@@ -1,0 +1,10 @@
+
+
+
+public class HelloWorldTest {
+
+	public static void main(String[] args) {
+		System.out.println("Hello World");//prints Hello world to console
+		System.out.println("Goodbye cold dungeon");//hello cruel loots
+	}
+}
