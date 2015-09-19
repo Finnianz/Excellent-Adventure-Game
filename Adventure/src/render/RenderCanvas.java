@@ -13,27 +13,27 @@ import javax.swing.JPanel;
 
 /**
  * 
- * @author Paige Halliwell 
- * 			ID:300316022
+ * @author Paige Halliwell ID:300316022
  *
  */
 public class RenderCanvas extends JPanel {
-	private Compass direction = Compass.NORTH;
+	private Compass direction = Compass.EAST;
 	public IsometricRenderer renderer = new IsometricRenderer();
 	private DrawableTile[][] board;
 	private final String floorString = "resource/FloorBlock";
 	private final String wallString = "resource/Wall";
 	private final String figureString = "resource/sticky";
 
-	public enum Compass{
+	public enum Compass {
 		NORTH, EAST, SOUTH, WEST
 	}
+
 	public RenderCanvas(){
 		
 		//Creates a board with one stick figure and walls around the edges. For testing purposes only.
 		/*
-		 * new DrawableTile[4][4]
-		 * for(int i=0;i<board.length;i++){
+		  board = new DrawableTile[4][4];
+		  for(int i=0;i<board.length;i++){
 			for(int j= 0;j<board.length;j++){
 				Drawable floor = new Floor(floorString);
 				Drawable occupier = null;
@@ -53,14 +53,14 @@ public class RenderCanvas extends JPanel {
 				if(j==board.length-1){
 					wallNE = new Wall(wallString, Position.WALL_NE);
 				}
-				if(i==2 && j==1){
+				if(i==0 && j==board.length-1){
 					occupier = new Person(figureString, Position.CENTER);
 				}
 				board[i][j] = new DrawableTile(wallNE, wallNW, wallSE,wallSW, floor, occupier);
 			}
-		}*/
+		  }*/
 	}
-	
+
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 	}
@@ -72,7 +72,8 @@ public class RenderCanvas extends JPanel {
 
 	@Override
 	public void paint(Graphics g) {
-		if(board==null)return;
+		if (board == null)
+			return;
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		switch (direction) {
 		case NORTH:
@@ -91,12 +92,12 @@ public class RenderCanvas extends JPanel {
 		repaint();
 
 	}
-	
-	public void rotateLeft(){
+
+	public void rotateLeft() {
 		switch (direction) {
 		case NORTH:
 			direction = Compass.WEST;
-			
+
 			break;
 		case EAST:
 			direction = Compass.NORTH;
@@ -110,8 +111,8 @@ public class RenderCanvas extends JPanel {
 		}
 		repaint();
 	}
-	
-	public void rotateRight(){
+
+	public void rotateRight() {
 		switch (direction) {
 		case NORTH:
 			direction = Compass.EAST;

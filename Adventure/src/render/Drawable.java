@@ -20,7 +20,7 @@ public abstract class Drawable {
 											// order
 	public final int HEIGHT; // image height
 	public final int WIDTH; // image width
-	private final Position POSITION;//where this object sits on the tile, used to calculate where to draw.
+	public final Position POSITION;//where this object sits on the tile, used to calculate where to draw.
 
 	// Wall image constants. Walls don't follow the N,E,S,W pattern for the
 	// image array, instead the image correlate to the wall being at the top or
@@ -95,7 +95,7 @@ public abstract class Drawable {
 			break;
 		// Adjust coordinate for center drawables
 		case CENTER:
-			x_pos += (tileWidth / 2) - (WIDTH / 2);
+			x_pos += (tileWidth / 2) - (WIDTH/2);
 			y_pos += (tileHeight / 2) - HEIGHT;
 			break;
 		// adjust coords for square objects
@@ -130,6 +130,7 @@ public abstract class Drawable {
 
 			break;
 		case WALL_NE:
+			
 			switch (direction) {
 			case NORTH:
 				y_pos += (tileHeight / 2) - HEIGHT;
