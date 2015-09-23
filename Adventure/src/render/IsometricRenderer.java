@@ -7,8 +7,7 @@ import render.RenderCanvas.Compass;
 
 /**
  * 
- * @author Paige Halliwell 
- * 			ID:300316022
+ * @author Paige Halliwell ID:300316022
  *
  */
 public class IsometricRenderer {
@@ -16,9 +15,8 @@ public class IsometricRenderer {
 	public final int SIDE_PADDING = 300;
 	public final int TILE_HEIGHT = 64;
 	public final int TILE_WIDTH = 128;
+	// Coordinates to draw the current viewing direction
 	public final int COMPASS_OFFSET = 10;
-	
-	
 
 	/**
 	 * Draws the array from back to front if looking to the north
@@ -33,18 +31,20 @@ public class IsometricRenderer {
 		int startingX = x;// number x starts at for current row
 		int startingY = y;// number y starts at for current row
 
-		
+		// Draw letter to show current viewing direction
 		g.setColor(Color.WHITE);
 		g.drawString("N", COMPASS_OFFSET, COMPASS_OFFSET);
-		
+
 		// while current row < than the max
 		while (currentRow < maxLength * 2) {
 
 			while (currentCol < maxCol) {
-				
-				int xPos= getXPosition(currentCol, maxCol, currentRow, TILE_WIDTH);
-				int yPos = TOP_PADDING + (TILE_HEIGHT *currentRow/2);
-				board[x][y].draw(Compass.NORTH, xPos, yPos, g, TILE_WIDTH, TILE_HEIGHT);
+
+				int xPos = getXPosition(currentCol, maxCol, currentRow,
+						TILE_WIDTH);
+				int yPos = TOP_PADDING + (TILE_HEIGHT * currentRow / 2);
+				board[x][y].draw(Compass.NORTH, xPos, yPos, g, TILE_WIDTH,
+						TILE_HEIGHT);
 				x++;
 				y++;
 				currentCol++;
@@ -83,29 +83,30 @@ public class IsometricRenderer {
 		int startingX = x;// number x starts at for current row
 		int startingY = y;// number y starts at for current row
 
-		
 		g.setColor(Color.WHITE);
 		g.drawString("E", COMPASS_OFFSET, COMPASS_OFFSET);
 		// while current row < than the max
 		while (currentRow < maxLength * 2) {
 
 			while (currentCol < maxCol) {
-				int xPos= getXPosition(currentCol, maxCol, currentRow, TILE_WIDTH);
-				int yPos = TOP_PADDING + (TILE_HEIGHT*currentRow/2);
-				board[x][y].draw(Compass.EAST, xPos, yPos, g, TILE_WIDTH, TILE_HEIGHT);
+				int xPos = getXPosition(currentCol, maxCol, currentRow,
+						TILE_WIDTH);
+				int yPos = TOP_PADDING + (TILE_HEIGHT * currentRow / 2);
+				board[x][y].draw(Compass.EAST, xPos, yPos, g, TILE_WIDTH,
+						TILE_HEIGHT);
 				x++;
 				y--;
 				currentCol++;
 			}
 			// If past the halfway point
-			if (y <0) {
-				startingX=0;
+			if (y < 0) {
+				startingX = 0;
 				startingY--;
 				maxCol--;
 			}
 			// Else the top half of the board
 			else {
-				startingY=maxLength-1;
+				startingY = maxLength - 1;
 				startingX--;
 				maxCol++;
 
@@ -117,7 +118,7 @@ public class IsometricRenderer {
 			currentCol = 0;
 		}
 	}
-	
+
 	/**
 	 * Draws the array from back to front if looking to the South
 	 */
@@ -137,23 +138,25 @@ public class IsometricRenderer {
 		while (currentRow < maxLength * 2) {
 
 			while (currentCol < maxCol) {
-				int xPos= getXPosition(currentCol, maxCol, currentRow, TILE_WIDTH);
-				int yPos = TOP_PADDING + (TILE_HEIGHT*currentRow/2);
-				board[x][y].draw(Compass.SOUTH, xPos, yPos, g, TILE_WIDTH, TILE_HEIGHT);
+				int xPos = getXPosition(currentCol, maxCol, currentRow,
+						TILE_WIDTH);
+				int yPos = TOP_PADDING + (TILE_HEIGHT * currentRow / 2);
+				board[x][y].draw(Compass.SOUTH, xPos, yPos, g, TILE_WIDTH,
+						TILE_HEIGHT);
 				x--;
 				y--;
 				currentCol++;
 			}
 			// If past the halfway point
-			if (x <0) {
+			if (x < 0) {
 				startingX--;
-				startingY=maxLength-1;
+				startingY = maxLength - 1;
 				maxCol--;
 			}
 			// Else the top half of the board
 			else {
 				startingY++;
-				startingX=maxLength-1;
+				startingX = maxLength - 1;
 				maxCol++;
 
 			}
@@ -164,11 +167,11 @@ public class IsometricRenderer {
 			currentCol = 0;
 		}
 	}
-	
+
 	/**
 	 * Draws the array from back to front if looking to the west
 	 */
-	
+
 	public void drawWestView(DrawableTile[][] board, Graphics g) {
 		int maxLength = board.length;
 		int currentCol = 0;// Keep track of current column number
@@ -184,22 +187,24 @@ public class IsometricRenderer {
 		while (currentRow < maxLength * 2) {
 
 			while (currentCol < maxCol) {
-				int xPos= getXPosition(currentCol, maxCol, currentRow, TILE_WIDTH);
-				int yPos = TOP_PADDING + (TILE_HEIGHT*currentRow/2);
-				board[x][y].draw(Compass.WEST, xPos, yPos, g, TILE_WIDTH, TILE_HEIGHT);
+				int xPos = getXPosition(currentCol, maxCol, currentRow,
+						TILE_WIDTH);
+				int yPos = TOP_PADDING + (TILE_HEIGHT * currentRow / 2);
+				board[x][y].draw(Compass.WEST, xPos, yPos, g, TILE_WIDTH,
+						TILE_HEIGHT);
 				x--;
 				y++;
 				currentCol++;
 			}
 			// If past the halfway point
-			if (y ==maxLength) {
-				startingX=maxLength-1;
+			if (y == maxLength) {
+				startingX = maxLength - 1;
 				startingY++;
 				maxCol--;
 			}
 			// Else the top half of the board
 			else {
-				startingY=0;
+				startingY = 0;
 				startingX++;
 				maxCol++;
 
@@ -211,20 +216,33 @@ public class IsometricRenderer {
 			currentCol = 0;
 		}
 	}
-	
-	private int getXPosition(int currentCol, int maxCol, int currentRow, int tileWidth){
+
+	/**
+	 * Helper method to get the x postion of a tile.
+	 * 
+	 * @param currentCol
+	 *            the current column
+	 * @param maxCol
+	 *            the max columns for this row
+	 * @param currentRow
+	 * 
+	 * @param tileWidth
+	 * 
+	 * @return
+	 */
+	private int getXPosition(int currentCol, int maxCol, int currentRow,
+			int tileWidth) {
 		int xPos = SIDE_PADDING;
 		double drawingCol = (currentCol);
-		//If current row is divided by 2
-		if(currentRow % 2 ==0){
-			drawingCol = currentCol-(maxCol/2.0);
-			xPos+=tileWidth * (drawingCol);
+		// If current row is divided by 2
+		if (currentRow % 2 == 0) {
+			drawingCol = currentCol - (maxCol / 2.0);
+			xPos += tileWidth * (drawingCol);
+		} else {
+			drawingCol = (currentCol - (maxCol / 2));
+			xPos += tileWidth * (drawingCol);
 		}
-		else{
-			drawingCol=(currentCol-(maxCol/2));
-			xPos+=tileWidth * (drawingCol);
-		}
-		return (int)xPos;
+		return (int) xPos;
 	}
 
 }

@@ -108,7 +108,7 @@ public abstract class Drawable {
 		case WALL_NW:
 			switch (direction) {
 			case NORTH:
-				y_pos += (tileHeight / 2) - HEIGHT;
+				y_pos += (tileHeight/2) - HEIGHT;
 				x_pos -= (WIDTH - tileWidth);
 				spriteNum = TOP_LEFT;
 				break;

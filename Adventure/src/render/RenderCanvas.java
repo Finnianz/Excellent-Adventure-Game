@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  *
  */
 public class RenderCanvas extends JPanel {
-	private Compass direction = Compass.EAST;
+	private Compass direction = Compass.NORTH;
 	public IsometricRenderer renderer = new IsometricRenderer();
 	private DrawableTile[][] board;
 	private final String floorString = "resource/FloorBlock";
@@ -93,6 +93,9 @@ public class RenderCanvas extends JPanel {
 
 	}
 
+	/**
+	 * Changes the viewing direction to the left
+	 */
 	public void rotateLeft() {
 		switch (direction) {
 		case NORTH:
@@ -112,6 +115,9 @@ public class RenderCanvas extends JPanel {
 		repaint();
 	}
 
+	/**
+	 * Changes the viewing direction to the right
+	 */
 	public void rotateRight() {
 		switch (direction) {
 		case NORTH:
