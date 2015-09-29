@@ -1,7 +1,9 @@
 package Game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Room {
 
@@ -10,6 +12,7 @@ public class Room {
 	private int width;
 	private int height;
 	private List<Item> items = new ArrayList <Item>();
+	private Map<Location, Item> map = new HashMap<Location, Item>();
 	
 	/**
 	 * @param locs - the list of locations to be contained in the room
@@ -18,6 +21,12 @@ public class Room {
 		this.roomID = id;
 		this.width = width;
 		this.height = height;
+		for(int i =0; i<width;i++){
+			for(int k = 0; k<height;k++){
+				Location loc = new Location(i,k);
+				map.put(loc, null);
+			}
+		}
 	}
 
 	/**
@@ -28,10 +37,10 @@ public class Room {
 	}
 
 	/**
-	 * @param doors the doors to set
+	 * @param door -  the door to add
 	 */
-	public void setDoors(List<Doorway> doors) {
-		this.doors = doors;
+	public void addDoor(Doorway door) {
+		this.doors.add(door);
 	}
 	
 	/**
@@ -61,6 +70,19 @@ public class Room {
 	 */
 	public int getRoomID() {
 		return roomID;
+	}
+	
+	public void addItem(Item item, Location loc){
+		map.put(loc, item);
+	}
+
+	public boolean checkLocation(Location loc) {
+		if(map.get(loc)!=null){
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 	
 }

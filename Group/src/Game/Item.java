@@ -6,10 +6,10 @@ public class Item {
 	
 	public String itemType;
 	public Location loc;
-	public int roomID;
+	public Room roomID;
 	public ImageIcon image;
 	
-	public Item(String type, Location loc, int room, ImageIcon image){
+	public Item(String type, Location loc, Room room, ImageIcon image){
 		this.itemType = type;
 		this.loc = loc;
 		this.roomID = room;
