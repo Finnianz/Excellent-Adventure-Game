@@ -13,20 +13,16 @@ public class Room {
 	private int height;
 	private List<Item> items = new ArrayList <Item>();
 	private Map<Location, Item> map = new HashMap<Location, Item>();
+	private Location[][] floor; 
 	
 	/**
-	 * @param locs - the list of locations to be contained in the room
+	 * rooms must be square at the moment.  ie. width == height
 	 */
 	public Room(int id, int width, int height){
 		this.roomID = id;
 		this.width = width;
 		this.height = height;
-		for(int i =0; i<width;i++){
-			for(int k = 0; k<height;k++){
-				Location loc = new Location(i,k);
-				map.put(loc, null);
-			}
-		}
+		floor = new Location[width][height];
 	}
 
 	/**

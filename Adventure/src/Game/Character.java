@@ -3,7 +3,11 @@ package Game;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Character {
+import render.*;
+import render.Drawable.Position;
+
+
+public class Character extends Drawable{
 	
 	private final String name;
 	private Room currentRoom;
@@ -11,8 +15,10 @@ public class Character {
 	private List<Item> items = new ArrayList<Item>();
 	
 	
-	public Character(String name){
+	public Character(String imgLoc, Position pos, String name, Room room){
+		super(imgLoc, pos);
 		this.name = name;
+		this.currentRoom = room;
 	}
 	
 	public void moveSpace(Location newLoc){

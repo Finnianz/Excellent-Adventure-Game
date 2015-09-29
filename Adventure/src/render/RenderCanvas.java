@@ -61,6 +61,10 @@ public class RenderCanvas extends JPanel {
 			}
 		  }*/
 	}
+	
+	public void setRoom(DrawableTile[][] b){
+		this.board=b;
+	}
 
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
