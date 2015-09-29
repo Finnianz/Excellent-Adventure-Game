@@ -15,9 +15,6 @@ import Game.Game;
 import render.RenderCanvas;
 import render.RenderFrame;
 
-
-
-
 public class GameCanvas extends JPanel {
 	private Game game;
 	private JPanel outerPanel;
@@ -25,58 +22,52 @@ public class GameCanvas extends JPanel {
 	private JLabel[][] grid;
 	private int xClick = -1;
 	private int yClick = -1;
-	private final int width = 26;
-	private final int height = 27;
-
+	private RenderCanvas canvasRen = new RenderCanvas();
+	
 	/**
 	 * Creates a new Canvas and sets up the board
-	 * @param gui 
+	 *
+	 * @param gui
 	 */
 	public GameCanvas() {
 		setLayout(new BorderLayout());
 		outerPanel = new JPanel();
 		outerPanel.setSize(1500, 1500);
-		outerPanel.setLayout(new GridLayout(width, height));
-		makeOuterPanel(width, height);
+		outerPanel.setLayout(null);
+		outerPanel.add(canvasRen);
 		drawBoard();
-	
+
 	}
+	public RenderCanvas getRenderCanvas(){
+		return canvasRen;
+	}
+	
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(600, 600);
 	}
-	
+
 	public void drawBoard() {
-		
 	}
-	
-	public void makeOuterPanel(int width, int height){
-		
-	}
-	
+
 	@Override
 	public void paint(Graphics g) {
-		repaint();
+
+		canvasRen.paint(g);
 	}
-	
+
 	/**
 	 * @return the xClick
 	 */
 	public int getxClick() {
-		System.out.print(xClick);
 		return xClick;
-
 	}
-
 
 	/**
 	 * @return the yClick
 	 */
 	public int getyClick() {
-		System.out.print(yClick);
 		return yClick;
-		
 	}
-	
 
 }

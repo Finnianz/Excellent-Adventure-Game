@@ -77,9 +77,12 @@ public class RenderCanvas extends JPanel {
 
 	@Override
 	public void paint(Graphics g) {
+		g.setColor(Color.PINK);
+		g.fillRect(0, 0, 300,300);
+
 		if (board == null)
 			return;
-		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		//g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		switch (direction) {
 		case NORTH:
 			renderer.drawNorthView(board, g);
