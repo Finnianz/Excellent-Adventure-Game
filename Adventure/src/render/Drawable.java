@@ -29,6 +29,7 @@ public abstract class Drawable {
 	private final int BOTTOM_RIGHT = 1;
 	private final int BOTTOM_LEFT = 2;
 	private final int TOP_RIGHT = 3;
+	private final String RESOURCE = "resource/";
 
 	//TODO animation support
 	
@@ -217,7 +218,7 @@ public abstract class Drawable {
 	private void loadImages(String imgLoc) throws IOException {
 		for (int i = 0; i < images.length; i++) {
 
-			images[i] = ImageIO.read(new File(imgLoc + i + ".png"));
+			images[i] = ImageIO.read(new File(RESOURCE+imgLoc + i + ".png"));
 		}
 	}
 
