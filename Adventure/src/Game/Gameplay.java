@@ -33,6 +33,7 @@ public class Gameplay {
 		Character player1 = new Character("sticky", Position.CENTER, "Player 1", dungeon);
 		player1.setCurrentLocation(new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), player1, 3, 4));
 		characters.add(player1);
+		move(new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), player1, 3, 5), player1);
 		
 	}
 	
@@ -40,8 +41,20 @@ public class Gameplay {
 		boolean move = character.getCurrentRoom().checkLocation(loc);
 		if(move){
 			character.moveSpace(loc);
+			System.out.println("moving left");
 		}
 	}
+	
+//	public void moveLeft( Character character){
+//		new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), character, character.getCurrentLocation()., 5)
+//		boolean move = character.getCurrentRoom().checkLocation(loc);
+//		if(move){
+//			character.moveSpace(loc);
+//			System.out.println("moving left");
+//		}
+//	}
+	
+	
 	
 	/**
 	 * @return the rooms
@@ -79,7 +92,7 @@ public class Gameplay {
 		Gameplay game = new Gameplay();
 		game.setCanvas(new RenderCanvas());
 		game.setFrame(new GameFrame());
-		
+		game.getFrame().getC().getRenderCanvas().setRoom(game.getRooms().get(0).getFloor());
 		
 		
 		
