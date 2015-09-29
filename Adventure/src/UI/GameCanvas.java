@@ -1,6 +1,7 @@
 package UI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -38,6 +39,7 @@ public class GameCanvas extends JPanel {
 		outerPanel.setLayout(new GridLayout(width, height));
 		makeOuterPanel(width, height);
 		drawBoard();
+	
 	}
 	@Override
 	public Dimension getPreferredSize() {
@@ -45,11 +47,13 @@ public class GameCanvas extends JPanel {
 	}
 	
 	public void drawBoard() {
+		
 	}
 	
 	public void makeOuterPanel(int width, int height){
-		grid = new JLabel[width][height];
+		
 	}
+	
 	@Override
 	public void paint(Graphics g) {
 		repaint();
@@ -59,7 +63,9 @@ public class GameCanvas extends JPanel {
 	 * @return the xClick
 	 */
 	public int getxClick() {
+		System.out.print(xClick);
 		return xClick;
+
 	}
 
 
@@ -67,7 +73,9 @@ public class GameCanvas extends JPanel {
 	 * @return the yClick
 	 */
 	public int getyClick() {
+		System.out.print(yClick);
 		return yClick;
+		
 	}
 	
 

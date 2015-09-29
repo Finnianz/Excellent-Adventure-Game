@@ -61,7 +61,7 @@ public class GameFrame extends JFrame implements WindowListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int r = JOptionPane.showConfirmDialog(c, new JLabel(
-						"Exit Cluedo?"), "Confirm Exit",
+						"Exit?"), "Confirm Exit",
 						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 						if (r == JOptionPane.YES_OPTION) {
 							System.exit(0);

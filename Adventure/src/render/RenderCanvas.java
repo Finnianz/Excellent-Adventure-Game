@@ -32,6 +32,7 @@ public class RenderCanvas extends JPanel {
 		
 		//Creates a board with one stick figure and walls around the edges. For testing purposes only.
 		/*
+		 
 		  board = new DrawableTile[4][4];
 		  for(int i=0;i<board.length;i++){
 			for(int j= 0;j<board.length;j++){
