@@ -49,7 +49,7 @@ public class AnimationSequence {
 
 	}
 
-	public Image getImage(Compass direction) {
+	public BufferedImage getImage(Compass direction) {
 		if (animationState) {
 			return animation1.get(direction)[currentImage];
 
@@ -85,7 +85,7 @@ public class AnimationSequence {
 		if (file.hasNextLine()) {
 			animationLength = file.nextInt();
 			file.nextLine();
-			// create arrays for the first animation, in every direction
+			// create arrays for the second animation, in every direction
 			for (Compass c : Compass.values()) {
 				animation1.put(c, new BufferedImage[animationLength]);
 			}
