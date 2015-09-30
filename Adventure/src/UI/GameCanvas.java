@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -36,6 +38,18 @@ public class GameCanvas extends JPanel {
 		outerPanel.setLayout(null);
 		outerPanel.add(canvasRen);
 		drawBoard();
+		this.addComponentListener(new ComponentListener() {
+
+    		public void componentResized(ComponentEvent e) {
+    			canvasRen.setSize(e.getComponent().getSize());
+    		}
+
+    		public void componentHidden(ComponentEvent e) {}
+
+    		public void componentMoved(ComponentEvent e) {}
+
+    		public void componentShown(ComponentEvent e) {}
+    	});
 
 	}
 	public RenderCanvas getRenderCanvas(){

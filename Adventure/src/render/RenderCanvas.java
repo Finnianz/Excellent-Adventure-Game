@@ -20,14 +20,15 @@ public class RenderCanvas extends JPanel {
 	private Compass direction = Compass.NORTH;
 	public IsometricRenderer renderer = new IsometricRenderer();
 	private DrawableTile[][] board;
-	private final int MAX_WIDTH = 1000;
-	private final int MAX_HEIGHT = 1000;
+	private int height =0;
+	private int width =0;
 
 	public enum Compass {
 		NORTH, EAST, SOUTH, WEST
 	}
 
 	public RenderCanvas(){
+		
 	}
 	
 	public void setRoom(DrawableTile[][] b){
@@ -39,15 +40,18 @@ public class RenderCanvas extends JPanel {
 	}
 
 	@Override
-	public Dimension getPreferredSize() {
-		return new Dimension(600, 600);
+	public void setSize(Dimension d) {
+		System.out.println(d);
+		width = d.width;
+		height = d.height;
+		
 	}
 	
 
 	@Override
 	public void paint(Graphics g) {
 		g.setColor(Color.GRAY);
-		g.fillRect(0, 0, MAX_WIDTH, MAX_HEIGHT);
+		g.fillRect(0, 0, width, height);
 		if (board == null)
 			return;
 		switch (direction) {
@@ -75,7 +79,6 @@ public class RenderCanvas extends JPanel {
 		switch (direction) {
 		case NORTH:
 			direction = Compass.WEST;
-
 			break;
 		case EAST:
 			direction = Compass.NORTH;
