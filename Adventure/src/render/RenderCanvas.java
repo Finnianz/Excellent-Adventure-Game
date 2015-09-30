@@ -20,46 +20,14 @@ public class RenderCanvas extends JPanel {
 	private Compass direction = Compass.NORTH;
 	public IsometricRenderer renderer = new IsometricRenderer();
 	private DrawableTile[][] board;
-	private final String floorString = "resource/FloorBlock";
-	private final String wallString = "resource/Wall";
-	private final String figureString = "resource/sticky";
+	private final int MAX_WIDTH = 1000;
+	private final int MAX_HEIGHT = 1000;
 
 	public enum Compass {
 		NORTH, EAST, SOUTH, WEST
 	}
 
 	public RenderCanvas(){
-		
-		//Creates a board with one stick figure and walls around the edges. For testing purposes only.
-		/*
-		 
-		  board = new DrawableTile[4][4];
-		  for(int i=0;i<board.length;i++){
-			for(int j= 0;j<board.length;j++){
-				Drawable floor = new Floor(floorString);
-				Drawable occupier = null;
-				Drawable wallNE = null;
-				Drawable wallNW = null;
-				Drawable wallSE = null;
-				Drawable wallSW = null;
-				if(i==0){
-					wallNW = new Wall(wallString, Position.WALL_NW);
-				}
-				if(j==0){
-					wallSW = new Wall(wallString, Position.WALL_SW);
-				}
-				if(i==board.length-1){
-					wallSE = new Wall(wallString, Position.WALL_SE);
-				}
-				if(j==board.length-1){
-					wallNE = new Wall(wallString, Position.WALL_NE);
-				}
-				if(i==0 && j==board.length-1){
-					occupier = new Person(figureString, Position.CENTER);
-				}
-				board[i][j] = new DrawableTile(wallNE, wallNW, wallSE,wallSW, floor, occupier);
-			}
-		  }*/
 	}
 	
 	public void setRoom(DrawableTile[][] b){
@@ -74,15 +42,14 @@ public class RenderCanvas extends JPanel {
 	public Dimension getPreferredSize() {
 		return new Dimension(600, 600);
 	}
+	
 
 	@Override
 	public void paint(Graphics g) {
-		g.setColor(Color.PINK);
-		g.fillRect(0, 0, 300,300);
-
+		g.setColor(Color.GRAY);
+		g.fillRect(0, 0, MAX_WIDTH, MAX_HEIGHT);
 		if (board == null)
 			return;
-		//g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		switch (direction) {
 		case NORTH:
 			renderer.drawNorthView(board, g);
