@@ -1,6 +1,8 @@
 package render;
 
 import render.Drawable.Position;
+import render.RenderCanvas.Compass;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -20,19 +22,34 @@ public class RenderCanvas extends JPanel {
 	private Compass direction = Compass.NORTH;
 	public IsometricRenderer renderer = new IsometricRenderer();
 	private DrawableTile[][] board;
-	private int height =0;
-	private int width =0;
+	private int height = 0;
+	private int width = 0;
 
 	public enum Compass {
-		NORTH, EAST, SOUTH, WEST
+		NORTH, EAST, SOUTH, WEST;
+
+		public static Compass stringToCompass(String directionString) {
+			switch (directionString) {
+			case "NORTH":
+				return NORTH;
+			case "EAST":
+				return EAST;
+			case "SOUTH":
+				return SOUTH;
+			case "WEST":
+				return WEST;
+			default:
+				return null;
+			}
+		}
 	}
 
-	public RenderCanvas(){
-		
+	public RenderCanvas() {
+
 	}
-	
-	public void setRoom(DrawableTile[][] b){
-		this.board=b;
+
+	public void setRoom(DrawableTile[][] b) {
+		this.board = b;
 	}
 
 	protected void paintComponent(Graphics g) {
@@ -43,9 +60,8 @@ public class RenderCanvas extends JPanel {
 	public void setSize(Dimension d) {
 		width = d.width;
 		height = d.height;
-		
+
 	}
-	
 
 	@Override
 	public void paint(Graphics g) {

@@ -1,6 +1,7 @@
 package render;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -15,16 +16,18 @@ public class AnimationSequence {
 
 	// One array for each direction. Each array is a sequence of images that
 	// create the animation
-	private Image spriteSheet;
+	private BufferedImage spriteSheet;
 	private boolean animationState = false;// Which animation is the active one,
 											// false is 0 true is1
-	private HashMap<Compass, Image[]> animation0;// A map of four image arrays,
-													// one for each direction
-	private HashMap<Compass, Image[]> animation1;// A second map to support two
-													// different states for an
-													// object eg. light on/off
-													// or a door that is
-													// locked/unlocked
+	private HashMap<Compass, BufferedImage[]> animation0;// A map of four image
+															// arrays,
+	// one for each direction
+	private HashMap<Compass, BufferedImage[]> animation1;// A second map to
+															// support two
+	// different states for an
+	// object eg. light on/off
+	// or a door that is
+	// locked/unlocked
 
 	private int currentImage = 0;// To keep track of where we are in the
 									// sequence
@@ -64,32 +67,33 @@ public class AnimationSequence {
 		file.nextLine();
 		// create arrays for the first animation, in every direction
 		for (Compass c : Compass.values()) {
-			animation0.put(c, new Image[animationLength]);
+			animation0.put(c, new BufferedImage[animationLength]);
 		}
 
 		Scanner line;
 		while (file.hasNext()) {
 			String directionString = file.nextLine();
-			line = new Scanner(file.nextLine());
-			String dir = line.next();
-			getSprite(line);
+			Compass dir = Compass.stringToCompass(directionString);
+			for (int i = 0; i < animationLength; i++) {
+				line = new Scanner(file.nextLine());
+				animation0.get(dir)[i] = getSprite(line);
+			}
 		}
-
 	}
 
 	public void changeState() {
 		animationState = !animationState;
 	}
 
-	private void tick() {
+	public void tick() {
 
 	}
 
-	private void getSprite(Scanner line) {
+	private BufferedImage getSprite(Scanner line) {
 		int x = line.nextInt();
 		int y = line.nextInt();
 		int w = line.nextInt();
 		int h = line.nextInt();
-
+		return spriteSheet.getSubimage(x, y, w, h);
 	}
 }
