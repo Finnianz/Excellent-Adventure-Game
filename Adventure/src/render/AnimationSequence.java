@@ -39,7 +39,12 @@ public class AnimationSequence {
 			spriteSheet = ImageIO.read(new File(imgLoc + ".png"));
 		} catch (IOException e1) {
 			System.out.println("Error readings images for " + imgLoc);
-			e1.printStackTrace();
+		}
+		try {
+			loadSprites(imgLoc);
+		} catch (IOException e) {
+			System.out.println("Error reading txt file for " + imgLoc
+					+ " sprites");
 		}
 
 	}
@@ -59,7 +64,7 @@ public class AnimationSequence {
 	 * @param imgLoc
 	 * @throws IOException
 	 */
-	private void loadImages(String imgLoc) throws IOException {
+	private void loadSprites(String imgLoc) throws IOException {
 
 		Scanner file = new Scanner(new File(imgLoc + ".txt"));
 		// Get animation length
@@ -69,23 +74,60 @@ public class AnimationSequence {
 		for (Compass c : Compass.values()) {
 			animation0.put(c, new BufferedImage[animationLength]);
 		}
-
-		Scanner line;
-		while (file.hasNext()) {
-			String directionString = file.nextLine();
-			Compass dir = Compass.stringToCompass(directionString);
+		// get the direction and turn into a compass point
+		Compass dir = Compass.stringToCompass(file.nextLine());
+		// there should be a line for each image in the animation
+		for (int i = 0; i < animationLength; i++) {
+			Scanner line = new Scanner(file.nextLine());
+			animation0.get(dir)[i] = getSprite(line);
+		}
+		// if there is more, there must be a second animation state
+		if (file.hasNextLine()) {
+			animationLength = file.nextInt();
+			file.nextLine();
+			// create arrays for the first animation, in every direction
+			for (Compass c : Compass.values()) {
+				animation1.put(c, new BufferedImage[animationLength]);
+			}
+			// get the direction and turn into a compass point
+			dir = Compass.stringToCompass(file.nextLine());
+			// there should be a line for each image in the animation
 			for (int i = 0; i < animationLength; i++) {
-				line = new Scanner(file.nextLine());
-				animation0.get(dir)[i] = getSprite(line);
+				Scanner line = new Scanner(file.nextLine());
+				animation1.get(dir)[i] = getSprite(line);
 			}
 		}
+		// else there is only one set of animations.
+		// set animation1 to be the same as animation0 to prevent null pointer
+		// exceptions
+		else {
+			animation1 = animation0;
+		}
+		file.close();
+
 	}
 
 	public void changeState() {
 		animationState = !animationState;
+		currentImage = 0;// reset to zero, the different states may not be the
+							// same length
+	}
+
+	public boolean getState() {
+		return animationState;
 	}
 
 	public void tick() {
+		if (animationState) {
+			// if at end of animation cycle back to beginning
+			if (currentImage == animation0.get(Compass.NORTH).length - 1) {
+				currentImage = 0;
+			}
+			// else just increment by 1
+			else {
+				currentImage++;
+			}
+		}
 
 	}
 
