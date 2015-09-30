@@ -41,7 +41,6 @@ public class RenderCanvas extends JPanel {
 
 	@Override
 	public void setSize(Dimension d) {
-		System.out.println(d);
 		width = d.width;
 		height = d.height;
 		
