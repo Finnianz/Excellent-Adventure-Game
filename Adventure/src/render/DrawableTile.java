@@ -155,5 +155,23 @@ public class DrawableTile {
 		}
 
 	}
+	public void animationTick(){
+		if(wallNE!=null){
+			wallNE.animationTick();
+		}
+		if(wallNW!=null){
+			wallNW.animationTick();
+		}
+		if(wallSE!=null){
+			wallSE.animationTick();
+		}
+		if(wallSW!=null){
+			wallSW.animationTick();
+		}
+		if(occupier!=null){
+			occupier.animationTick();
+		}
+		floor.animationTick();
+	}
 
 }

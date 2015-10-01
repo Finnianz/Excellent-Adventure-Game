@@ -202,5 +202,9 @@ public abstract class Drawable {
 		g.drawImage(sprite, x_pos, y_pos, null);
 
 	}
+	
+	public void animationTick(){
+		images.animationTick();
+	}
 
 }

@@ -121,7 +121,7 @@ public class AnimationSequence {
 		return animationState;
 	}
 
-	public void tick() {
+	public void animationTick() {
 		if (animationState) {
 			// if at end of animation cycle back to beginning
 			if (currentImage == animation0.get(Compass.NORTH).length - 1) {
