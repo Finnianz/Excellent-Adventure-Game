@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 
 public class AnimationSequence {
 
+	private final String RESOURCE = "resource/";
 	// One array for each direction. Each array is a sequence of images that
 	// create the animation
 	private BufferedImage spriteSheet;
@@ -34,9 +35,11 @@ public class AnimationSequence {
 
 	public AnimationSequence(String imgLoc) {
 
+		animation0 = new HashMap<Compass, BufferedImage[]>();
+		animation1 = new HashMap<Compass, BufferedImage[]>();
 		// Load sprite sheet
 		try {
-			spriteSheet = ImageIO.read(new File(imgLoc + ".png"));
+			spriteSheet = ImageIO.read(new File(RESOURCE + imgLoc + ".png"));
 		} catch (IOException e1) {
 			System.out.println("Error readings images for " + imgLoc);
 		}
@@ -44,7 +47,8 @@ public class AnimationSequence {
 			loadSprites(imgLoc);
 		} catch (IOException e) {
 			System.out.println("Error reading txt file for " + imgLoc
-					+ " sprites");
+					+ " sprites" + "\n" + e.toString());
+			
 		}
 
 	}
@@ -66,37 +70,37 @@ public class AnimationSequence {
 	 */
 	private void loadSprites(String imgLoc) throws IOException {
 
-		Scanner file = new Scanner(new File(imgLoc + ".txt"));
+		Scanner file = new Scanner(new File(RESOURCE + imgLoc + ".txt"));
 		// Get animation length
 		int animationLength = file.nextInt();
 		file.nextLine();
-		// create arrays for the first animation, in every direction
-		for (Compass c : Compass.values()) {
-			animation0.put(c, new BufferedImage[animationLength]);
-		}
-		// get the direction and turn into a compass point
-		Compass dir = Compass.stringToCompass(file.nextLine());
-		// there should be a line for each image in the animation
-		for (int i = 0; i < animationLength; i++) {
-			Scanner line = new Scanner(file.nextLine());
-			animation0.get(dir)[i] = getSprite(line);
-		}
-		// if there is more, there must be a second animation state
-		if (file.hasNextLine()) {
-			animationLength = file.nextInt();
-			file.nextLine();
-			// create arrays for the second animation, in every direction
-			for (Compass c : Compass.values()) {
-				animation1.put(c, new BufferedImage[animationLength]);
-			}
+		for (int i = 0; i<4; i++) {
 			// get the direction and turn into a compass point
-			dir = Compass.stringToCompass(file.nextLine());
+			Compass dir = Compass.stringToCompass(file.nextLine());
+			animation0.put(dir, new BufferedImage[animationLength]);// create arrays for the first animation, in every direction
 			// there should be a line for each image in the animation
-			for (int i = 0; i < animationLength; i++) {
+			for (int j = 0; j < animationLength; j++) {
 				Scanner line = new Scanner(file.nextLine());
-				animation1.get(dir)[i] = getSprite(line);
+				animation0.get(dir)[j] = getSprite(line);
 			}
 		}
+
+		// if there is more, there must be a second anim
+			if(file.hasNext()){
+				animationLength = file.nextInt();
+				file.nextLine();
+				for (int i = 0; i<4; i++) {
+					// get the direction and turn into a compass point
+					Compass dir = Compass.stringToCompass(file.nextLine());
+					animation1.put(dir, new BufferedImage[animationLength]);// create arrays for the first animation, in every direction
+					// there should be a line for each image in the animation
+					for (int j = 0; j < animationLength; j++) {
+						Scanner line = new Scanner(file.nextLine());
+						animation1.get(dir)[j] = getSprite(line);
+					}
+				}
+
+			}
 		// else there is only one set of animations.
 		// set animation1 to be the same as animation0 to prevent null pointer
 		// exceptions
@@ -136,6 +140,8 @@ public class AnimationSequence {
 		int y = line.nextInt();
 		int w = line.nextInt();
 		int h = line.nextInt();
-		return spriteSheet.getSubimage(x, y, w, h);
+		BufferedImage sprite = spriteSheet.getSubimage(x, y, w, h);
+		return sprite;
 	}
+
 }

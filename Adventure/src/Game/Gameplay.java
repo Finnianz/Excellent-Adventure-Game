@@ -26,11 +26,11 @@ public class Gameplay {
 		dungeon.addDoor(dungeondoor);
 		hallway.addDoor(dungeondoor);
 		Location loc = new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), null, 0,0);
-		Item wall = new Item("wall", Position.WALL_NE);
+		Item wall = new Item("PlainWall", Position.WALL_NE);
 		dungeon.addItem(wall, loc);
 		rooms.add(dungeon);
 		rooms.add(hallway);
-		Character player1 = new Character("sticky", Position.CENTER, "Player 1", dungeon);
+		Character player1 = new Character("StickFig", Position.CENTER, "Player 1", dungeon);
 		player1.setCurrentLocation(new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), player1, 3, 4));
 		characters.add(player1);
 		move(new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), player1, 3, 5), player1);

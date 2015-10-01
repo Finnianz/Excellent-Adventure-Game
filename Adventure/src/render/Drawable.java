@@ -29,9 +29,9 @@ public abstract class Drawable {
 	// bottom of the tile, and on the left or right edge.
 	private final Compass TOP_LEFT = Compass.NORTH;
 	private final Compass TOP_RIGHT = Compass.EAST;
-	private final Compass BOTTOM_LEFT = Compass.SOUTH;
-	private final Compass BOTTOM_RIGHT = Compass.WEST;
-	private final String RESOURCE = "resource/";
+	private final Compass BOTTOM_RIGHT = Compass.SOUTH;
+	private final Compass BOTTOM_LEFT = Compass.WEST;
+
 
 	/**
 	 * Floor - the floor tiles Center - any object to be drawn in the center of
