@@ -12,7 +12,6 @@ import render.RenderCanvas.Compass;
  */
 public class IsometricRenderer {
 	public final int TOP_PADDING = 200;
-	public final int SIDE_PADDING = 300;
 	public final int TILE_HEIGHT = 64;
 	public final int TILE_WIDTH = 128;
 	// Coordinates to draw the current viewing direction
@@ -21,7 +20,7 @@ public class IsometricRenderer {
 	/**
 	 * Draws the array from back to front if looking to the north
 	 */
-	public void drawNorthView(DrawableTile[][] board, Graphics g) {
+	public void drawNorthView(DrawableTile[][] board, Graphics g, int centerLine) {
 		int maxLength = board.length;
 		int currentCol = 0;// Keep track of current column number
 		int maxCol = 1; // Max number of columns for this row, starts at one
@@ -41,7 +40,7 @@ public class IsometricRenderer {
 			while (currentCol < maxCol) {
 
 				int xPos = getXPosition(currentCol, maxCol, currentRow,
-						TILE_WIDTH);
+						TILE_WIDTH, centerLine);
 				int yPos = TOP_PADDING + (TILE_HEIGHT * currentRow / 2);
 				board[x][y].draw(Compass.NORTH, xPos, yPos, g, TILE_WIDTH,
 						TILE_HEIGHT);
@@ -73,7 +72,7 @@ public class IsometricRenderer {
 	/**
 	 * Draws the array from back to front if looking to the east
 	 */
-	public void drawEastView(DrawableTile[][] board, Graphics g) {
+	public void drawEastView(DrawableTile[][] board, Graphics g, int centerLine) {
 		int maxLength = board.length;
 		int currentCol = 0;// Keep track of current column number
 		int maxCol = 1; // Max number of columns for this row, starts at one
@@ -90,7 +89,7 @@ public class IsometricRenderer {
 
 			while (currentCol < maxCol) {
 				int xPos = getXPosition(currentCol, maxCol, currentRow,
-						TILE_WIDTH);
+						TILE_WIDTH, centerLine);
 				int yPos = TOP_PADDING + (TILE_HEIGHT * currentRow / 2);
 				board[x][y].draw(Compass.EAST, xPos, yPos, g, TILE_WIDTH,
 						TILE_HEIGHT);
@@ -122,7 +121,7 @@ public class IsometricRenderer {
 	/**
 	 * Draws the array from back to front if looking to the South
 	 */
-	public void drawSouthView(DrawableTile[][] board, Graphics g) {
+	public void drawSouthView(DrawableTile[][] board, Graphics g, int centerLine) {
 		int maxLength = board.length;
 		int currentCol = 0;// Keep track of current column number
 		int maxCol = 1; // Max number of columns for this row, starts at one
@@ -139,7 +138,7 @@ public class IsometricRenderer {
 
 			while (currentCol < maxCol) {
 				int xPos = getXPosition(currentCol, maxCol, currentRow,
-						TILE_WIDTH);
+						TILE_WIDTH, centerLine);
 				int yPos = TOP_PADDING + (TILE_HEIGHT * currentRow / 2);
 				board[x][y].draw(Compass.SOUTH, xPos, yPos, g, TILE_WIDTH,
 						TILE_HEIGHT);
@@ -172,7 +171,7 @@ public class IsometricRenderer {
 	 * Draws the array from back to front if looking to the west
 	 */
 
-	public void drawWestView(DrawableTile[][] board, Graphics g) {
+	public void drawWestView(DrawableTile[][] board, Graphics g, int centerLine) {
 		int maxLength = board.length;
 		int currentCol = 0;// Keep track of current column number
 		int maxCol = 1; // Max number of columns for this row, starts at one
@@ -188,7 +187,7 @@ public class IsometricRenderer {
 
 			while (currentCol < maxCol) {
 				int xPos = getXPosition(currentCol, maxCol, currentRow,
-						TILE_WIDTH);
+						TILE_WIDTH, centerLine);
 				int yPos = TOP_PADDING + (TILE_HEIGHT * currentRow / 2);
 				board[x][y].draw(Compass.WEST, xPos, yPos, g, TILE_WIDTH,
 						TILE_HEIGHT);
@@ -231,8 +230,8 @@ public class IsometricRenderer {
 	 * @return
 	 */
 	private int getXPosition(int currentCol, int maxCol, int currentRow,
-			int tileWidth) {
-		int xPos = SIDE_PADDING;
+			int tileWidth, int centerLine) {
+		int xPos = centerLine;
 		double drawingCol = (currentCol);
 		// If current row is divided by 2
 		if (currentRow % 2 == 0) {

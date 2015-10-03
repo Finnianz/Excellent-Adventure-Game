@@ -34,16 +34,16 @@ public class Room {
 				Drawable wallSE = null;
 				Drawable wallSW = null;
 				if(i==0){
-					wallNW = new Item("PlainWall", Position.WALL_NW);
+					wallNW = new Item("PlainWall1", Position.WALL_NW);
 				}
 				if(j==0){
-					wallSW = new Item("PlainWall", Position.WALL_SW);
+					wallSW = new Item("PlainWall1", Position.WALL_SW);
 				}
 				if(i==floor.length-1){
-					wallSE = new Item("PlainWall", Position.WALL_SE);
+					wallSE = new Item("PlainWall1", Position.WALL_SE);
 				}
 				if(j==floor.length-1){
-					wallNE = new Item("PlainWall", Position.WALL_NE);
+					wallNE = new Item("PlainWall1", Position.WALL_NE);
 				}
 //				if(i==0 && j==floor.length-1){
 //					occupier = new Chter(figureString, Position.CENTER);

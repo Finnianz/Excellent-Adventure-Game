@@ -71,16 +71,16 @@ public class RenderCanvas extends JPanel {
 			return;
 		switch (direction) {
 		case NORTH:
-			renderer.drawNorthView(board, g);
+			renderer.drawNorthView(board, g, width/2);
 			break;
 		case EAST:
-			renderer.drawEastView(board, g);
+			renderer.drawEastView(board, g, width/2);
 			break;
 		case SOUTH:
-			renderer.drawSouthView(board, g);
+			renderer.drawSouthView(board, g, width/2);
 			break;
 		case WEST:
-			renderer.drawWestView(board, g);
+			renderer.drawWestView(board, g, width/2);
 			break;
 		}
 		repaint();
