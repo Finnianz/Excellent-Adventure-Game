@@ -22,6 +22,8 @@ public class DrawableTile {
 	private Drawable floor;
 	private Drawable occupier;
 
+	private Drawable[] drawOrder;
+
 	/**
 	 * Constructor takes Drawable objects. Wall and occupier objects are
 	 * optional, but it must have a floor.
@@ -44,6 +46,7 @@ public class DrawableTile {
 		this.wallSW = wallSW;
 		this.floor = floor;
 		this.occupier = occupier;
+		drawOrder = new Drawable[6];
 	}
 
 	/**
@@ -65,7 +68,7 @@ public class DrawableTile {
 	public void draw(Compass direction, int xPos, int yPos, Graphics g,
 			int tileWidth, int tileHeight) {
 		// An array to keep track of the draw order. Some indexs may remain null
-		Drawable[] drawOrder = new Drawable[6];
+
 		drawOrder[2] = floor;// Floor is always the third item in array
 
 		// If wall isn't null, check the viewing direction to decide where in
@@ -155,20 +158,21 @@ public class DrawableTile {
 		}
 
 	}
-	public void animationTick(){
-		if(wallNE!=null){
+
+	public void animationTick() {
+		if (wallNE != null) {
 			wallNE.animationTick();
 		}
-		if(wallNW!=null){
+		if (wallNW != null) {
 			wallNW.animationTick();
 		}
-		if(wallSE!=null){
+		if (wallSE != null) {
 			wallSE.animationTick();
 		}
-		if(wallSW!=null){
+		if (wallSW != null) {
 			wallSW.animationTick();
 		}
-		if(occupier!=null){
+		if (occupier != null) {
 			occupier.animationTick();
 		}
 		floor.animationTick();
@@ -182,7 +186,8 @@ public class DrawableTile {
 	}
 
 	/**
-	 * @param wallNE the wallNE to set
+	 * @param wallNE
+	 *            the wallNE to set
 	 */
 	public void setWallNE(Drawable wallNE) {
 		this.wallNE = wallNE;
@@ -196,7 +201,8 @@ public class DrawableTile {
 	}
 
 	/**
-	 * @param wallNW the wallNW to set
+	 * @param wallNW
+	 *            the wallNW to set
 	 */
 	public void setWallNW(Drawable wallNW) {
 		this.wallNW = wallNW;
@@ -210,7 +216,8 @@ public class DrawableTile {
 	}
 
 	/**
-	 * @param wallSE the wallSE to set
+	 * @param wallSE
+	 *            the wallSE to set
 	 */
 	public void setWallSE(Drawable wallSE) {
 		this.wallSE = wallSE;
@@ -224,7 +231,8 @@ public class DrawableTile {
 	}
 
 	/**
-	 * @param wallSW the wallSW to set
+	 * @param wallSW
+	 *            the wallSW to set
 	 */
 	public void setWallSW(Drawable wallSW) {
 		this.wallSW = wallSW;
@@ -238,7 +246,8 @@ public class DrawableTile {
 	}
 
 	/**
-	 * @param floor the floor to set
+	 * @param floor
+	 *            the floor to set
 	 */
 	public void setFloor(Drawable floor) {
 		this.floor = floor;
@@ -252,11 +261,23 @@ public class DrawableTile {
 	}
 
 	/**
-	 * @param occupier the occupier to set
+	 * @param occupier
+	 *            the occupier to set
 	 */
 	public void setOccupier(Drawable occupier) {
 		this.occupier = occupier;
 	}
-	
+
+	public Drawable isClickedOn(int x, int y) {
+		Drawable objectToReturn = null;
+		for (int i = 0; i < drawOrder.length; i++) {
+			if (drawOrder[i] != null) {
+				if (drawOrder[i].isContained(x, y)) {
+					objectToReturn = drawOrder[i];
+				}
+			}
+		}
+		return objectToReturn;
+	}
 
 }

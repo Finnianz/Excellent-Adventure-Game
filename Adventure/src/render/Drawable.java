@@ -17,10 +17,11 @@ import javax.imageio.ImageIO;
  *
  */
 public abstract class Drawable {
-	private AnimationSequence images; // An array of images for the object
-										// viewed from the different
-										// directions N,E,S,W, in that
-										// order
+	
+	private Compass direction = Compass.NORTH;
+	private int xOnScreen =0;
+	private int yOnScreen = 0;
+	private AnimationSequence images; // The images
 	public final Position POSITION;// where this object sits on the tile, used
 									// to calculate where to draw.
 
@@ -31,6 +32,7 @@ public abstract class Drawable {
 	private final Compass TOP_RIGHT = Compass.EAST;
 	private final Compass BOTTOM_RIGHT = Compass.SOUTH;
 	private final Compass BOTTOM_LEFT = Compass.WEST;
+	
 
 
 	/**
@@ -80,8 +82,9 @@ public abstract class Drawable {
 	 */
 	public void draw(Compass direction, int x, int y, Graphics g,
 			int tileWidth, int tileHeight) {
-		int x_pos = x;
-		int y_pos = y;
+		
+		xOnScreen = x;
+		yOnScreen = y;
 		BufferedImage sprite = images.getImage(direction);
 		int height = sprite.getHeight();
 		int width = sprite.getWidth();
@@ -91,12 +94,12 @@ public abstract class Drawable {
 			break;
 		// Adjust coordinate for center drawables
 		case CENTER:
-			x_pos += (tileWidth / 2) - (width / 2);
-			y_pos += (tileHeight / 2) - height;
+			xOnScreen += (tileWidth / 2) - (width / 2);
+			yOnScreen += (tileHeight / 2) - height;
 			break;
 		// adjust coords for square objects
 		case SQUARE:
-			y_pos -= (height - tileHeight);
+			yOnScreen -= (height - tileHeight);
 			break;
 		// Wall cases below. These are a bit more complicated than the above
 		// ones. Which wall image to draw and where it is in relation to it's
@@ -104,23 +107,23 @@ public abstract class Drawable {
 		case WALL_NW:
 			switch (direction) {
 			case NORTH:
-				y_pos += (tileHeight / 2) - height;
-				x_pos -= (width - tileWidth);
+				yOnScreen += (tileHeight / 2) - height;
+				xOnScreen -= (width - tileWidth);
 				sprite = images.getImage(TOP_LEFT);
 				break;
 			case EAST:
 				sprite = images.getImage(BOTTOM_LEFT);
-				y_pos += tileHeight - sprite.getHeight(null);
+				yOnScreen += tileHeight - sprite.getHeight(null);
 				break;
 			case SOUTH:
 				sprite = images.getImage(BOTTOM_RIGHT);
-				y_pos += (tileHeight) - sprite.getHeight(null);
-				x_pos += (tileWidth / 2);
+				yOnScreen += (tileHeight) - sprite.getHeight(null);
+				xOnScreen += (tileWidth / 2);
 				break;
 			case WEST:
 				sprite = images.getImage(TOP_RIGHT);
-				y_pos += (tileHeight / 2) - height;
-				x_pos += (tileWidth / 2) + (width - tileWidth);
+				yOnScreen += (tileHeight / 2) - height;
+				xOnScreen += (tileWidth / 2) + (width - tileWidth);
 				break;
 			}
 
@@ -130,22 +133,22 @@ public abstract class Drawable {
 			switch (direction) {
 			case NORTH:
 				sprite = images.getImage(TOP_RIGHT);
-				y_pos += (tileHeight / 2) - height;
-				x_pos += (tileWidth / 2) + (width - tileWidth);
+				yOnScreen += (tileHeight / 2) - height;
+				xOnScreen += (tileWidth / 2) + (width - tileWidth);
 				break;
 			case EAST:
-				y_pos += (tileHeight / 2) - height;
-				x_pos -= (width - tileWidth);
+				yOnScreen += (tileHeight / 2) - height;
+				xOnScreen -= (width - tileWidth);
 				sprite = images.getImage(TOP_LEFT);
 				break;
 			case SOUTH:
 				sprite = images.getImage(BOTTOM_LEFT);
-				y_pos += tileHeight - sprite.getHeight(null);
+				yOnScreen += tileHeight - sprite.getHeight(null);
 				break;
 			case WEST:
 				sprite = images.getImage(BOTTOM_RIGHT);
-				y_pos += (tileHeight) - sprite.getHeight(null);
-				x_pos += (tileWidth / 2);
+				yOnScreen += (tileHeight) - sprite.getHeight(null);
+				xOnScreen += (tileWidth / 2);
 				break;
 			}
 			break;
@@ -154,21 +157,21 @@ public abstract class Drawable {
 			switch (direction) {
 			case NORTH:
 				sprite = images.getImage(BOTTOM_LEFT);
-				y_pos += tileHeight - sprite.getHeight(null);
+				yOnScreen += tileHeight - sprite.getHeight(null);
 				break;
 			case EAST:
 				sprite = images.getImage(BOTTOM_RIGHT);
-				y_pos += (tileHeight) - sprite.getHeight(null);
-				x_pos += (tileWidth / 2);
+				yOnScreen += (tileHeight) - sprite.getHeight(null);
+				xOnScreen += (tileWidth / 2);
 				break;
 			case SOUTH:
 				sprite = images.getImage(TOP_RIGHT);
-				y_pos += (tileHeight / 2) - height;
-				x_pos += (tileWidth / 2) + (width - tileWidth);
+				yOnScreen += (tileHeight / 2) - height;
+				xOnScreen += (tileWidth / 2) + (width - tileWidth);
 				break;
 			case WEST:
-				y_pos += (tileHeight / 2) - height;
-				x_pos -= (width - tileWidth);
+				yOnScreen += (tileHeight / 2) - height;
+				xOnScreen -= (width - tileWidth);
 				sprite = images.getImage(TOP_LEFT);
 				break;
 
@@ -178,33 +181,40 @@ public abstract class Drawable {
 			switch (direction) {
 			case NORTH:
 				sprite = images.getImage(BOTTOM_RIGHT);
-				y_pos += (tileHeight) - sprite.getHeight(null);
-				x_pos += (tileWidth / 2);
+				yOnScreen += (tileHeight) - sprite.getHeight(null);
+				xOnScreen += (tileWidth / 2);
 				break;
 			case EAST:
 				sprite = images.getImage(TOP_RIGHT);
-				y_pos += (tileHeight / 2) - height;
-				x_pos += (tileWidth / 2) + (width - tileWidth);
+				yOnScreen += (tileHeight / 2) - height;
+				xOnScreen += (tileWidth / 2) + (width - tileWidth);
 				break;
 			case SOUTH:
 				sprite = images.getImage(TOP_LEFT);
-				y_pos += (tileHeight / 2) - height;
-				x_pos -= (width - tileWidth);
+				yOnScreen += (tileHeight / 2) - height;
+				xOnScreen -= (width - tileWidth);
 				break;
 			case WEST:
 				sprite = images.getImage(BOTTOM_LEFT);
-				y_pos += tileHeight - sprite.getHeight(null);
+				yOnScreen += tileHeight - sprite.getHeight(null);
 				break;
 			}
 			break;
 		}
 		// Finally draw the image
-		g.drawImage(sprite, x_pos, y_pos, null);
+		g.drawImage(sprite, xOnScreen, yOnScreen, null);
 
 	}
 	
 	public void animationTick(){
 		images.animationTick();
 	}
-
+	
+	public void changeAnimation(){
+		images.changeState();
+	}
+	
+	public boolean isContained(int x, int y){
+		return (x>xOnScreen && x<(xOnScreen+images.getImage(direction).getWidth()) &&y>yOnScreen && y< (yOnScreen + images.getImage(direction).getHeight()));
+	}
 }
