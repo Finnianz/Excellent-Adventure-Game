@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  * @author Paige Halliwell ID:300316022
  *
  */
-public class RenderCanvas extends JPanel implements MouseListener{
+public class RenderCanvas extends JPanel implements MouseListener {
 	private Drawable selectedObject;
 	private Compass direction = Compass.NORTH;
 	public IsometricRenderer renderer = new IsometricRenderer();
@@ -47,15 +47,16 @@ public class RenderCanvas extends JPanel implements MouseListener{
 		}
 	}
 
-	public RenderCanvas() {
-
-	}
-
+	/**
+	 * 
+	 * @param b array of drawable objects that represent the current room
+	 */
 	public void setRoom(DrawableTile[][] b) {
 		this.board = b;
 		selectedObject = null;
 	}
 
+	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 	}
@@ -75,16 +76,16 @@ public class RenderCanvas extends JPanel implements MouseListener{
 			return;
 		switch (direction) {
 		case NORTH:
-			renderer.drawNorthView(board, g, width/2);
+			renderer.drawNorthView(board, g, width / 2);
 			break;
 		case EAST:
-			renderer.drawEastView(board, g, width/2);
+			renderer.drawEastView(board, g, width / 2);
 			break;
 		case SOUTH:
-			renderer.drawSouthView(board, g, width/2);
+			renderer.drawSouthView(board, g, width / 2);
 			break;
 		case WEST:
-			renderer.drawWestView(board, g, width/2);
+			renderer.drawWestView(board, g, width / 2);
 			break;
 		}
 		repaint();
@@ -135,42 +136,42 @@ public class RenderCanvas extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		if(board!=null){
-			for(int i = 0; i< board.length; i++){
-				for(int j = 0; j<board[i].length; j++){
-					//TODO ??? Drawable clickedOn = board[i][j].isClickedOn(arg0.getX(), arg0.getY());
+		if (board != null) {
+			for (int i = 0; i < board.length; i++) {
+				for (int j = 0; j < board[i].length; j++) {
+					Drawable clickedOn = board[i][j].isClickedOn(arg0.getX(),
+							arg0.getY());// the isClickedOn method returns to
+											// topmost object of the draw order
+					if (clickedOn != null) {// If clickedOn isn't null an object
+											// has been found, assign selected
+											// object and return from method
+						selectedObject = clickedOn;
+						return;
+					}
 				}
 			}
 		}
-		
+
 	}
 
 	/**
-	 * @return the selectedObject
+	 * @return the selectedObject, may be null
 	 */
 	public Drawable getSelectedObject() {
 		return selectedObject;
