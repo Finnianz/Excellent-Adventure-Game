@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
 
 public class AnimationSequence {
 
-	private final String RESOURCE = "resource/";
+	private final String RESOURCE = "Adventure/resource/";
 	// One array for each direction. Each array is a sequence of images that
 	// create the animation
 	private BufferedImage spriteSheet;
