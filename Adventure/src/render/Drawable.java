@@ -18,6 +18,7 @@ import javax.imageio.ImageIO;
  */
 public abstract class Drawable {
 	
+	private boolean selected = false;
 	private Compass direction = Compass.NORTH;
 	private int xOnScreen =0;
 	private int yOnScreen = 0;
@@ -216,5 +217,23 @@ public abstract class Drawable {
 	
 	public boolean isContained(int x, int y){
 		return (x>xOnScreen && x<(xOnScreen+images.getImage(direction).getWidth()) &&y>yOnScreen && y< (yOnScreen + images.getImage(direction).getHeight()));
+	}
+
+	/**
+	 * @return the selected
+	 */
+	public boolean isSelected() {
+		return selected;
+	}
+
+	/**
+	 * @param selected the selected to set
+	 */
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+
+	public int getYOnScreen() {
+		return yOnScreen;
 	}
 }

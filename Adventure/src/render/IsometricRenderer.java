@@ -15,7 +15,7 @@ public class IsometricRenderer {
 	public final int TILE_HEIGHT = 64;
 	public final int TILE_WIDTH = 128;
 	// Coordinates to draw the current viewing direction
-	public final int COMPASS_OFFSET = 10;
+	public final int COMPASS_OFFSET = 20;
 
 	/**
 	 * Draws the array from back to front if looking to the north
