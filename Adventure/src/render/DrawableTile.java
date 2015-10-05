@@ -174,4 +174,89 @@ public class DrawableTile {
 		floor.animationTick();
 	}
 
+	/**
+	 * @return the wallNE
+	 */
+	public Drawable getWallNE() {
+		return wallNE;
+	}
+
+	/**
+	 * @param wallNE the wallNE to set
+	 */
+	public void setWallNE(Drawable wallNE) {
+		this.wallNE = wallNE;
+	}
+
+	/**
+	 * @return the wallNW
+	 */
+	public Drawable getWallNW() {
+		return wallNW;
+	}
+
+	/**
+	 * @param wallNW the wallNW to set
+	 */
+	public void setWallNW(Drawable wallNW) {
+		this.wallNW = wallNW;
+	}
+
+	/**
+	 * @return the wallSE
+	 */
+	public Drawable getWallSE() {
+		return wallSE;
+	}
+
+	/**
+	 * @param wallSE the wallSE to set
+	 */
+	public void setWallSE(Drawable wallSE) {
+		this.wallSE = wallSE;
+	}
+
+	/**
+	 * @return the wallSW
+	 */
+	public Drawable getWallSW() {
+		return wallSW;
+	}
+
+	/**
+	 * @param wallSW the wallSW to set
+	 */
+	public void setWallSW(Drawable wallSW) {
+		this.wallSW = wallSW;
+	}
+
+	/**
+	 * @return the floor
+	 */
+	public Drawable getFloor() {
+		return floor;
+	}
+
+	/**
+	 * @param floor the floor to set
+	 */
+	public void setFloor(Drawable floor) {
+		this.floor = floor;
+	}
+
+	/**
+	 * @return the occupier
+	 */
+	public Drawable getOccupier() {
+		return occupier;
+	}
+
+	/**
+	 * @param occupier the occupier to set
+	 */
+	public void setOccupier(Drawable occupier) {
+		this.occupier = occupier;
+	}
+	
+
 }
