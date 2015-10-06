@@ -8,7 +8,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -64,12 +66,26 @@ public class GameFrame extends JFrame implements WindowListener {
 			}
 		});
 		menu.add(startNewSingle);
+
+		
+
 		startNewMulti = new JMenuItem("Start Multi Player Game");
 		startNewMulti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int result = JOptionPane.showConfirmDialog(null, c, "Port", JOptionPane.OK_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE);
+				String[] choices = new String[]{"Host", "Client"};
+		        String choice = (String) JOptionPane.showInputDialog(
+		                null,
+		                "Please Choose whether Host or Client",
+		                "??",
+		                JOptionPane.PLAIN_MESSAGE,
+		                null,
+		                choices,
+		                choices[0]);
+		      	int result = 0;
+		      	if(choice.equals("Host")) result = 1;
+				
 				new Gameplay(result);
+				
 			}
 		});
 		menu.add(startNewMulti);

@@ -11,20 +11,9 @@ import java.io.IOException;
 public class Main {
 	private static final int DEFAULT_CLK_PERIOD = 20;
 	private static final int DEFAULT_BROADCAST_CLK_PERIOD = 5;
-	
-	
-	
+
 	public static void main(String[] args) {
-		int gameClock = DEFAULT_CLK_PERIOD;
-		int broadcastClock = DEFAULT_BROADCAST_CLK_PERIOD;
-		
-		
-		
-		
-		
-		
-		
-		
+
 		startGame();
 
 	}
