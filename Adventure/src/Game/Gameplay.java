@@ -101,7 +101,7 @@ public class Gameplay {
 			current.setOccupier(null);
 			newLoc.setOccupier(character);
 			//TODO Remove println
-			System.out.println("moving east");
+			System.out.println("moving west");
 		}
 		else if (itemOnNewLoc instanceof NonMovableItem){
 			((NonMovableItem) itemOnNewLoc).interact();
@@ -120,7 +120,7 @@ public class Gameplay {
 			current.setOccupier(null);
 			newLoc.setOccupier(character);
 			//TODO Remove println
-			System.out.println("moving east");
+			System.out.println("moving South");
 		}
 		else if (itemOnNewLoc instanceof NonMovableItem){
 			((NonMovableItem) itemOnNewLoc).interact();
@@ -139,7 +139,7 @@ public class Gameplay {
 			current.setOccupier(null);
 			newLoc.setOccupier(character);
 			//TODO Remove println
-			System.out.println("moving east");
+			System.out.println("moving north");
 		}
 		else if (itemOnNewLoc instanceof NonMovableItem){
 			((NonMovableItem) itemOnNewLoc).interact();
