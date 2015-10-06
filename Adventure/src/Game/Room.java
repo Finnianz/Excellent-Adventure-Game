@@ -100,16 +100,17 @@ public class Room {
 		floor[loc.getX()][loc.getY()].setOccupier(item);
 	}
 
-	public boolean checkLocation(Location loc) {
-		if(floor[loc.getX()][loc.getY()].getOccupier() == null){
-			return true;
-		}
-		else if(floor[loc.getX()][loc.getY()].getOccupier() instanceof MovableItem) {
-			return true;
-		}
-		else {
-			return false;
-		}
+	public Drawable checkLocation(Location loc) {
+//		if(floor[loc.getX()][loc.getY()].getOccupier() == null){
+//			return null;
+//		}
+//		else if(floor[loc.getX()][loc.getY()].getOccupier() instanceof MovableItem) {
+//			return true;
+//		}
+//		else {
+//			return false;
+//		}
+		return floor[loc.getX()][loc.getY()].getOccupier();
 	}
 
 	/**

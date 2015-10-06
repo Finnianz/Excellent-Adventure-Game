@@ -2,6 +2,7 @@ package Game;
 
 import java.util.ArrayList;
 
+import render.Drawable;
 import render.RenderCanvas;
 import render.Drawable.Position;
 
@@ -62,67 +63,76 @@ public class Gameplay {
 	public void moveEast(Character character) {
 		Location current = character.getCurrentLocation();
 		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX() + 1][character.getCurrentLocation().getY()];
-		boolean move = character.getCurrentRoom().checkLocation(newLoc);
-		if (move) {
+		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
+		if (itemOnNewLoc == null || itemOnNewLoc instanceof MovableItem) {
 			character.moveSpace(newLoc);
-			if(newLoc.getOccupier() instanceof MovableItem){
+			if(itemOnNewLoc !=null ){
 				character.pickUpItem((MovableItem) newLoc.getOccupier());
 			}
 			current.setOccupier(null);
 			newLoc.setOccupier(character);
 			//TODO Remove println
 			System.out.println("moving east");
+		}
+		else if (itemOnNewLoc instanceof NonMovableItem){
+			((NonMovableItem) itemOnNewLoc).interact();
 		}
 	}
 	
 	public void moveWest(Character character) {
 		Location current = character.getCurrentLocation();
 		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX() - 1][character.getCurrentLocation().getY()];
-		boolean move = character.getCurrentRoom().checkLocation(newLoc);
-		if (move) {
+		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
+		if (itemOnNewLoc == null || itemOnNewLoc instanceof MovableItem) {
 			character.moveSpace(newLoc);
-			if(newLoc.getOccupier() instanceof MovableItem){
+			if(itemOnNewLoc !=null ){
 				character.pickUpItem((MovableItem) newLoc.getOccupier());
 			}
 			current.setOccupier(null);
 			newLoc.setOccupier(character);
 			//TODO Remove println
-
-			System.out.println("moving West");
+			System.out.println("moving east");
+		}
+		else if (itemOnNewLoc instanceof NonMovableItem){
+			((NonMovableItem) itemOnNewLoc).interact();
 		}
 	}
 	
 	public void moveSouth(Character character) {
 		Location current = character.getCurrentLocation();
 		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX()][character.getCurrentLocation().getY() + 1];
-		boolean move = character.getCurrentRoom().checkLocation(newLoc);
-		if (move) {
+		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
+		if (itemOnNewLoc == null || itemOnNewLoc instanceof MovableItem) {
 			character.moveSpace(newLoc);
-			if(newLoc.getOccupier() instanceof MovableItem){
+			if(itemOnNewLoc !=null ){
 				character.pickUpItem((MovableItem) newLoc.getOccupier());
 			}
 			current.setOccupier(null);
 			newLoc.setOccupier(character);
 			//TODO Remove println
-
 			System.out.println("moving east");
+		}
+		else if (itemOnNewLoc instanceof NonMovableItem){
+			((NonMovableItem) itemOnNewLoc).interact();
 		}
 	}
 	
 	public void moveNorth(Character character) {
 		Location current = character.getCurrentLocation();
 		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX()][character.getCurrentLocation().getY() - 1];
-		boolean move = character.getCurrentRoom().checkLocation(newLoc);
-		if (move) {
+		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
+		if (itemOnNewLoc == null || itemOnNewLoc instanceof MovableItem) {
 			character.moveSpace(newLoc);
-			if(newLoc.getOccupier() instanceof MovableItem){
+			if(itemOnNewLoc !=null ){
 				character.pickUpItem((MovableItem) newLoc.getOccupier());
 			}
 			current.setOccupier(null);
 			newLoc.setOccupier(character);
 			//TODO Remove println
-
 			System.out.println("moving east");
+		}
+		else if (itemOnNewLoc instanceof NonMovableItem){
+			((NonMovableItem) itemOnNewLoc).interact();
 		}
 	}
 
