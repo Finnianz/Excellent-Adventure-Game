@@ -33,8 +33,7 @@ public class Gameplay {
 		player1.setCurrentLocation(
 				new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), player1, 3, 4));
 		characters.add(player1);
-		move(new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), player1, 3, 5), player1);
-
+		moveEast(player1);
 	}
 
 	public Gameplay(int result) {
@@ -60,23 +59,74 @@ public class Gameplay {
 		
 	}
 
-	public void move(Location loc, Character character) {
-		boolean move = character.getCurrentRoom().checkLocation(loc);
+	public void moveEast(Character character) {
+		Location current = character.getCurrentLocation();
+		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX() + 1][character.getCurrentLocation().getY()];
+		boolean move = character.getCurrentRoom().checkLocation(newLoc);
 		if (move) {
-			character.moveSpace(loc);
-			System.out.println("moving left");
+			character.moveSpace(newLoc);
+			if(newLoc.getOccupier() instanceof MovableItem){
+				character.pickUpItem((MovableItem) newLoc.getOccupier());
+			}
+			current.setOccupier(null);
+			newLoc.setOccupier(character);
+			//TODO Remove println
+			System.out.println("moving east");
+		}
+	}
+	
+	public void moveWest(Character character) {
+		Location current = character.getCurrentLocation();
+		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX() - 1][character.getCurrentLocation().getY()];
+		boolean move = character.getCurrentRoom().checkLocation(newLoc);
+		if (move) {
+			character.moveSpace(newLoc);
+			if(newLoc.getOccupier() instanceof MovableItem){
+				character.pickUpItem((MovableItem) newLoc.getOccupier());
+			}
+			current.setOccupier(null);
+			newLoc.setOccupier(character);
+			//TODO Remove println
+
+			System.out.println("moving West");
+		}
+	}
+	
+	public void moveSouth(Character character) {
+		Location current = character.getCurrentLocation();
+		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX()][character.getCurrentLocation().getY() + 1];
+		boolean move = character.getCurrentRoom().checkLocation(newLoc);
+		if (move) {
+			character.moveSpace(newLoc);
+			if(newLoc.getOccupier() instanceof MovableItem){
+				character.pickUpItem((MovableItem) newLoc.getOccupier());
+			}
+			current.setOccupier(null);
+			newLoc.setOccupier(character);
+			//TODO Remove println
+
+			System.out.println("moving east");
+		}
+	}
+	
+	public void moveNorth(Character character) {
+		Location current = character.getCurrentLocation();
+		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX()][character.getCurrentLocation().getY() - 1];
+		boolean move = character.getCurrentRoom().checkLocation(newLoc);
+		if (move) {
+			character.moveSpace(newLoc);
+			if(newLoc.getOccupier() instanceof MovableItem){
+				character.pickUpItem((MovableItem) newLoc.getOccupier());
+			}
+			current.setOccupier(null);
+			newLoc.setOccupier(character);
+			//TODO Remove println
+
+			System.out.println("moving east");
 		}
 	}
 
-	// public void moveLeft( Character character){
-	// new Location(null, null, null, null, new Item("FloorBlock",
-	// Position.FLOOR), character, character.getCurrentLocation()., 5)
-	// boolean move = character.getCurrentRoom().checkLocation(loc);
-	// if(move){
-	// character.moveSpace(loc);
-	// System.out.println("moving left");
-	// }
-	// }
+
 
 	/**
 	 * @return the rooms
