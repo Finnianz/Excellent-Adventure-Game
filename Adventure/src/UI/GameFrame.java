@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Game.Gameplay;
-import Game.Main;
+import Main.Main;
 import render.RenderCanvas;
 
 public class GameFrame extends JFrame implements WindowListener {

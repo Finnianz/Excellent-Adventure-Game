@@ -1,7 +1,9 @@
-package Game;
+package Main;
 
+import Game.Gameplay;
 import UI.GameFrame;
 import render.RenderCanvas;
+
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.BufferedReader;
