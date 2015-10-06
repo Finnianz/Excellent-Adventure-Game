@@ -9,7 +9,7 @@ import render.*;
 import render.Drawable.Position;
 public class Room {
 
-	private List<Doorway> doors = new ArrayList<Doorway>();
+//	private List<Trapdoor> doors = new ArrayList<Trapdoor>();
 	private final int roomID;
 	private int width;
 	private int height;
@@ -53,19 +53,19 @@ public class Room {
 		  }
 	}
 
-	/**
-	 * @return the doors
-	 */
-	public List<Doorway> getDoors() {
-		return doors;
-	}
-
-	/**
-	 * @param door -  the door to add
-	 */
-	public void addDoor(Doorway door) {
-		this.doors.add(door);
-	}
+//	/**
+//	 * @return the doors
+//	 */
+//	public List<Trapdoor> getDoors() {
+//		return doors;
+//	}
+//
+//	/**
+//	 * @param door -  the door to add
+//	 */
+//	public void addDoor(Trapdoor door) {
+//		this.doors.add(door);
+//	}
 	
 	/**
 	 * @return the items in the room
