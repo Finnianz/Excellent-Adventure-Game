@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -62,7 +63,7 @@ public class GameFrame extends JFrame implements WindowListener {
 		startNewSingle = new JMenuItem("Start Single Player Game");
 		startNewSingle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Gameplay();
+				new Gameplay(new ArrayList<Game.Character>());
 			}
 		});
 		menu.add(startNewSingle);
@@ -83,7 +84,7 @@ public class GameFrame extends JFrame implements WindowListener {
 		                choices[0]);
 		      	int result = 0;
 		      	if(choice.equals("Host")) result = 1;
-				new Gameplay(result);
+				new Gameplay(new ArrayList<Game.Character>());
 				
 			}
 		});
