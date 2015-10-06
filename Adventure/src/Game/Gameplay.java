@@ -21,44 +21,53 @@ public class Gameplay {
 	public Gameplay() {
 
 		Room dungeon = new Room(1, 10, 10);
-		Room hallway = new Room(2, 5, 5);
-		Doorway dungeondoor = new Doorway(dungeon, hallway);
-		dungeon.addDoor(dungeondoor);
-		hallway.addDoor(dungeondoor);
-		Location loc = new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), null, 0, 0);
-		Item wall = new Item("PlainWall", Position.WALL_NE);
-		dungeon.addItem(wall, loc);
+		Room hallway = new Room(2, 10, 10);
+		Location doorLoc = dungeon.getFloor()[4][4];
+		Trapdoor t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(), doorLoc.getFloor(), doorLoc.getOccupier(),4 ,4 , dungeon, hallway);
+//		Trapdoor dungeondoor = new Trapdoor(dungeon, hallway);
+//		dungeon.addDoor(dungeondoor);
+//		hallway.addDoor(dungeondoor);
+//		Location loc = new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), null, 0, 0);
+//		Item wall = new Item("PlainWall", Position.WALL_NE);
+//		dungeon.addItem(wall, loc);
 		rooms.add(dungeon);
 		rooms.add(hallway);
 		Character player1 = new Character("StickFig", Position.CENTER, "Player 1", dungeon);
 		player1.setCurrentLocation(
-				new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), player1, 3, 4));
+				new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), player1, 7, 8));
 		characters.add(player1);
+		System.out.println(player1.getCurrentLocation().getX() + " " + player1.getCurrentLocation().getY());
 		moveEast(player1);
+		System.out.println(player1.getCurrentLocation().getX() + " " + player1.getCurrentLocation().getY());
+		moveWest(player1);
+		System.out.println(player1.getCurrentLocation().getX() + " " + player1.getCurrentLocation().getY());
+		moveNorth(player1);
+		System.out.println(player1.getCurrentLocation().getX() + " " + player1.getCurrentLocation().getY());
+		
 	}
 
-	public Gameplay(int result) {
-		Room dungeon = new Room(1, 10, 10);
-		Room hallway = new Room(2, 5, 5);
-		Doorway dungeondoor = new Doorway(dungeon, hallway);
-		dungeon.addDoor(dungeondoor);
-		hallway.addDoor(dungeondoor);
-		Location loc = new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), null, 0, 0);
-		Item wall = new Item("PlainWall", Position.WALL_NE);
-		dungeon.addItem(wall, loc);
-		rooms.add(dungeon);
-		rooms.add(hallway);
-		Character player1 = new Character("StickFig", Position.CENTER, "Player 1", dungeon);
-		player1.setCurrentLocation(
-				new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), player1, 3, 4));
-		characters.add(player1);
-		System.out.println("moving right");
-		
-		
-		
-		
-		
-	}
+//	public Gameplay(int result) {
+//		Room dungeon = new Room(1, 10, 10);
+//		Room hallway = new Room(2, 5, 5);
+//		Trapdoor dungeondoor = new Trapdoor(dungeon, hallway);
+//		dungeon.addDoor(dungeondoor);
+//		hallway.addDoor(dungeondoor);
+//		Location loc = new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), null, 0, 0);
+//		Item wall = new Item("PlainWall", Position.WALL_NE);
+//		dungeon.addItem(wall, loc);
+//		rooms.add(dungeon);
+//		rooms.add(hallway);
+//		Character player1 = new Character("StickFig", Position.CENTER, "Player 1", dungeon);
+//		player1.setCurrentLocation(
+//				new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), player1, 3, 4));
+//		characters.add(player1);
+//		System.out.println("moving right");
+//		
+//		
+//		
+//		
+//		
+//	}
 
 	public void moveEast(Character character) {
 		Location current = character.getCurrentLocation();
@@ -73,6 +82,7 @@ public class Gameplay {
 			newLoc.setOccupier(character);
 			//TODO Remove println
 			System.out.println("moving east");
+			
 		}
 		else if (itemOnNewLoc instanceof NonMovableItem){
 			((NonMovableItem) itemOnNewLoc).interact();
