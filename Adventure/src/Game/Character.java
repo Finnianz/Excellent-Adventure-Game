@@ -25,8 +25,8 @@ public class Character extends Drawable{
 		currentLocation = newLoc;
 	}
 	
-	public void pickUpItem(Item item){
-		
+	public void pickUpItem(MovableItem item){
+		items.add(item);
 	}
 	
 	

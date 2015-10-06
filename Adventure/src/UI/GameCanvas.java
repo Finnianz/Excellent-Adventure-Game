@@ -13,12 +13,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import Game.Game;
+import Game.Gameplay;
 import render.RenderCanvas;
 import render.RenderFrame;
 
 public class GameCanvas extends JPanel {
-	private Game game;
+	private Gameplay game;
 	private JPanel outerPanel;
 	private RenderFrame GamePanel;
 	private JLabel[][] grid;

@@ -14,7 +14,7 @@ public class Room {
 	private int width;
 	private int height;
 	private List<Item> items = new ArrayList <Item>();
-	private Map<Location, Item> map = new HashMap<Location, Item>();
+//	private Map<Location, Item> map = new HashMap<Location, Item>();
 	private Location[][] floor; 
 	
 	/**
@@ -97,16 +97,20 @@ public class Room {
 	}
 	
 	public void addItem(Item item, Location loc){
-		map.put(loc, item);
+		floor[loc.getX()][loc.getY()].setOccupier(item);
 	}
 
-	public boolean checkLocation(Location loc) {
-		if(map.get(loc)!=null){
-			return false;
-		}
-		else {
-			return true;
-		}
+	public Drawable checkLocation(Location loc) {
+//		if(floor[loc.getX()][loc.getY()].getOccupier() == null){
+//			return null;
+//		}
+//		else if(floor[loc.getX()][loc.getY()].getOccupier() instanceof MovableItem) {
+//			return true;
+//		}
+//		else {
+//			return false;
+//		}
+		return floor[loc.getX()][loc.getY()].getOccupier();
 	}
 
 	/**
