@@ -17,6 +17,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Game.Gameplay;
+import Game.Main;
 import render.RenderCanvas;
 
 public class GameFrame extends JFrame implements WindowListener {
@@ -25,7 +27,8 @@ public class GameFrame extends JFrame implements WindowListener {
 	private JMenuBar menuBar;
 	private JMenu menu;
 	private JMenu helpMenu;
-	private JMenuItem startNew;
+	private JMenuItem startNewSingle;
+	private JMenuItem startNewMulti;
 	private JMenuItem exit;
 	private JMenuItem instructions;
 
@@ -54,22 +57,29 @@ public class GameFrame extends JFrame implements WindowListener {
 		helpMenu = new JMenu("Help");
 		menuBar.add(menu);
 		menuBar.add(helpMenu);
-		startNew = new JMenuItem("Start new game");
-		startNew.addActionListener(new ActionListener() {
+		startNewSingle = new JMenuItem("Start Single Player Game");
+		startNewSingle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// GUI.main(null);
+				new Gameplay();
 			}
 		});
-		menu.add(startNew);
+		menu.add(startNewSingle);
+		startNewMulti = new JMenuItem("Start Multi Player Game");
+		startNewMulti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(null, c, "Port", JOptionPane.OK_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE);
+				new Gameplay(result);
+			}
+		});
+		menu.add(startNewMulti);
 		exit = new JMenuItem("Exit game");
 		exit.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int r = JOptionPane
-						.showConfirmDialog(c, new JLabel("Exit Cluedo?"),
-								"Confirm Exit", JOptionPane.YES_NO_OPTION,
-								JOptionPane.QUESTION_MESSAGE);
+				int r = JOptionPane.showConfirmDialog(c, new JLabel("Exit Cluedo?"), "Confirm Exit",
+						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if (r == JOptionPane.YES_OPTION) {
 					System.exit(0);
 				}
@@ -103,8 +113,7 @@ public class GameFrame extends JFrame implements WindowListener {
 	}
 
 	public void windowClosing(WindowEvent e) {
-		int r = JOptionPane.showConfirmDialog(this, new JLabel("Exit?"),
-				"Confirm Exit", JOptionPane.YES_NO_OPTION,
+		int r = JOptionPane.showConfirmDialog(this, new JLabel("Exit?"), "Confirm Exit", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE);
 		if (r == JOptionPane.YES_OPTION) {
 			System.exit(0);
@@ -134,10 +143,8 @@ public class GameFrame extends JFrame implements WindowListener {
 	}
 
 	public void showInstructions() {
-		JOptionPane.showMessageDialog(this,
-				"this is a game \nit is not yet clear what to do.",
-				"Instructions", JOptionPane.PLAIN_MESSAGE);
-		JOptionPane.showMessageDialog(this, "more unknown instructions",
-				"Instructions", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(this, "this is a game \nit is not yet clear what to do.", "Instructions",
+				JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(this, "more unknown instructions", "Instructions", JOptionPane.PLAIN_MESSAGE);
 	}
 }
