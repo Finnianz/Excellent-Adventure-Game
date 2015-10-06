@@ -83,9 +83,7 @@ public class GameFrame extends JFrame implements WindowListener {
 		                choices[0]);
 		      	int result = 0;
 		      	if(choice.equals("Host")) result = 1;
-				
-				new Gameplay();
-				//new Gameplay(result);  TODO change this
+				new Gameplay(result);
 				
 			}
 		});
