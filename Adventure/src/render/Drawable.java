@@ -109,7 +109,7 @@ public abstract class Drawable {
 			switch (direction) {
 			case NORTH:
 				yOnScreen += (tileHeight / 2) - height;
-				xOnScreen -= (width - tileWidth);
+				xOnScreen -= (width - tileWidth/2);
 				sprite = images.getImage(TOP_LEFT);
 				break;
 			case EAST:
@@ -124,7 +124,7 @@ public abstract class Drawable {
 			case WEST:
 				sprite = images.getImage(TOP_RIGHT);
 				yOnScreen += (tileHeight / 2) - height;
-				xOnScreen += (tileWidth / 2) + (width - tileWidth);
+				xOnScreen += (tileWidth/2);
 				break;
 			}
 
@@ -135,11 +135,11 @@ public abstract class Drawable {
 			case NORTH:
 				sprite = images.getImage(TOP_RIGHT);
 				yOnScreen += (tileHeight / 2) - height;
-				xOnScreen += (tileWidth / 2) + (width - tileWidth);
+				xOnScreen += (tileWidth/2);
 				break;
 			case EAST:
 				yOnScreen += (tileHeight / 2) - height;
-				xOnScreen -= (width - tileWidth);
+				xOnScreen -= (width - tileWidth/2);
 				sprite = images.getImage(TOP_LEFT);
 				break;
 			case SOUTH:
@@ -168,11 +168,11 @@ public abstract class Drawable {
 			case SOUTH:
 				sprite = images.getImage(TOP_RIGHT);
 				yOnScreen += (tileHeight / 2) - height;
-				xOnScreen += (tileWidth / 2) + (width - tileWidth);
+				xOnScreen += (tileWidth/2);
 				break;
 			case WEST:
 				yOnScreen += (tileHeight / 2) - height;
-				xOnScreen -= (width - tileWidth);
+				xOnScreen -= (width - tileWidth/2);
 				sprite = images.getImage(TOP_LEFT);
 				break;
 
@@ -183,17 +183,17 @@ public abstract class Drawable {
 			case NORTH:
 				sprite = images.getImage(BOTTOM_RIGHT);
 				yOnScreen += (tileHeight) - sprite.getHeight(null);
-				xOnScreen += (tileWidth / 2);
+				xOnScreen += (tileWidth - sprite.getWidth(null));
 				break;
 			case EAST:
 				sprite = images.getImage(TOP_RIGHT);
 				yOnScreen += (tileHeight / 2) - height;
-				xOnScreen += (tileWidth / 2) + (width - tileWidth);
+				xOnScreen += (tileWidth/2);
 				break;
 			case SOUTH:
 				sprite = images.getImage(TOP_LEFT);
 				yOnScreen += (tileHeight / 2) - height;
-				xOnScreen -= (width - tileWidth);
+				xOnScreen -= (width - tileWidth/2);
 				break;
 			case WEST:
 				sprite = images.getImage(BOTTOM_LEFT);
