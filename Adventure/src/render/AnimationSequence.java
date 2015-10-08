@@ -12,6 +12,11 @@ import render.RenderCanvas.Compass;
 
 import javax.imageio.ImageIO;
 
+/**
+ * 
+ * @author Paige Halliwell ID:300316022
+ *
+ */
 public class AnimationSequence {
 
 	private final String RESOURCE = "resource/";
