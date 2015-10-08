@@ -68,35 +68,24 @@ public class GameFrame extends JFrame implements WindowListener {
 		});
 		menu.add(startNewSingle);
 
-		
-		//adds multiplayer item to menu, and offers option pane to choose host or client 
+		// adds multiplayer item to menu, and offers option pane to choose host
+		// or client
 		startNewMulti = new JMenuItem("Multi Player");
 		startNewMulti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String[] choices = new String[]{"Host Game", "Join Game"};
-		        String choice = (String) JOptionPane.showInputDialog(
-		                null,
-		                "Please Choose whether Host or Client",
-		                "??",
-		                JOptionPane.PLAIN_MESSAGE,
-		                null,
-		                choices,
-		                choices[0]);
-		        if(choice.equals("Host Game")) {
-		        	JOptionPane.showInputDialog(
-		                    null,
-		                    "Enter Port", null,
-		                    JOptionPane.PLAIN_MESSAGE);
-		           
-		        	
-		        } else if(choice.equals("Join Game")) {
-		        	JOptionPane.showInputDialog(
-		                    null,
-		                    "Enter Port", null,
-		                    JOptionPane.PLAIN_MESSAGE);
-		        	
-		        }
-							
+				String[] choices = new String[] { "Host Game", "Join Game" };
+				String choice = (String) JOptionPane.showInputDialog(null, "Please Choose whether Host or Client", "??",
+						JOptionPane.PLAIN_MESSAGE, null, choices, choices[0]);
+				if (choice.equals("Host Game")) {
+					Main.hostGame(Integer.parseInt(
+							JOptionPane.showInputDialog(null, "Enter Port", null, JOptionPane.PLAIN_MESSAGE)));
+
+				} else if (choice.equals("Join Game")) {
+
+					Main.joinGame(Integer.parseInt(
+							JOptionPane.showInputDialog(null, "Enter Port", null, JOptionPane.PLAIN_MESSAGE)));
+				}
+
 			}
 		});
 		menu.add(startNewMulti);
