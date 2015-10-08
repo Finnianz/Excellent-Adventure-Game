@@ -18,7 +18,7 @@ public class Gameplay {
 	private List<Room> rooms = new ArrayList<Room>();
 	private List<Character> characters = new ArrayList<Character>();
 
-	public Gameplay() {
+	public Gameplay(List<Character> characters) {
 
 		Room dungeon = new Room(1, 10, 10);
 		Room hallway = new Room(2, 10, 10);
@@ -49,9 +49,9 @@ public class Gameplay {
 //	public Gameplay(int result) {
 //		Room dungeon = new Room(1, 10, 10);
 //		Room hallway = new Room(2, 5, 5);
-//		Trapdoor dungeondoor = new Trapdoor(dungeon, hallway);
-//		dungeon.addDoor(dungeondoor);
-//		hallway.addDoor(dungeondoor);
+////		Trapdoor dungeondoor = new Trapdoor(dungeon, hallway);
+////		dungeon.addDoor(dungeondoor);
+////		hallway.addDoor(dungeondoor);
 //		Location loc = new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), null, 0, 0);
 //		Item wall = new Item("PlainWall", Position.WALL_NE);
 //		dungeon.addItem(wall, loc);
@@ -101,7 +101,7 @@ public class Gameplay {
 			current.setOccupier(null);
 			newLoc.setOccupier(character);
 			//TODO Remove println
-			System.out.println("moving east");
+			System.out.println("moving west");
 		}
 		else if (itemOnNewLoc instanceof NonMovableItem){
 			((NonMovableItem) itemOnNewLoc).interact();
@@ -120,7 +120,7 @@ public class Gameplay {
 			current.setOccupier(null);
 			newLoc.setOccupier(character);
 			//TODO Remove println
-			System.out.println("moving east");
+			System.out.println("moving South");
 		}
 		else if (itemOnNewLoc instanceof NonMovableItem){
 			((NonMovableItem) itemOnNewLoc).interact();
@@ -139,7 +139,7 @@ public class Gameplay {
 			current.setOccupier(null);
 			newLoc.setOccupier(character);
 			//TODO Remove println
-			System.out.println("moving east");
+			System.out.println("moving north");
 		}
 		else if (itemOnNewLoc instanceof NonMovableItem){
 			((NonMovableItem) itemOnNewLoc).interact();
