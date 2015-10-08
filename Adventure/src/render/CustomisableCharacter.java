@@ -13,7 +13,8 @@ import render.RenderCanvas.Compass;
 public class CustomisableCharacter extends Drawable {
 
 	private AnimationSequence hatImages;
-	private Direction dir = Direction.UP;
+	private Direction dir = Direction.DOWN;
+	private final int HAT_DISPLACEMENT = 13;
 
 	public CustomisableCharacter(String characterImgLoc, String hatString) {
 		super(characterImgLoc, Position.CENTER);
@@ -30,8 +31,8 @@ public class CustomisableCharacter extends Drawable {
 		Compass realDirection = getRelativeDirectionFromCompass(direction);
 		super.draw(realDirection, x, y, g, tileWidth, tileHeight);
 		BufferedImage hatImage = hatImages.getImage(realDirection);
-		int xPos = x + (tileWidth / 2) - (hatImage.getWidth() / 2);
-		int yPos = super.getYOnScreen() - hatImage.getHeight();
+		int xPos = x + (tileWidth / 2) - (hatImage.getWidth()/2);
+		int yPos = super.getYOnScreen() - hatImage.getHeight() + HAT_DISPLACEMENT;
 		g.drawImage(hatImage, xPos, yPos, null);
 	}
 
