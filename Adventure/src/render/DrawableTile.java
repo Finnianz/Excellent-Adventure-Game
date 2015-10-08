@@ -152,7 +152,7 @@ public class DrawableTile {
 		for (int i = 0; i < drawOrder.length; i++) {
 
 			if (drawOrder[i] != null) {
-				drawOrder[i].draw(direction, xPos, yPos, g, tileHeight,
+				drawOrder[i].draw(direction, xPos, yPos, g, tileWidth,
 						tileHeight);
 			}
 		}
