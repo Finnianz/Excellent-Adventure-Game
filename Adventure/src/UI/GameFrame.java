@@ -69,11 +69,11 @@ public class GameFrame extends JFrame implements WindowListener {
 		menu.add(startNewSingle);
 
 		
-
-		startNewMulti = new JMenuItem("Start Multi Player Game");
+		//adds multiplayer item to menu, and offers option pane to choose host or client 
+		startNewMulti = new JMenuItem("Multi Player");
 		startNewMulti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String[] choices = new String[]{"Host", "Client"};
+				String[] choices = new String[]{"Host Game", "Join Game"};
 		        String choice = (String) JOptionPane.showInputDialog(
 		                null,
 		                "Please Choose whether Host or Client",
@@ -82,10 +82,21 @@ public class GameFrame extends JFrame implements WindowListener {
 		                null,
 		                choices,
 		                choices[0]);
-		      	int result = 0;
-		      	if(choice.equals("Host")) result = 1;
-				new Gameplay(new ArrayList<Game.Character>());
-				
+		        if(choice.equals("Host Game")) {
+		        	JOptionPane.showInputDialog(
+		                    null,
+		                    "Enter Port", null,
+		                    JOptionPane.PLAIN_MESSAGE);
+		           
+		        	
+		        } else if(choice.equals("Join Game")) {
+		        	JOptionPane.showInputDialog(
+		                    null,
+		                    "Enter Port", null,
+		                    JOptionPane.PLAIN_MESSAGE);
+		        	
+		        }
+							
 			}
 		});
 		menu.add(startNewMulti);

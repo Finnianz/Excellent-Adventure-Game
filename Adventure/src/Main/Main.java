@@ -15,20 +15,45 @@ import java.io.IOException;
 public class Main {
 	private static final int DEFAULT_CLK_PERIOD = 20;
 	private static final int DEFAULT_BROADCAST_CLK_PERIOD = 5;
+	
+	
+	
 
 	public static void main(String[] args) {
-
-		startGame();
-
+		 boolean server = false;
+		 int nclients = 0;	
+		 int port = 36768; // default
+		 GameFrame frame = new GameFrame();
+		
+		//startGame();
 	}
 
+	
+	
 	public static void startGame() {
 		List<Game.Character> characters = new ArrayList<Game.Character>();
+		
+		
+		
+		
+		
+		
+		
+		
 		Gameplay game = new Gameplay(characters);
-		game.setCanvas(new RenderCanvas());
-		game.setFrame(new GameFrame());
+		
+		
+		
+		RenderCanvas renderCanv = new RenderCanvas();
+		game.setCanvas(renderCanv);
+		
+		GameFrame gameFrame = new GameFrame();
+		game.setFrame(gameFrame);
+		
+		
+		
+		
 		game.getFrame().getC().getRenderCanvas().setRoom(game.getRooms().get(0).getFloor());
 
 	}
-
 }
