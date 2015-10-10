@@ -104,7 +104,7 @@ public class Room {
 //		if(floor[loc.getX()][loc.getY()].getOccupier() == null){
 //			return null;
 //		}
-//		else if(floor[loc.getX()][loc.getY()].getOccupier() instanceof MovableItem) {
+//		else if(floor[loc.getX()][loc.getY()].getOccupier() instanceof CollectableItem) {
 //			return true;
 //		}
 //		else {

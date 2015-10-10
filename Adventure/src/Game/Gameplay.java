@@ -73,10 +73,10 @@ public class Gameplay {
 		Location current = character.getCurrentLocation();
 		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX() + 1][character.getCurrentLocation().getY()];
 		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
-		if (itemOnNewLoc == null || itemOnNewLoc instanceof MovableItem) {
+		if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
 			character.moveSpace(newLoc);
 			if(itemOnNewLoc !=null ){
-				character.pickUpItem((MovableItem) newLoc.getOccupier());
+				character.pickUpItem((CollectableItem) newLoc.getOccupier());
 			}
 			current.setOccupier(null);
 			newLoc.setOccupier(character);
@@ -84,8 +84,8 @@ public class Gameplay {
 			System.out.println("moving east");
 			
 		}
-		else if (itemOnNewLoc instanceof NonMovableItem){
-			((NonMovableItem) itemOnNewLoc).interact();
+		else if (itemOnNewLoc instanceof StationaryItem){
+			((StationaryItem) itemOnNewLoc).interact();
 		}
 	}
 	
@@ -93,18 +93,18 @@ public class Gameplay {
 		Location current = character.getCurrentLocation();
 		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX() - 1][character.getCurrentLocation().getY()];
 		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
-		if (itemOnNewLoc == null || itemOnNewLoc instanceof MovableItem) {
+		if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
 			character.moveSpace(newLoc);
 			if(itemOnNewLoc !=null ){
-				character.pickUpItem((MovableItem) newLoc.getOccupier());
+				character.pickUpItem((CollectableItem) newLoc.getOccupier());
 			}
 			current.setOccupier(null);
 			newLoc.setOccupier(character);
 			//TODO Remove println
 			System.out.println("moving west");
 		}
-		else if (itemOnNewLoc instanceof NonMovableItem){
-			((NonMovableItem) itemOnNewLoc).interact();
+		else if (itemOnNewLoc instanceof StationaryItem){
+			((StationaryItem) itemOnNewLoc).interact();
 		}
 	}
 	
@@ -112,18 +112,18 @@ public class Gameplay {
 		Location current = character.getCurrentLocation();
 		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX()][character.getCurrentLocation().getY() + 1];
 		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
-		if (itemOnNewLoc == null || itemOnNewLoc instanceof MovableItem) {
+		if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
 			character.moveSpace(newLoc);
 			if(itemOnNewLoc !=null ){
-				character.pickUpItem((MovableItem) newLoc.getOccupier());
+				character.pickUpItem((CollectableItem) newLoc.getOccupier());
 			}
 			current.setOccupier(null);
 			newLoc.setOccupier(character);
 			//TODO Remove println
 			System.out.println("moving South");
 		}
-		else if (itemOnNewLoc instanceof NonMovableItem){
-			((NonMovableItem) itemOnNewLoc).interact();
+		else if (itemOnNewLoc instanceof StationaryItem){
+			((StationaryItem) itemOnNewLoc).interact();
 		}
 	}
 	
@@ -131,18 +131,18 @@ public class Gameplay {
 		Location current = character.getCurrentLocation();
 		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX()][character.getCurrentLocation().getY() - 1];
 		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
-		if (itemOnNewLoc == null || itemOnNewLoc instanceof MovableItem) {
+		if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
 			character.moveSpace(newLoc);
 			if(itemOnNewLoc !=null ){
-				character.pickUpItem((MovableItem) newLoc.getOccupier());
+				character.pickUpItem((CollectableItem) newLoc.getOccupier());
 			}
 			current.setOccupier(null);
 			newLoc.setOccupier(character);
 			//TODO Remove println
 			System.out.println("moving north");
 		}
-		else if (itemOnNewLoc instanceof NonMovableItem){
-			((NonMovableItem) itemOnNewLoc).interact();
+		else if (itemOnNewLoc instanceof StationaryItem){
+			((StationaryItem) itemOnNewLoc).interact();
 		}
 	}
 

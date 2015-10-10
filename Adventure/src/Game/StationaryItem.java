@@ -4,13 +4,13 @@ import javax.swing.ImageIcon;
 
 import render.Drawable.Position;
 
-public class NonMovableItem extends Item {
+public class StationaryItem extends Item {
 	
 	Boolean interactable;
-	MovableItem hiddenItem;
+	CollectableItem hiddenItem;
 	
 	//if interactable is false, hiddenItem should be null
-	public NonMovableItem(String imgLoc, Position pos, Boolean interactable, MovableItem item){
+	public StationaryItem(String imgLoc, Position pos, Boolean interactable, CollectableItem item){
 		super(imgLoc, pos);	
 		this.interactable = interactable;
 		hiddenItem = item;
