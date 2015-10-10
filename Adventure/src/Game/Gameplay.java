@@ -73,6 +73,17 @@ public class Gameplay {
 		Location current = character.getCurrentLocation();
 		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX() + 1][character.getCurrentLocation().getY()];
 		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
+		if(newLoc instanceof Trapdoor){
+			
+		}
+		if(newLoc instanceof Ladder){
+			character.setCurrentRoom(((Ladder) newLoc).getExit());
+			//TODO Get Loc in new room
+			character.setCurrentLocation(newLoc); //currently standing on trapdoor
+			
+			current.setOccupier(null);
+			
+		}
 		if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
 			character.moveSpace(newLoc);
 			if(itemOnNewLoc !=null ){
