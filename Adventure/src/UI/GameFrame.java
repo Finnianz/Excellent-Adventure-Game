@@ -59,41 +59,15 @@ public class GameFrame extends JFrame implements WindowListener {
 		pack();
 		setResizable(true);
 		setVisible(true);
-		if(newGame){
+		//if(newGame){
 			showInstructions();
-			inputPlayers();
-		}
+			//inputPlayers();
+		//}
 
 	}
 
 	private void inputPlayers() {
-		while(true){
-			String stringInput = JOptionPane.showInputDialog(this,"How Many Players? (1 or 2)");
-			if(stringInput == null){
-				int r = JOptionPane.showConfirmDialog(this, new JLabel(
-						"Exit?"), "Confirm Exit",
-						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-				if (r == JOptionPane.YES_OPTION) {
-					System.exit(0);
-				}
-				else{
-					inputPlayers();
-				}
-			}
-			Scanner input = new Scanner(stringInput);
-			int count =0;
-			if(input.hasNextInt()){
-				count += Integer.parseInt(input.next());
-				while(count < 1 || count>2) {
-					stringInput = JOptionPane.showInputDialog(this,"The number of players\nmust be between 1 and 2.\nHow Many Players?");
-					countOfPlayers = Integer.parseInt(stringInput);
-				}
-				break;
-			}
-			input.close();
-		}
-//		//TODO if count of players is 2 then start a multiplayer game
-		//set up buttons for selecting stick figure colour
+
 		JRadioButton Yellow = new JRadioButton("Yellow");
 		Yellow.setActionCommand("Yellow"); 
 		Yellow.setSelected(true);
@@ -225,6 +199,7 @@ public class GameFrame extends JFrame implements WindowListener {
 		startNewSingle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new Gameplay(new ArrayList<Game.Character>());
+				inputPlayers();
 			}
 		});
 		menu.add(startNewSingle);
@@ -246,7 +221,7 @@ public class GameFrame extends JFrame implements WindowListener {
 					Main.joinGame(Integer.parseInt(
 							JOptionPane.showInputDialog(null, "Enter Port", null, JOptionPane.PLAIN_MESSAGE)));
 				}
-
+				inputPlayers();
 			}
 		});
 		menu.add(startNewMulti);
@@ -255,7 +230,7 @@ public class GameFrame extends JFrame implements WindowListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int r = JOptionPane.showConfirmDialog(c, new JLabel("Exit Cluedo?"), "Confirm Exit",
+				int r = JOptionPane.showConfirmDialog(c, new JLabel("Exit?"), "Confirm Exit",
 						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if (r == JOptionPane.YES_OPTION) {
 					System.exit(0);
