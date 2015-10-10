@@ -15,7 +15,7 @@ public class MovableItem extends Item {
 		if(newX <= currentRoom.getWidth() && newY <= currentRoom.getWidth()){
 			Location newLoc = currentRoom.getFloor()[newX][newY];
 			Drawable itemOnLoc = currentRoom.checkLocation(newLoc);
-			if(itemOnLoc == null){
+			if(itemOnLoc == null && !(newLoc instanceof EmptyTile)){
 				currentRoom.getFloor()[newX][newY].setOccupier(this); 
 				currentRoom.getFloor()[currentLoc.getX()][currentLoc.getY()].setOccupier(ch);
 				currentRoom.getFloor()[playerLoc.getX()][playerLoc.getY()].setOccupier(null);	
