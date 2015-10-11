@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Game.Room;
+
 /**
  * 
  * @author Paige Halliwell ID:300316022
@@ -52,8 +54,8 @@ public class RenderCanvas extends JPanel {
 	 * @param b
 	 *            array of drawable objects that represent the current room
 	 */
-	public void setRoom(DrawableTile[][] b) {
-		this.board = b;
+	public void setRoom(Room r) {
+		this.board = r.getFloor();
 		selectedObject = null;
 	}
 

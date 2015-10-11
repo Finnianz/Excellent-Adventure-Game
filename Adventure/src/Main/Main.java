@@ -51,7 +51,7 @@ public class Main {
 		GameFrame gameFrame = new GameFrame();
 		game.setFrame(gameFrame);
 
-		game.getFrame().getC().getRenderCanvas().setRoom(game.getRooms().get(0).getFloor());
+		game.getFrame().getC().getRenderCanvas().setRoom(game.getRooms().get(0));
 
 	}
 
