@@ -131,7 +131,7 @@ public abstract class Drawable {
 				break;
 			case WEST:
 				sprite = images.getImage(TOP_RIGHT);
-				yOnScreen += (tileHeight / 2) - height;
+				yOnScreen += (tileHeight / 2) - (sprite.getHeight(null) * SCALE);
 				xOnScreen += (tileWidth / 2);
 				break;
 			}
@@ -175,13 +175,14 @@ public abstract class Drawable {
 				break;
 			case SOUTH:
 				sprite = images.getImage(TOP_RIGHT);
-				yOnScreen += (tileHeight / 2) - height;
+				yOnScreen += (tileHeight / 2) - (sprite.getHeight(null) * SCALE);
 				xOnScreen += (tileWidth / 2);
 				break;
 			case WEST:
-				yOnScreen += (tileHeight / 2) - height;
-				xOnScreen -= (width - tileWidth / 2);
+
 				sprite = images.getImage(TOP_LEFT);
+				yOnScreen += (tileHeight / 2) - (sprite.getHeight(null) * SCALE);
+				xOnScreen -= (width - tileWidth / 2);
 				break;
 
 			}
@@ -200,7 +201,7 @@ public abstract class Drawable {
 				break;
 			case SOUTH:
 				sprite = images.getImage(TOP_LEFT);
-				yOnScreen += (tileHeight / 2) - height;
+				yOnScreen += (tileHeight / 2) - (sprite.getHeight(null) * SCALE);
 				xOnScreen -= (width - tileWidth / 2);
 				break;
 			case WEST:
