@@ -27,6 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Game.Gameplay;
+import render.Drawable;
 import render.RenderCanvas;
 import render.RenderFrame;
 
@@ -54,26 +55,7 @@ public class GameCanvas extends JPanel {
 		//JPanel temp = new JPanel();
 		//temp.add(canvasRen);
 		outerPanel.add(canvasRen, BorderLayout.CENTER);
-		outerPanel.addKeyListener(new KeyListener(){
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		
 		
 		//Creates panel for buttons
 		JPanel button = new JPanel();
@@ -94,7 +76,7 @@ public class GameCanvas extends JPanel {
 		bag = new JLabel[6];
 		for(int t = 0; t<bag.length;t++){
 				bag[t] = new JLabel(new ImageIcon());
-				bag[t].setIcon(null);
+				bag[t].setIcon(new ImageIcon("canvasImages"));
 				bag[t].addMouseListener(new MouseListener(){
 					@Override
 					public void mouseClicked(MouseEvent e) {
@@ -116,6 +98,39 @@ public class GameCanvas extends JPanel {
 		setVisible(true);
 		add(outerPanel);
 		drawBoard();
+		outerPanel.addMouseListener(new MouseListener(){
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				Drawable objectClicked = canvasRen.clickedOn(e);
+				//TODO check actions
+			}
+			
+		});
 		outerPanel.addComponentListener(new ComponentListener() {
 
     		public void componentResized(ComponentEvent e) {
@@ -191,4 +206,16 @@ public class GameCanvas extends JPanel {
 	public ImageIcon getItem(Game.Item i){
 		return null; //remove for compiling
 	}
+//
+//	private static ImageIcon makeImageIcon(String filename) {
+//		// using the URL means the image loads when stored
+//		// in a jar or expanded into individual files.
+//		java.net.URL imageURL = GameCanvas.class.getResource(filename);
+//
+//		ImageIcon icon = null;
+//		if (imageURL != null) {
+//			icon = new ImageIcon(imageURL);
+//		}
+//		return icon;
+//	}
 }

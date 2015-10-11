@@ -6,6 +6,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
@@ -49,9 +51,7 @@ public class GameFrame extends JFrame implements WindowListener {
 		GameCanvas canvas = new GameCanvas();
 		c = canvas;
 		c.setMinimumSize(new Dimension(600, 600));
-
 		getContentPane().add(c, BorderLayout.CENTER);
-
 		setUpMenu();
 		setSize(1500, 1500);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -59,11 +59,27 @@ public class GameFrame extends JFrame implements WindowListener {
 		pack();
 		setResizable(true);
 		setVisible(true);
-		//if(newGame){
 			showInstructions();
-			//inputPlayers();
-		//}
+			c.addKeyListener(new KeyListener(){
 
+				@Override
+				public void keyTyped(KeyEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void keyPressed(KeyEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void keyReleased(KeyEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 	}
 
 	private void inputPlayers() {
