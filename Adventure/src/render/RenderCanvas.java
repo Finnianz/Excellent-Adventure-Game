@@ -91,7 +91,7 @@ public class RenderCanvas extends JPanel {
 			renderer.drawWestView(board, g, width / 2);
 			break;
 		}
-		repaint();
+		//repaint();
 
 	}
 
@@ -113,7 +113,7 @@ public class RenderCanvas extends JPanel {
 			direction = Compass.SOUTH;
 			break;
 		}
-		repaint();
+		//repaint();
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class RenderCanvas extends JPanel {
 			direction = Compass.NORTH;
 			break;
 		}
-		repaint();
+		//repaint();
 	}
 
 	public Drawable clickedOn(MouseEvent e) {
@@ -161,7 +161,7 @@ public class RenderCanvas extends JPanel {
 						selectedObject = clickedOn;
 						selectedObject.setSelected(true);
 						
-						repaint();
+						//repaint();
 						return selectedObject;
 					}
 

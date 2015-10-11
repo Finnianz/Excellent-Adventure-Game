@@ -69,7 +69,7 @@ public class GameCanvas extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				canvasRen.rotateLeft();
-				System.out.print("l");
+				repaint();
 				
 			}
 			
@@ -81,7 +81,7 @@ public class GameCanvas extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				canvasRen.rotateRight();
-				System.out.print("r");
+				repaint();
 				
 			}
 			
@@ -136,6 +136,7 @@ public class GameCanvas extends JPanel {
 			public void mousePressed(MouseEvent e) {}
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				repaint();
 				Drawable objectClicked = canvasRen.clickedOn(e);
 				//TODO check actions
 			}

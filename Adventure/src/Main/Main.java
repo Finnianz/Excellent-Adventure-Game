@@ -52,7 +52,7 @@ public class Main {
 		game.setFrame(gameFrame);
 
 		game.getFrame().getC().getRenderCanvas().setRoom(game.getRooms().get(0));
-
+		game.getFrame().getC().repaint();
 	}
 
 	public static void joinGame(int port) {
