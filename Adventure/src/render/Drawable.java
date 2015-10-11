@@ -216,9 +216,11 @@ public abstract class Drawable {
 		int imgWidth = (int) (sprite.getWidth()*SCALE);
 		g.drawImage(sprite, xOnScreen, yOnScreen, imgWidth, imgHeight,  null);
 		if(selected){
-			int slctWidth = (int) (selectedImg.getWidth()*SCALE);
-			int slctHeight = (int) (selectedImg.getHeight()*SCALE);
-			g.drawImage(selectedImg, xOnScreen, yOnScreen, slctWidth, slctHeight, null);
+			int selectWidth = (int) (selectedImg.getWidth()*SCALE);
+			int selectHeight = (int) (selectedImg.getHeight()*SCALE);
+			int selectX = xOnScreen;
+			int selectY = yOnScreen - selectHeight;
+			g.drawImage(selectedImg, selectX, selectY, selectWidth, selectHeight, null);
 		}
 	}
 	
