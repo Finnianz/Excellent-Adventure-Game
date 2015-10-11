@@ -268,16 +268,10 @@ public class DrawableTile {
 		this.occupier = occupier;
 	}
 
-	public Drawable isClickedOn(int x, int y) {
-		Drawable objectToReturn = null;
-		for (int i = 0; i < drawOrder.length; i++) {
-			if (drawOrder[i] != null) {
-				if (drawOrder[i].isContained(x, y)) {
-					objectToReturn = drawOrder[i];
-				}
-			}
+	public DrawableTile isClickedOn(int x, int y) {
+		if (floor.isContained(x, y)) {
+			return this;
 		}
-		return objectToReturn;
+		return null;
 	}
-
 }

@@ -91,7 +91,7 @@ public class RenderCanvas extends JPanel {
 			renderer.drawWestView(board, g, width / 2);
 			break;
 		}
-		//repaint();
+		// repaint();
 
 	}
 
@@ -113,7 +113,7 @@ public class RenderCanvas extends JPanel {
 			direction = Compass.SOUTH;
 			break;
 		}
-		//repaint();
+		// repaint();
 	}
 
 	/**
@@ -134,35 +134,18 @@ public class RenderCanvas extends JPanel {
 			direction = Compass.NORTH;
 			break;
 		}
-		//repaint();
+		// repaint();
 	}
 
-	public Drawable clickedOn(MouseEvent e) {
+	public DrawableTile clickedOn(MouseEvent e) {
 
 		if (board != null) {
 			for (int i = 0; i < board.length; i++) {
 				for (int j = 0; j < board[i].length; j++) {
-					Drawable clickedOn = board[i][j].isClickedOn(e.getX(),
-							e.getY());// the isClickedOn method returns to
-										// topmost object of the draw order
-					if (clickedOn != null) {// If clickedOn isn't null an object
-											// has been found, assign selected
-											// object and return from method
-						//If another object is selected, deselect it
-						if (selectedObject != null) {
-							selectedObject.setSelected(false);
-						}
-						//If clicking on the object that is already selected, deselect it 
-						if (clickedOn.equals(selectedObject)) {
-							selectedObject.setSelected(false);
-							selectedObject = null;
-						}
-						//set new clickedOn
-						selectedObject = clickedOn;
-						selectedObject.setSelected(true);
-						
-						//repaint();
-						return selectedObject;
+					DrawableTile clickedOn = board[i][j].isClickedOn(e.getX(),
+							e.getY());
+					if (clickedOn != null) {
+						return clickedOn;
 					}
 
 				}

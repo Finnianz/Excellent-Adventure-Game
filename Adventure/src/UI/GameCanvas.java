@@ -31,6 +31,7 @@ import javax.swing.JPanel;
 
 import Game.Gameplay;
 import render.Drawable;
+import render.DrawableTile;
 import render.RenderCanvas;
 import render.RenderFrame;
 
@@ -137,7 +138,7 @@ public class GameCanvas extends JPanel {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				repaint();
-				Drawable objectClicked = canvasRen.clickedOn(e);
+				DrawableTile objectClicked = canvasRen.clickedOn(e);
 				//TODO check actions
 			}
 		});
