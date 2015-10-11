@@ -96,8 +96,8 @@ public abstract class Drawable {
 		yOnScreen = y;
 		BufferedImage sprite = images.getImage(direction);
 		if(sprite!=null);
-		int height = sprite.getHeight();
-		int width = sprite.getWidth();
+		int height = (int) (sprite.getHeight()*SCALE);
+		int width = (int) (sprite.getWidth()*SCALE);
 		switch (POSITION) {
 		// No change to the coords for floor
 		case FLOOR:
@@ -123,12 +123,12 @@ public abstract class Drawable {
 				break;
 			case EAST:
 				sprite = images.getImage(BOTTOM_LEFT);
-				yOnScreen += tileHeight - sprite.getHeight(null);
+				yOnScreen += tileHeight - (sprite.getHeight(null)*SCALE);
 				break;
 			case SOUTH:
 				sprite = images.getImage(BOTTOM_RIGHT);
-				yOnScreen += (tileHeight) - sprite.getHeight(null);
-				xOnScreen += (tileWidth - sprite.getWidth(null));
+				yOnScreen += (tileHeight) - (sprite.getHeight(null)*SCALE);
+				xOnScreen += (tileWidth - (sprite.getWidth(null)*SCALE));
 				break;
 			case WEST:
 				sprite = images.getImage(TOP_RIGHT);
@@ -153,12 +153,12 @@ public abstract class Drawable {
 				break;
 			case SOUTH:
 				sprite = images.getImage(BOTTOM_LEFT);
-				yOnScreen += tileHeight - sprite.getHeight(null);
+				yOnScreen += tileHeight - (sprite.getHeight(null)*SCALE);
 				break;
 			case WEST:
 				sprite = images.getImage(BOTTOM_RIGHT);
-				yOnScreen += (tileHeight) - sprite.getHeight(null);
-				xOnScreen += (tileWidth - sprite.getWidth(null));
+				yOnScreen += (tileHeight) - (sprite.getHeight(null)*SCALE);
+				xOnScreen += (tileWidth - (sprite.getWidth(null)*SCALE));
 				break;
 			}
 			break;
@@ -167,12 +167,12 @@ public abstract class Drawable {
 			switch (direction) {
 			case NORTH:
 				sprite = images.getImage(BOTTOM_LEFT);
-				yOnScreen += tileHeight - sprite.getHeight(null);
+				yOnScreen += tileHeight - (sprite.getHeight(null)*SCALE);
 				break;
 			case EAST:
 				sprite = images.getImage(BOTTOM_RIGHT);
-				yOnScreen += (tileHeight) - sprite.getHeight(null);
-				xOnScreen += (tileWidth - sprite.getWidth(null));
+				yOnScreen += (tileHeight) - (sprite.getHeight(null)*SCALE);
+				xOnScreen += (tileWidth - (sprite.getWidth(null)*SCALE));
 				break;
 			case SOUTH:
 				sprite = images.getImage(TOP_RIGHT);
@@ -191,8 +191,8 @@ public abstract class Drawable {
 			switch (direction) {
 			case NORTH:
 				sprite = images.getImage(BOTTOM_RIGHT);
-				yOnScreen += (tileHeight) - sprite.getHeight(null);
-				xOnScreen += (tileWidth - sprite.getWidth(null));
+				yOnScreen += (tileHeight) - (sprite.getHeight(null)*SCALE);
+				xOnScreen += (tileWidth - (sprite.getWidth(null)*SCALE));
 				break;
 			case EAST:
 				sprite = images.getImage(TOP_RIGHT);
@@ -206,7 +206,7 @@ public abstract class Drawable {
 				break;
 			case WEST:
 				sprite = images.getImage(BOTTOM_LEFT);
-				yOnScreen += tileHeight - sprite.getHeight(null);
+				yOnScreen += tileHeight - (sprite.getHeight(null)*SCALE);
 				break;
 			}
 			break;
