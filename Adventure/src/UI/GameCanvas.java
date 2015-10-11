@@ -97,6 +97,39 @@ public class GameCanvas extends JPanel {
 		setVisible(true);
 		add(outerPanel);
 		drawBoard();
+		outerPanel.addMouseListener(new MouseListener(){
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				canvasRen.clickedOn(e);
+				
+			}
+			
+		});
 		outerPanel.addComponentListener(new ComponentListener() {
 
     		public void componentResized(ComponentEvent e) {
