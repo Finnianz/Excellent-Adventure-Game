@@ -45,7 +45,7 @@ public class GameCanvas extends JPanel {
 	private JLabel[] bag;
 	private String selectedItem;
 	private Game.Item[] bagToDraw;
-	private ImageIcon benie = resize(makeImageIcon("Beanie.png"),70,70);
+	//private ImageIcon benie = resize(makeImageIcon("resource/Beanie.png"),70,70);
 	/**
 	 * Creates a new Canvas and sets up the board
 	 *
@@ -74,10 +74,12 @@ public class GameCanvas extends JPanel {
 		
 		//Creates the panel that will contain in the bag
 		JPanel handPanel = new JPanel();
+		handPanel.setSize(20,20);
+		handPanel.setBackground(Color.PINK);
 		handPanel.setLayout(new GridLayout(1,6));
 		bag = new JLabel[6];
 		for(int t = 0; t<bag.length;t++){
-				bag[t] = new JLabel(benie);
+				bag[t] = new JLabel();
 				bag[t].setText("bob");
 				bag[t].setForeground(Color.BLUE);
 				//bag[t].setIcon(null);
