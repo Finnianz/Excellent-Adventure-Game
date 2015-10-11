@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  * @author Paige Halliwell ID:300316022
  *
  */
-public class RenderCanvas extends JPanel implements MouseListener {
+public class RenderCanvas extends JPanel {
 	private Drawable selectedObject;
 	private Compass direction = Compass.NORTH;
 	public IsometricRenderer renderer = new IsometricRenderer();
@@ -134,45 +134,29 @@ public class RenderCanvas extends JPanel implements MouseListener {
 		repaint();
 	}
 	public Drawable clickedOn(MouseEvent e){
-		System.out.println("Hi");
-		return null;
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
+		
 		if (board != null) {
 			for (int i = 0; i < board.length; i++) {
 				for (int j = 0; j < board[i].length; j++) {
-					Drawable clickedOn = board[i][j].isClickedOn(arg0.getX(),
-							arg0.getY());// the isClickedOn method returns to
+					Drawable clickedOn = board[i][j].isClickedOn(e.getX(),
+							e.getY());// the isClickedOn method returns to
 											// topmost object of the draw order
 					if (clickedOn != null) {// If clickedOn isn't null an object
 											// has been found, assign selected
 											// object and return from method
 						selectedObject = clickedOn;
-						return;
+						System.out.println(clickedOn.POSITION);
+						return selectedObject;
 					}
 				}
 			}
 		}
-
+		return null;
 	}
+
+		
+
+	
 
 	/**
 	 * @return the selectedObject, may be null
