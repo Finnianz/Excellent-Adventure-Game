@@ -18,6 +18,7 @@ import javax.imageio.ImageIO;
  */
 public abstract class Drawable {
 	
+	private final double SCALE = .6;
 	private boolean selected = false;
 	private BufferedImage selectedImg;
 	private final String SELECT_IMG_STRING = "resource/Star.png";
@@ -83,15 +84,14 @@ public abstract class Drawable {
 	 * @param y
 	 * @param g
 	 *            graphics object to draw to
-	 * @param tileWidth
+	 * @param scaledTileW
 	 *            The width of the tiles
-	 * @param tileHeight
+	 * @param scaledTileH
 	 *            The height of the tiles, note that this is not the same as the
 	 *            image height of the tiles.
 	 */
 	public void draw(Compass direction, int x, int y, Graphics g,
 			int tileWidth, int tileHeight) {
-		
 		xOnScreen = x;
 		yOnScreen = y;
 		BufferedImage sprite = images.getImage(direction);
@@ -212,12 +212,54 @@ public abstract class Drawable {
 			break;
 		}
 		// Finally draw the image
-		g.drawImage(sprite, xOnScreen, yOnScreen, null);
+		int imgHeight = (int) (sprite.getHeight()*SCALE);
+		int imgWidth = (int) (sprite.getWidth()*SCALE);
+		g.drawImage(sprite, xOnScreen, yOnScreen, imgWidth, imgHeight,  null);
 		if(selected){
-			g.drawImage(selectedImg, xOnScreen, yOnScreen, null);
+			int slctWidth = (int) (selectedImg.getWidth()*SCALE);
+			int slctHeight = (int) (selectedImg.getHeight()*SCALE);
+			g.drawImage(selectedImg, xOnScreen, yOnScreen, slctWidth, slctHeight, null);
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((POSITION == null) ? 0 : POSITION.hashCode());
+		result = prime * result + (selected ? 1231 : 1237);
+		result = prime * result + xOnScreen;
+		result = prime * result + yOnScreen;
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Drawable other = (Drawable) obj;
+		if (POSITION != other.POSITION)
+			return false;
+		if (selected != other.selected)
+			return false;
+		if (xOnScreen != other.xOnScreen)
+			return false;
+		if (yOnScreen != other.yOnScreen)
+			return false;
+		return true;
+	}
+
 	public void animationTick(){
 		images.animationTick();
 	}
