@@ -68,7 +68,7 @@ public class DrawableTile {
 	public void draw(Compass direction, int xPos, int yPos, Graphics g,
 			int tileWidth, int tileHeight) {
 		// An array to keep track of the draw order. Some indexs may remain null
-
+		drawOrder = new Drawable[6];
 		drawOrder[2] = floor;// Floor is always the third item in array
 
 		// If wall isn't null, check the viewing direction to decide where in
