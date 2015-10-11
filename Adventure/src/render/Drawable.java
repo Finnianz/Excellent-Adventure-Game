@@ -17,13 +17,13 @@ import javax.imageio.ImageIO;
  *
  */
 public abstract class Drawable {
-	
+
 	private final double SCALE = .6;
 	private boolean selected = false;
 	private BufferedImage selectedImg;
 	private final String SELECT_IMG_STRING = "resource/Star.png";
 	private Compass direction = Compass.NORTH;
-	private int xOnScreen =0;
+	private int xOnScreen = 0;
 	private int yOnScreen = 0;
 	private AnimationSequence images; // The images
 	public final Position POSITION;// where this object sits on the tile, used
@@ -36,8 +36,6 @@ public abstract class Drawable {
 	private final Compass TOP_RIGHT = Compass.EAST;
 	private final Compass BOTTOM_RIGHT = Compass.SOUTH;
 	private final Compass BOTTOM_LEFT = Compass.WEST;
-	
-
 
 	/**
 	 * Floor - the floor tiles Center - any object to be drawn in the center of
@@ -63,7 +61,7 @@ public abstract class Drawable {
 	 *            enum for more details.
 	 */
 	public Drawable(String imgLoc, Position pos) {
-		
+
 		images = new AnimationSequence(imgLoc);
 		POSITION = pos;
 		try {
@@ -95,9 +93,10 @@ public abstract class Drawable {
 		xOnScreen = x;
 		yOnScreen = y;
 		BufferedImage sprite = images.getImage(direction);
-		if(sprite!=null);
-		int height = (int) (sprite.getHeight()*SCALE);
-		int width = (int) (sprite.getWidth()*SCALE);
+		if (sprite != null)
+			;
+		int height = (int) (sprite.getHeight() * SCALE);
+		int width = (int) (sprite.getWidth() * SCALE);
 		switch (POSITION) {
 		// No change to the coords for floor
 		case FLOOR:
@@ -118,22 +117,22 @@ public abstract class Drawable {
 			switch (direction) {
 			case NORTH:
 				yOnScreen += (tileHeight / 2) - height;
-				xOnScreen -= (width - tileWidth/2);
+				xOnScreen -= (width - tileWidth / 2);
 				sprite = images.getImage(TOP_LEFT);
 				break;
 			case EAST:
 				sprite = images.getImage(BOTTOM_LEFT);
-				yOnScreen += tileHeight - (sprite.getHeight(null)*SCALE);
+				yOnScreen += tileHeight - (sprite.getHeight(null) * SCALE);
 				break;
 			case SOUTH:
 				sprite = images.getImage(BOTTOM_RIGHT);
-				yOnScreen += (tileHeight) - (sprite.getHeight(null)*SCALE);
-				xOnScreen += (tileWidth - (sprite.getWidth(null)*SCALE));
+				yOnScreen += (tileHeight) - (sprite.getHeight(null) * SCALE);
+				xOnScreen += (tileWidth - (sprite.getWidth(null) * SCALE));
 				break;
 			case WEST:
 				sprite = images.getImage(TOP_RIGHT);
 				yOnScreen += (tileHeight / 2) - height;
-				xOnScreen += (tileWidth/2);
+				xOnScreen += (tileWidth / 2);
 				break;
 			}
 
@@ -144,21 +143,21 @@ public abstract class Drawable {
 			case NORTH:
 				sprite = images.getImage(TOP_RIGHT);
 				yOnScreen += (tileHeight / 2) - height;
-				xOnScreen += (tileWidth/2);
+				xOnScreen += (tileWidth / 2);
 				break;
 			case EAST:
 				yOnScreen += (tileHeight / 2) - height;
-				xOnScreen -= (width - tileWidth/2);
+				xOnScreen -= (width - tileWidth / 2);
 				sprite = images.getImage(TOP_LEFT);
 				break;
 			case SOUTH:
 				sprite = images.getImage(BOTTOM_LEFT);
-				yOnScreen += tileHeight - (sprite.getHeight(null)*SCALE);
+				yOnScreen += tileHeight - (sprite.getHeight(null) * SCALE);
 				break;
 			case WEST:
 				sprite = images.getImage(BOTTOM_RIGHT);
-				yOnScreen += (tileHeight) - (sprite.getHeight(null)*SCALE);
-				xOnScreen += (tileWidth - (sprite.getWidth(null)*SCALE));
+				yOnScreen += (tileHeight) - (sprite.getHeight(null) * SCALE);
+				xOnScreen += (tileWidth - (sprite.getWidth(null) * SCALE));
 				break;
 			}
 			break;
@@ -167,21 +166,21 @@ public abstract class Drawable {
 			switch (direction) {
 			case NORTH:
 				sprite = images.getImage(BOTTOM_LEFT);
-				yOnScreen += tileHeight - (sprite.getHeight(null)*SCALE);
+				yOnScreen += tileHeight - (sprite.getHeight(null) * SCALE);
 				break;
 			case EAST:
 				sprite = images.getImage(BOTTOM_RIGHT);
-				yOnScreen += (tileHeight) - (sprite.getHeight(null)*SCALE);
-				xOnScreen += (tileWidth - (sprite.getWidth(null)*SCALE));
+				yOnScreen += (tileHeight) - (sprite.getHeight(null) * SCALE);
+				xOnScreen += (tileWidth - (sprite.getWidth(null) * SCALE));
 				break;
 			case SOUTH:
 				sprite = images.getImage(TOP_RIGHT);
 				yOnScreen += (tileHeight / 2) - height;
-				xOnScreen += (tileWidth/2);
+				xOnScreen += (tileWidth / 2);
 				break;
 			case WEST:
 				yOnScreen += (tileHeight / 2) - height;
-				xOnScreen -= (width - tileWidth/2);
+				xOnScreen -= (width - tileWidth / 2);
 				sprite = images.getImage(TOP_LEFT);
 				break;
 
@@ -191,38 +190,43 @@ public abstract class Drawable {
 			switch (direction) {
 			case NORTH:
 				sprite = images.getImage(BOTTOM_RIGHT);
-				yOnScreen += (tileHeight) - (sprite.getHeight(null)*SCALE);
-				xOnScreen += (tileWidth - (sprite.getWidth(null)*SCALE));
+				yOnScreen += (tileHeight) - (sprite.getHeight(null) * SCALE);
+				xOnScreen += (tileWidth - (sprite.getWidth(null) * SCALE));
 				break;
 			case EAST:
 				sprite = images.getImage(TOP_RIGHT);
 				yOnScreen += (tileHeight / 2) - height;
-				xOnScreen += (tileWidth/2);
+				xOnScreen += (tileWidth / 2);
 				break;
 			case SOUTH:
 				sprite = images.getImage(TOP_LEFT);
 				yOnScreen += (tileHeight / 2) - height;
-				xOnScreen -= (width - tileWidth/2);
+				xOnScreen -= (width - tileWidth / 2);
 				break;
 			case WEST:
 				sprite = images.getImage(BOTTOM_LEFT);
-				yOnScreen += tileHeight - (sprite.getHeight(null)*SCALE);
+				yOnScreen += tileHeight - (sprite.getHeight(null) * SCALE);
 				break;
 			}
 			break;
 		}
 		// Finally draw the image
-		int imgHeight = (int) (sprite.getHeight()*SCALE);
-		int imgWidth = (int) (sprite.getWidth()*SCALE);
-		g.drawImage(sprite, xOnScreen, yOnScreen, imgWidth, imgHeight,  null);
-		if(selected){
-			int slctWidth = (int) (selectedImg.getWidth()*SCALE);
-			int slctHeight = (int) (selectedImg.getHeight()*SCALE);
-			g.drawImage(selectedImg, xOnScreen, yOnScreen, slctWidth, slctHeight, null);
+		int imgHeight = (int) (sprite.getHeight() * SCALE);
+		int imgWidth = (int) (sprite.getWidth() * SCALE);
+		g.drawImage(sprite, xOnScreen, yOnScreen, imgWidth, imgHeight, null);
+		if (selected) {
+			int selectWidth = (int) (selectedImg.getWidth() * SCALE);
+			int selectHeight = (int) (selectedImg.getHeight() * SCALE);
+			int selectX = xOnScreen;
+			int selectY = yOnScreen - selectHeight;
+			g.drawImage(selectedImg, selectX, selectY, selectWidth,
+					selectHeight, null);
 		}
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -237,7 +241,9 @@ public abstract class Drawable {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -260,16 +266,18 @@ public abstract class Drawable {
 		return true;
 	}
 
-	public void animationTick(){
+	public void animationTick() {
 		images.animationTick();
 	}
-	
-	public void changeAnimation(){
+
+	public void changeAnimation() {
 		images.changeState();
 	}
-	
-	public boolean isContained(int x, int y){
-		return (x>xOnScreen && x<(xOnScreen+images.getImage(direction).getWidth()) &&y>yOnScreen && y< (yOnScreen + images.getImage(direction).getHeight()));
+
+	public boolean isContained(int x, int y) {
+		int width = (int) (images.getImage(direction).getWidth() * SCALE);
+		int height = (int) ((int) images.getImage(direction).getHeight() * SCALE);
+		return (x > xOnScreen && x < (xOnScreen + width) && y > yOnScreen && y < (yOnScreen + height));
 	}
 
 	/**
@@ -280,7 +288,8 @@ public abstract class Drawable {
 	}
 
 	/**
-	 * @param selected the selected to set
+	 * @param selected
+	 *            the selected to set
 	 */
 	public void setSelected(boolean selected) {
 		this.selected = selected;
