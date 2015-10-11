@@ -12,7 +12,7 @@ public class EmptyTile extends Location{
 	 * @param pos
 	 */
 	public EmptyTile(Drawable wallNE, Drawable wallNW, Drawable wallSE,
-			Drawable wallSW, Drawable floor, Drawable occupier, int x, int y, Room room1, Room room2){
+			Drawable wallSW, Drawable floor, Drawable occupier, int x, int y){
 		super(wallNE, wallNW, wallSE, wallSW, floor, occupier, x,y);
 	}
 }
