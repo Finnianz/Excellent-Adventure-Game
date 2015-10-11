@@ -133,8 +133,9 @@ public class RenderCanvas extends JPanel implements MouseListener {
 		}
 		repaint();
 	}
-	public void clickedOn(MouseEvent e){
+	public Drawable clickedOn(MouseEvent e){
 		System.out.println("Hi");
+		return null;
 	}
 
 	@Override
