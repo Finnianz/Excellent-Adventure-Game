@@ -14,7 +14,7 @@ public class CustomisableCharacter extends Drawable {
 
 	private AnimationSequence hatImages;
 	private Direction dir = Direction.DOWN;
-	private final int HAT_DISPLACEMENT = 13;
+	private final int HAT_DISPLACEMENT = 30;
 
 	public CustomisableCharacter(String characterImgLoc, String hatString) {
 		super(characterImgLoc, Position.CENTER);
@@ -31,11 +31,18 @@ public class CustomisableCharacter extends Drawable {
 		Compass realDirection = getRelativeDirectionFromCompass(direction);
 		super.draw(realDirection, x, y, g, tileWidth, tileHeight);
 		BufferedImage hatImage = hatImages.getImage(realDirection);
-		int xPos = x + (tileWidth / 2) - (hatImage.getWidth()/2);
-		int yPos = super.getYOnScreen() - hatImage.getHeight() + HAT_DISPLACEMENT;
-		g.drawImage(hatImage, xPos, yPos, null);
+		int xPos = (int) (x + (tileWidth / 2) - (hatImage.getWidth()/2)*super.SCALE);
+		int yPos = (int) (super.getYOnScreen() - hatImage.getHeight() + HAT_DISPLACEMENT*super.SCALE);
+		int width = (int) (hatImage.getWidth()*super.SCALE);
+		int height = (int) (hatImage.getHeight()*super.SCALE);
+		g.drawImage(hatImage, xPos, yPos, width, height, null);
 	}
 
+	/**
+	 * 
+	 * @param direction
+	 * @return
+	 */
 	private Compass getRelativeDirectionFromCompass(Compass direction) {
 		int intValue;
 		switch (dir) {
@@ -83,6 +90,40 @@ public class CustomisableCharacter extends Drawable {
 	 */
 	public void setDirection(Direction dir) {
 		this.dir = dir;
+	}
+	
+	public void rotateRight(){
+		switch(dir){
+		case LEFT:
+			dir = Direction.UP;
+			return;
+		case UP:
+			dir = Direction.RIGHT;
+			return;
+		case RIGHT:
+			dir = Direction.DOWN;
+			return;
+		case DOWN:
+			dir = Direction.LEFT;
+			return;
+		}
+	}
+	
+	public void rotateLeft(){
+		switch(dir){
+		case LEFT:
+			dir=Direction.DOWN;
+			return;
+		case DOWN:
+			dir = Direction.RIGHT;
+			return;
+		case RIGHT:
+			dir = Direction.UP;
+			return;
+		case UP:
+			dir = Direction.LEFT;
+			return;
+		}
 	}
 
 }

@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
  */
 public abstract class Drawable {
 
-	private final double SCALE = .6;
+	protected final double SCALE = .6;
 	private boolean selected = false;
 	private BufferedImage selectedImg;
 	private final String SELECT_IMG_STRING = "resource/Star.png";
