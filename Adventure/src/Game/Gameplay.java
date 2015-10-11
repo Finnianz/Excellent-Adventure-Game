@@ -31,6 +31,7 @@ public class Gameplay {
 		Location empty = tower.getFloor()[5][4];
 		Trapdoor t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(), doorLoc.getFloor(), doorLoc.getOccupier(),4 ,4 , tower, dungeon, 1);
 		tower.getFloor()[4][4] = t1;
+		tower.addDoor(t1);
 		EmptyTile e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(), empty.getFloor(), empty.getOccupier(), 5, 5);
 		tower.getFloor()[5][4] = e1;
 		Location ladderLoc = dungeon.getFloor()[4][4];
@@ -43,7 +44,7 @@ public class Gameplay {
 		MovableItem box = new MovableItem("PlainWall", Position.SQUARE);
 		tower.getFloor()[7][7].setOccupier(box);
 //		tower.addItem(box, tower.getFloor()[7][7]);
-		StationaryItem bookshelf = new StationaryItem("PLainWall", Position.SQUARE, true, false, 2, new CollectableItem("PlainWall", Position.CENTER));
+		StationaryItem bookshelf = new StationaryItem("PlainWall", Position.SQUARE, true, false, 2, new CollectableItem("PlainWall", Position.CENTER));
 		tower.getFloor()[9][6].setOccupier(bookshelf);
 		rooms.add(tower);
 		rooms.add(dungeon);
@@ -54,55 +55,8 @@ public class Gameplay {
 		playerLoc.setOccupier(player1);
 		characters.add(player1);
 		
-//		
-//		Room dungeon = new Room(1, 10, 10);
-//		Room hallway = new Room(2, 10, 10);
-//		Location doorLoc = dungeon.getFloor()[4][4];
-//		Trapdoor t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(), doorLoc.getFloor(), doorLoc.getOccupier(),4 ,4 , dungeon, hallway);
-////		Trapdoor dungeondoor = new Trapdoor(dungeon, hallway);
-////		dungeon.addDoor(dungeondoor);
-////		hallway.addDoor(dungeondoor);
-////		Location loc = new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), null, 0, 0);
-////		Item wall = new Item("PlainWall", Position.WALL_NE);
-////		dungeon.addItem(wall, loc);
-//		rooms.add(dungeon);
-//		rooms.add(hallway);
-//		Character player1 = new Character("StickFig", Position.CENTER, "Player 1", dungeon);
-//		player1.setCurrentLocation(
-//				new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), player1, 7, 8));
-//		characters.add(player1);
-//		System.out.println(player1.getCurrentLocation().getX() + " " + player1.getCurrentLocation().getY());
-//		moveEast(player1);
-//		System.out.println(player1.getCurrentLocation().getX() + " " + player1.getCurrentLocation().getY());
-//		moveWest(player1);
-//		System.out.println(player1.getCurrentLocation().getX() + " " + player1.getCurrentLocation().getY());
-//		moveNorth(player1);
-//		System.out.println(player1.getCurrentLocation().getX() + " " + player1.getCurrentLocation().getY());
-//		
+	
 	}
-
-//	public Gameplay(int result) {
-//		Room dungeon = new Room(1, 10, 10);
-//		Room hallway = new Room(2, 5, 5);
-////		Trapdoor dungeondoor = new Trapdoor(dungeon, hallway);
-////		dungeon.addDoor(dungeondoor);
-////		hallway.addDoor(dungeondoor);
-//		Location loc = new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), null, 0, 0);
-//		Item wall = new Item("PlainWall", Position.WALL_NE);
-//		dungeon.addItem(wall, loc);
-//		rooms.add(dungeon);
-//		rooms.add(hallway);
-//		Character player1 = new Character("StickFig", Position.CENTER, "Player 1", dungeon);
-//		player1.setCurrentLocation(
-//				new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), player1, 3, 4));
-//		characters.add(player1);
-//		System.out.println("moving right");
-//		
-//		
-//		
-//		
-//		
-//	}
 
 	public void moveEast(Character character) {
 		Location current = character.getCurrentLocation();
@@ -111,6 +65,7 @@ public class Gameplay {
 		if(newLoc instanceof Trapdoor){
 			if(((Trapdoor) newLoc).isLocked()){
 				return;
+				//TODO stand on locked door
 			}
 			else{
 				character.setCurrentRoom(((Trapdoor) newLoc).getExit());
@@ -118,6 +73,7 @@ public class Gameplay {
 				character.setCurrentLocation(newRoomLoc); 
 				newRoomLoc.setOccupier(character);
 				current.setOccupier(null);	
+				((Trapdoor) newLoc).setLockRoom(true);
 			}			
 		}
 		if(newLoc instanceof Ladder){
@@ -150,6 +106,7 @@ public class Gameplay {
 		if(newLoc instanceof Trapdoor){
 			if(((Trapdoor) newLoc).isLocked()){
 				return;
+				//TODO stand on locked door
 			}
 			else{
 				character.setCurrentRoom(((Trapdoor) newLoc).getExit());
@@ -157,6 +114,7 @@ public class Gameplay {
 				character.setCurrentLocation(newRoomLoc); 
 				newRoomLoc.setOccupier(character);
 				current.setOccupier(null);	
+				((Trapdoor) newLoc).setLockRoom(true);
 			}			
 		}
 		if(newLoc instanceof Ladder){
@@ -188,6 +146,7 @@ public class Gameplay {
 		if(newLoc instanceof Trapdoor){
 			if(((Trapdoor) newLoc).isLocked()){
 				return;
+				//TODO stand on locked door
 			}
 			else{
 				character.setCurrentRoom(((Trapdoor) newLoc).getExit());
@@ -195,6 +154,7 @@ public class Gameplay {
 				character.setCurrentLocation(newRoomLoc); 
 				newRoomLoc.setOccupier(character);
 				current.setOccupier(null);	
+				((Trapdoor) newLoc).setLockRoom(true);
 			}			
 		}
 		if(newLoc instanceof Ladder){
@@ -226,6 +186,7 @@ public class Gameplay {
 		if(newLoc instanceof Trapdoor){
 			if(((Trapdoor) newLoc).isLocked()){
 				return;
+				//TODO stand on locked door
 			}
 			else{
 				character.setCurrentRoom(((Trapdoor) newLoc).getExit());
@@ -233,6 +194,7 @@ public class Gameplay {
 				character.setCurrentLocation(newRoomLoc); 
 				newRoomLoc.setOccupier(character);
 				current.setOccupier(null);	
+				((Trapdoor) newLoc).setLockRoom(true);
 			}			
 		}
 		if(newLoc instanceof Ladder){
@@ -258,6 +220,14 @@ public class Gameplay {
 	}
 
 
+//	public void useItem(Item selectedFromBag, Drawable selectedOnBoard, Character player){
+//		//TODO
+//		for(int i = 0; i<player.getCurrentRoom().getDoors().size();i++){
+//			if()
+//		}
+//		
+//		
+//	}
 
 	/**
 	 * @return the rooms
@@ -286,10 +256,6 @@ public class Gameplay {
 	 */
 	public void setCanvas(RenderCanvas canvas) {
 		this.canvas = canvas;
-	}
-
-	public static void main(String[] args) {
-
 	}
 
 	/**

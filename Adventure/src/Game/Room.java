@@ -9,13 +9,13 @@ import render.*;
 import render.Drawable.Position;
 public class Room {
 
-//	private List<Trapdoor> doors = new ArrayList<Trapdoor>();
 	private final int roomID;
 	private int width;
 	private int height;
 	private List<Item> items = new ArrayList <Item>();
-//	private Map<Location, Item> map = new HashMap<Location, Item>();
 	private Location[][] floor; 
+	private List<Trapdoor> doors =  new ArrayList<Trapdoor>();
+	
 	
 	/**
 	 * rooms must be square at the moment.  ie. width == height
@@ -45,41 +45,10 @@ public class Room {
 				if(j==floor.length-1){
 					wallNE = new Item("PlainWall1", Position.WALL_NE);
 				}
-//				if(i==0 && j==floor.length-1){
-//					occupier = new Chter(figureString, Position.CENTER);
-//				}
 				floor[i][j] = new Location(wallNE, wallNW, wallSE,wallSW, floortile, occupier, i , j);
 			}
 		  }
 	}
-
-//	/**
-//	 * @return the doors
-//	 */
-//	public List<Trapdoor> getDoors() {
-//		return doors;
-//	}
-//
-//	/**
-//	 * @param door -  the door to add
-//	 */
-//	public void addDoor(Trapdoor door) {
-//		this.doors.add(door);
-//	}
-	
-//	/**
-//	 * @return the items in the room
-//	 */
-//	public List<Item> getItems() {
-//		return items;
-//	}
-//
-//	/**
-//	 * @param items - the items to set in the room
-//	 */
-//	public void setItems(List<Item> items) {
-//		this.items = items;
-//	}
 
 	public int getWidth(){
 		return this.width;
@@ -95,21 +64,9 @@ public class Room {
 	public int getRoomID() {
 		return roomID;
 	}
-	
-//	public void addItem(Item item, Location loc){
-//		floor[loc.getX()][loc.getY()].setOccupier(item);
-//	}
 
 	public Drawable checkLocation(Location loc) {
-//		if(floor[loc.getX()][loc.getY()].getOccupier() == null){
-//			return null;
-//		}
-//		else if(floor[loc.getX()][loc.getY()].getOccupier() instanceof CollectableItem) {
-//			return true;
-//		}
-//		else {
-//			return false;
-//		}
+
 		return floor[loc.getX()][loc.getY()].getOccupier();
 	}
 
@@ -126,5 +83,20 @@ public class Room {
 	public void setFloor(Location[][] floor) {
 		this.floor = floor;
 	}
+
+	/**
+	 * @return the doors
+	 */
+	public List<Trapdoor> getDoors() {
+		return doors;
+	}
+
+	/**
+	 * @param doors the doors to set
+	 */
+	public void addDoor(Trapdoor door) {
+		this.doors.add(door);
+	}
+	
 	
 }

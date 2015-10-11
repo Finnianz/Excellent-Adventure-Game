@@ -11,7 +11,7 @@ public class StationaryItem extends Item {
 	Boolean unlockable;
 	int keyID;
 	
-	//if interactable is false, hiddenItem should be null
+	//if interactable and unlockable are false, hiddenItem should be null
 	public StationaryItem(String imgLoc, Position pos, Boolean interactable, Boolean unlockable, int keyID, CollectableItem item){
 		super(imgLoc, pos);	
 		this.interactable = interactable;
@@ -25,7 +25,7 @@ public class StationaryItem extends Item {
 		if(interactable){
 			//TODO
 			Location dropLoc = this.getRoomID().getFloor()[this.getLoc().getX() + 1][this.getLoc().getY()];
-			if(dropLoc.getOccupier() == null){
+			if(dropLoc.getX() <this.getRoomID().getFloor().length && dropLoc.getOccupier() == null){
 				dropLoc.setOccupier(hiddenItem);
 			}
 			else{
