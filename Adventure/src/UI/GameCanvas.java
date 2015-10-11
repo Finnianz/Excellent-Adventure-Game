@@ -6,8 +6,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
@@ -17,6 +19,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.font.TextAttribute;
+import java.awt.image.BufferedImage;
 import java.util.Map;
 
 import javax.swing.Box;
@@ -42,6 +45,7 @@ public class GameCanvas extends JPanel {
 	private JLabel[] bag;
 	private String selectedItem;
 	private Game.Item[] bagToDraw;
+	//private ImageIcon benie = resize(makeImageIcon("resource/Beanie.png"),70,70);
 	/**
 	 * Creates a new Canvas and sets up the board
 	 *
@@ -52,8 +56,6 @@ public class GameCanvas extends JPanel {
 		outerPanel = new JPanel();
 		outerPanel.setSize(300,300);
 		outerPanel.setLayout(null);
-		//JPanel temp = new JPanel();
-		//temp.add(canvasRen);
 		outerPanel.add(canvasRen, BorderLayout.CENTER);
 		
 		
@@ -72,64 +74,50 @@ public class GameCanvas extends JPanel {
 		
 		//Creates the panel that will contain in the bag
 		JPanel handPanel = new JPanel();
+		handPanel.setSize(20,20);
+		handPanel.setBackground(Color.PINK);
 		handPanel.setLayout(new GridLayout(1,6));
 		bag = new JLabel[6];
 		for(int t = 0; t<bag.length;t++){
-				bag[t] = new JLabel(new ImageIcon());
-				bag[t].setIcon(new ImageIcon("canvasImages"));
-				bag[t].addMouseListener(new MouseListener(){
-					@Override
-					public void mouseClicked(MouseEvent e) {
-					
-					}
-					public void mousePressed(MouseEvent e) {
-					}
-					public void mouseReleased(MouseEvent e) {
-					}
-					public void mouseEntered(MouseEvent e) {
-					}
-					public void mouseExited(MouseEvent e) {
-					}});
+				bag[t] = new JLabel();
+				bag[t].setText("bob");
+				bag[t].setForeground(Color.BLUE);
+				//bag[t].setIcon(null);
+				//bag[t].setVisible(true);
+//				bag[t].addMouseListener(new MouseListener(){
+//					@Override
+//					public void mouseClicked(MouseEvent e) {
+//					
+//					}
+//					public void mousePressed(MouseEvent e) {
+//					}
+//					public void mouseReleased(MouseEvent e) {
+//					}
+//					public void mouseEntered(MouseEvent e) {
+//					}
+//					public void mouseExited(MouseEvent e) {
+//					}});
+			
 				handPanel.add(bag[t]);
-
+				//drawBag();
+				//handPanel.add(useItem);
 		}		
+		handPanel.setVisible(true);
 		add(handPanel, BorderLayout.SOUTH);
 
 		setVisible(true);
 		add(outerPanel);
 		drawBoard();
 		outerPanel.addMouseListener(new MouseListener(){
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
+			public void mouseClicked(MouseEvent arg0) {}
+			public void mouseEntered(MouseEvent e) {}
+			public void mouseExited(MouseEvent e) {}
+			public void mousePressed(MouseEvent e) {}
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				Drawable objectClicked = canvasRen.clickedOn(e);
 				//TODO check actions
 			}
-			
 		});
 		outerPanel.addComponentListener(new ComponentListener() {
 
@@ -142,19 +130,6 @@ public class GameCanvas extends JPanel {
     		public void componentMoved(ComponentEvent e) {}
 
     		public void componentShown(ComponentEvent e) {}
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
     	});
 		
 	}
@@ -190,32 +165,49 @@ public class GameCanvas extends JPanel {
 	public int getyClick() {
 		return yClick;
 	}
-	public void draBag(){
-		if(bagToDraw!=null){
-			for(int a = 0; a<bagToDraw.length; a++){
-					if(bagToDraw[a]!=null){
-						ImageIcon card = getItem(bagToDraw[a]);
-						bag[a].setIcon(card);
+	public void drawBag(){
+//		if(bagToDraw!=null){
+		for(int a = 0; a<bag.length; a++){
+//					if(bagToDraw[a]!=null){
+//						ImageIcon card = getItem(bagToDraw[a]);
+//						bag[a].setIcon(benie);
 					}
-					else{
-						bag[a].setIcon(null);
-					}
-				}
-			}
+//					else{
+//						bag[a].setIcon(null);
+//					}
+//				}
+//			}
+	
 		}
 	public ImageIcon getItem(Game.Item i){
 		return null; //remove for compiling
 	}
-//
-//	private static ImageIcon makeImageIcon(String filename) {
-//		// using the URL means the image loads when stored
-//		// in a jar or expanded into individual files.
-//		java.net.URL imageURL = GameCanvas.class.getResource(filename);
-//
-//		ImageIcon icon = null;
-//		if (imageURL != null) {
-//			icon = new ImageIcon(imageURL);
-//		}
-//		return icon;
-//	}
+	private static ImageIcon makeImageIcon(String filename) {
+		// using the URL means the image loads when stored
+		// in a jar or expanded into individual files.
+		java.net.URL imageURL = GameCanvas.class.getResource(filename);
+
+		ImageIcon icon = null;
+		System.out.print("N");
+		if (imageURL != null) {
+			icon = new ImageIcon(imageURL);
+			System.out.print("Y");
+		}
+		return icon;
+	}
+	/**
+	 * helper method for changing the size of image icons
+	 * @param image
+	 * @param width
+	 * @param height
+	 * 
+	 */
+	public static ImageIcon resize(ImageIcon image, int width, int height) {
+		BufferedImage bi = new BufferedImage(width, height, BufferedImage.TRANSLUCENT);
+		Graphics2D g2d = (Graphics2D) bi.createGraphics();
+		g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
+		g2d.drawImage(image.getImage(), 0, 0, width, height, null);
+		g2d.dispose();
+		return new ImageIcon(bi);
+	}
 }

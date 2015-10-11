@@ -39,6 +39,10 @@ public class Gameplay {
 		dungeon.getFloor()[4][4] = l1;
 		e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(), empty.getFloor(), empty.getOccupier(), 5, 5);
 		dungeon.getFloor()[5][4] = e1;
+		//Set up items in Tower
+		MovableItem box = new MovableItem("PlainWall", Position.SQUARE);
+		tower.getFloor()[7][7].setOccupier(box);
+		tower.addItem(box, tower.getFloor()[7][7]);
 		
 		rooms.add(dungeon);
 		rooms.add(tower);
