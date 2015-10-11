@@ -20,7 +20,7 @@ public abstract class Drawable {
 	
 	private boolean selected = false;
 	private BufferedImage selectedImg;
-	private final String SELECT_IMG_STRING = "resource/star.png";
+	private final String SELECT_IMG_STRING = "resource/Star.png";
 	private Compass direction = Compass.NORTH;
 	private int xOnScreen =0;
 	private int yOnScreen = 0;

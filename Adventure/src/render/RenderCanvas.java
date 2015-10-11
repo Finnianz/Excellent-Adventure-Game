@@ -145,7 +145,6 @@ public class RenderCanvas extends JPanel {
 											// has been found, assign selected
 											// object and return from method
 						selectedObject = clickedOn;
-						System.out.println(clickedOn.POSITION);
 						return selectedObject;
 					}
 				}
