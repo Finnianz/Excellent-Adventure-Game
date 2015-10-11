@@ -42,10 +42,16 @@ public class Gameplay {
 		//Set up items in Tower
 		MovableItem box = new MovableItem("PlainWall", Position.SQUARE);
 		tower.getFloor()[7][7].setOccupier(box);
-		tower.addItem(box, tower.getFloor()[7][7]);
+//		tower.addItem(box, tower.getFloor()[7][7]);
 		
-		rooms.add(dungeon);
 		rooms.add(tower);
+		rooms.add(dungeon);
+		
+		//add player
+		Location playerLoc = tower.getFloor()[3][7];
+		Character player1 = new Character("BlueGhost", "CowboyHat", "Player1", tower, playerLoc);
+		playerLoc.setOccupier(player1);
+		characters.add(player1);
 		
 //		
 //		Room dungeon = new Room(1, 10, 10);

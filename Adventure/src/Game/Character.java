@@ -7,7 +7,7 @@ import render.*;
 import render.Drawable.Position;
 
 
-public class Character extends Drawable{
+public class Character extends CustomisableCharacter{
 	
 	private final String name;
 	private Room currentRoom;
@@ -15,10 +15,11 @@ public class Character extends Drawable{
 	private List<Item> items = new ArrayList<Item>();
 	
 	
-	public Character(String imgLoc, Position pos, String name, Room room){
-		super(imgLoc, pos);
+	public Character(String imgLoc, String hatname, String name, Room room, Location loc){
+		super(imgLoc, hatname);
 		this.name = name;
 		this.currentRoom = room;
+		this.currentLocation = loc;
 	}
 	
 	public void moveSpace(Location newLoc){

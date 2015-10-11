@@ -67,19 +67,19 @@ public class Room {
 //		this.doors.add(door);
 //	}
 	
-	/**
-	 * @return the items in the room
-	 */
-	public List<Item> getItems() {
-		return items;
-	}
-
-	/**
-	 * @param items - the items to set in the room
-	 */
-	public void setItems(List<Item> items) {
-		this.items = items;
-	}
+//	/**
+//	 * @return the items in the room
+//	 */
+//	public List<Item> getItems() {
+//		return items;
+//	}
+//
+//	/**
+//	 * @param items - the items to set in the room
+//	 */
+//	public void setItems(List<Item> items) {
+//		this.items = items;
+//	}
 
 	public int getWidth(){
 		return this.width;
@@ -96,9 +96,9 @@ public class Room {
 		return roomID;
 	}
 	
-	public void addItem(Item item, Location loc){
-		floor[loc.getX()][loc.getY()].setOccupier(item);
-	}
+//	public void addItem(Item item, Location loc){
+//		floor[loc.getX()][loc.getY()].setOccupier(item);
+//	}
 
 	public Drawable checkLocation(Location loc) {
 //		if(floor[loc.getX()][loc.getY()].getOccupier() == null){
