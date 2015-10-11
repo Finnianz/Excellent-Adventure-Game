@@ -40,7 +40,8 @@ public class Gameplay {
 		e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(), empty.getFloor(), empty.getOccupier(), 5, 5);
 		dungeon.getFloor()[5][4] = e1;
 		
-		
+		rooms.add(dungeon);
+		rooms.add(tower);
 		
 //		
 //		Room dungeon = new Room(1, 10, 10);
