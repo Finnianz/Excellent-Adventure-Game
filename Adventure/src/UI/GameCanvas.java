@@ -78,7 +78,8 @@ public class GameCanvas extends JPanel {
 		bag = new JLabel[6];
 		for(int t = 0; t<bag.length;t++){
 				bag[t] = new JLabel(benie);
-				
+				bag[t].setText("bob");
+				bag[t].setForeground(Color.BLUE);
 				//bag[t].setIcon(null);
 				//bag[t].setVisible(true);
 //				bag[t].addMouseListener(new MouseListener(){
