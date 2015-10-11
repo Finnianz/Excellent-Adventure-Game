@@ -29,7 +29,7 @@ public class Gameplay {
 		//set up trapdoor/ladder with empty tile next to each one
 		Location doorLoc = tower.getFloor()[4][4];
 		Location empty = tower.getFloor()[5][4];
-		Trapdoor t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(), doorLoc.getFloor(), doorLoc.getOccupier(),4 ,4 , tower, dungeon);
+		Trapdoor t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(), doorLoc.getFloor(), doorLoc.getOccupier(),4 ,4 , tower, dungeon, 1);
 		tower.getFloor()[4][4] = t1;
 		EmptyTile e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(), empty.getFloor(), empty.getOccupier(), 5, 5);
 		tower.getFloor()[5][4] = e1;
@@ -43,7 +43,8 @@ public class Gameplay {
 		MovableItem box = new MovableItem("PlainWall", Position.SQUARE);
 		tower.getFloor()[7][7].setOccupier(box);
 //		tower.addItem(box, tower.getFloor()[7][7]);
-		
+		StationaryItem bookshelf = new StationaryItem("PLainWall", Position.SQUARE, true, false, 2, new CollectableItem("PlainWall", Position.CENTER));
+		tower.getFloor()[9][6].setOccupier(bookshelf);
 		rooms.add(tower);
 		rooms.add(dungeon);
 		
