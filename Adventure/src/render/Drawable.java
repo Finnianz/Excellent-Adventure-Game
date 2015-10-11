@@ -19,6 +19,8 @@ import javax.imageio.ImageIO;
 public abstract class Drawable {
 	
 	private boolean selected = false;
+	private BufferedImage selectedImg;
+	private final String SELECT_IMG_STRING = "resource/Star.png";
 	private Compass direction = Compass.NORTH;
 	private int xOnScreen =0;
 	private int yOnScreen = 0;
@@ -60,8 +62,14 @@ public abstract class Drawable {
 	 *            enum for more details.
 	 */
 	public Drawable(String imgLoc, Position pos) {
+		
 		images = new AnimationSequence(imgLoc);
 		POSITION = pos;
+		try {
+			selectedImg = ImageIO.read(new File(SELECT_IMG_STRING));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -87,6 +95,7 @@ public abstract class Drawable {
 		xOnScreen = x;
 		yOnScreen = y;
 		BufferedImage sprite = images.getImage(direction);
+		if(sprite!=null);
 		int height = sprite.getHeight();
 		int width = sprite.getWidth();
 		switch (POSITION) {
@@ -204,7 +213,9 @@ public abstract class Drawable {
 		}
 		// Finally draw the image
 		g.drawImage(sprite, xOnScreen, yOnScreen, null);
-
+		if(selected){
+			g.drawImage(selectedImg, xOnScreen, yOnScreen, null);
+		}
 	}
 	
 	public void animationTick(){

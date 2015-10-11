@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
  *
  */
 public class AnimationSequence {
-
+	private final boolean HAS_IMG;
 	private final String RESOURCE = "resource/";
 	// One array for each direction. Each array is a sequence of images that
 	// create the animation
@@ -39,26 +39,33 @@ public class AnimationSequence {
 									// sequence
 
 	public AnimationSequence(String imgLoc) {
+		if (imgLoc == null) {
+			HAS_IMG = false;
+		} else {
+			HAS_IMG = true;
+			animation0 = new HashMap<Compass, BufferedImage[]>();
+			animation1 = new HashMap<Compass, BufferedImage[]>();
+			// Load sprite sheet
+			try {
+				spriteSheet = ImageIO
+						.read(new File(RESOURCE + imgLoc + ".png"));
+			} catch (IOException e1) {
+				System.out.println("Error readings images for " + imgLoc);
+			}
+			try {
+				loadSprites(imgLoc);
+			} catch (IOException e) {
+				System.out.println("Error reading txt file for " + imgLoc
+						+ " sprites" + "\n" + e.toString());
 
-		animation0 = new HashMap<Compass, BufferedImage[]>();
-		animation1 = new HashMap<Compass, BufferedImage[]>();
-		// Load sprite sheet
-		try {
-			spriteSheet = ImageIO.read(new File(RESOURCE + imgLoc + ".png"));
-		} catch (IOException e1) {
-			System.out.println("Error readings images for " + imgLoc);
+			}
 		}
-		try {
-			loadSprites(imgLoc);
-		} catch (IOException e) {
-			System.out.println("Error reading txt file for " + imgLoc
-					+ " sprites" + "\n" + e.toString());
-			
-		}
-
 	}
 
 	public BufferedImage getImage(Compass direction) {
+		if(!HAS_IMG){
+			return null;
+		}
 		if (animationState) {
 			return animation1.get(direction)[currentImage];
 
@@ -79,10 +86,16 @@ public class AnimationSequence {
 		// Get animation length
 		int animationLength = file.nextInt();
 		file.nextLine();
-		for (int i = 0; i<4; i++) {
+		for (int i = 0; i < 4; i++) {
 			// get the direction and turn into a compass point
 			Compass dir = Compass.stringToCompass(file.nextLine());
-			animation0.put(dir, new BufferedImage[animationLength]);// create arrays for the first animation, in every direction
+			animation0.put(dir, new BufferedImage[animationLength]);// create
+																	// arrays
+																	// for the
+																	// first
+																	// animation,
+																	// in every
+																	// direction
 			// there should be a line for each image in the animation
 			for (int j = 0; j < animationLength; j++) {
 				Scanner line = new Scanner(file.nextLine());
@@ -91,21 +104,29 @@ public class AnimationSequence {
 		}
 
 		// if there is more, there must be a second anim
-			if(file.hasNext()){
-				animationLength = file.nextInt();
-				file.nextLine();
-				for (int i = 0; i<4; i++) {
-					// get the direction and turn into a compass point
-					Compass dir = Compass.stringToCompass(file.nextLine());
-					animation1.put(dir, new BufferedImage[animationLength]);// create arrays for the first animation, in every direction
-					// there should be a line for each image in the animation
-					for (int j = 0; j < animationLength; j++) {
-						Scanner line = new Scanner(file.nextLine());
-						animation1.get(dir)[j] = getSprite(line);
-					}
+		if (file.hasNext()) {
+			animationLength = file.nextInt();
+			file.nextLine();
+			for (int i = 0; i < 4; i++) {
+				// get the direction and turn into a compass point
+				Compass dir = Compass.stringToCompass(file.nextLine());
+				animation1.put(dir, new BufferedImage[animationLength]);// create
+																		// arrays
+																		// for
+																		// the
+																		// first
+																		// animation,
+																		// in
+																		// every
+																		// direction
+				// there should be a line for each image in the animation
+				for (int j = 0; j < animationLength; j++) {
+					Scanner line = new Scanner(file.nextLine());
+					animation1.get(dir)[j] = getSprite(line);
 				}
-
 			}
+
+		}
 		// else there is only one set of animations.
 		// set animation1 to be the same as animation0 to prevent null pointer
 		// exceptions

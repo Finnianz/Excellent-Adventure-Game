@@ -15,7 +15,7 @@ public class Trapdoor extends Location {
 		this.exitRoom = exitRoom;
 	}
 
-	public Room getExit(Room entry){
+	public Room getExit(){
 		return exitRoom;
 	}
 

@@ -20,30 +20,54 @@ public class Gameplay {
 
 	public Gameplay(List<Character> characters) {
 
-		Room dungeon = new Room(1, 10, 10);
-		Room hallway = new Room(2, 10, 10);
-		Location doorLoc = dungeon.getFloor()[4][4];
-		Trapdoor t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(), doorLoc.getFloor(), doorLoc.getOccupier(),4 ,4 , dungeon, hallway);
-//		Trapdoor dungeondoor = new Trapdoor(dungeon, hallway);
-//		dungeon.addDoor(dungeondoor);
-//		hallway.addDoor(dungeondoor);
-//		Location loc = new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), null, 0, 0);
-//		Item wall = new Item("PlainWall", Position.WALL_NE);
-//		dungeon.addItem(wall, loc);
-		rooms.add(dungeon);
-		rooms.add(hallway);
-		Character player1 = new Character("StickFig", Position.CENTER, "Player 1", dungeon);
-		player1.setCurrentLocation(
-				new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), player1, 7, 8));
-		characters.add(player1);
-		System.out.println(player1.getCurrentLocation().getX() + " " + player1.getCurrentLocation().getY());
-		moveEast(player1);
-		System.out.println(player1.getCurrentLocation().getX() + " " + player1.getCurrentLocation().getY());
-		moveWest(player1);
-		System.out.println(player1.getCurrentLocation().getX() + " " + player1.getCurrentLocation().getY());
-		moveNorth(player1);
-		System.out.println(player1.getCurrentLocation().getX() + " " + player1.getCurrentLocation().getY());
+		this.characters = characters;
 		
+		//Set up first 2 rooms
+		
+		Room tower = new Room(1, 10, 10);
+		Room dungeon = new Room(2, 10, 10);
+		//set up trapdoor/ladder with empty tile next to each one
+		Location doorLoc = tower.getFloor()[4][4];
+		Location empty = tower.getFloor()[5][4];
+		Trapdoor t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(), doorLoc.getFloor(), doorLoc.getOccupier(),4 ,4 , tower, dungeon);
+		tower.getFloor()[4][4] = t1;
+		EmptyTile e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(), empty.getFloor(), empty.getOccupier(), 5, 5);
+		tower.getFloor()[5][4] = e1;
+		Location ladderLoc = dungeon.getFloor()[4][4];
+		empty = dungeon.getFloor()[5][4];
+		Ladder l1 = new Ladder(ladderLoc.getWallNE(), ladderLoc.getWallNW(), ladderLoc.getWallSE(),ladderLoc.getWallSW(), ladderLoc.getFloor(), ladderLoc.getOccupier(), 4,4, dungeon, tower);
+		dungeon.getFloor()[4][4] = l1;
+		e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(), empty.getFloor(), empty.getOccupier(), 5, 5);
+		dungeon.getFloor()[5][4] = e1;
+		
+		rooms.add(dungeon);
+		rooms.add(tower);
+		
+//		
+//		Room dungeon = new Room(1, 10, 10);
+//		Room hallway = new Room(2, 10, 10);
+//		Location doorLoc = dungeon.getFloor()[4][4];
+//		Trapdoor t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(), doorLoc.getFloor(), doorLoc.getOccupier(),4 ,4 , dungeon, hallway);
+////		Trapdoor dungeondoor = new Trapdoor(dungeon, hallway);
+////		dungeon.addDoor(dungeondoor);
+////		hallway.addDoor(dungeondoor);
+////		Location loc = new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), null, 0, 0);
+////		Item wall = new Item("PlainWall", Position.WALL_NE);
+////		dungeon.addItem(wall, loc);
+//		rooms.add(dungeon);
+//		rooms.add(hallway);
+//		Character player1 = new Character("StickFig", Position.CENTER, "Player 1", dungeon);
+//		player1.setCurrentLocation(
+//				new Location(null, null, null, null, new Item("FloorBlock", Position.FLOOR), player1, 7, 8));
+//		characters.add(player1);
+//		System.out.println(player1.getCurrentLocation().getX() + " " + player1.getCurrentLocation().getY());
+//		moveEast(player1);
+//		System.out.println(player1.getCurrentLocation().getX() + " " + player1.getCurrentLocation().getY());
+//		moveWest(player1);
+//		System.out.println(player1.getCurrentLocation().getX() + " " + player1.getCurrentLocation().getY());
+//		moveNorth(player1);
+//		System.out.println(player1.getCurrentLocation().getX() + " " + player1.getCurrentLocation().getY());
+//		
 	}
 
 //	public Gameplay(int result) {
@@ -74,15 +98,23 @@ public class Gameplay {
 		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX() + 1][character.getCurrentLocation().getY()];
 		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
 		if(newLoc instanceof Trapdoor){
-			
+			if(((Trapdoor) newLoc).isLocked()){
+				return;
+			}
+			else{
+				character.setCurrentRoom(((Trapdoor) newLoc).getExit());
+				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
+				character.setCurrentLocation(newRoomLoc); 
+				newRoomLoc.setOccupier(character);
+				current.setOccupier(null);	
+			}			
 		}
 		if(newLoc instanceof Ladder){
 			character.setCurrentRoom(((Ladder) newLoc).getExit());
-			//TODO Get Loc in new room
-			character.setCurrentLocation(newLoc); //currently standing on trapdoor
-			
+			Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
+			character.setCurrentLocation(newRoomLoc); 
+			newRoomLoc.setOccupier(character);
 			current.setOccupier(null);
-			
 		}
 		if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
 			character.moveSpace(newLoc);
@@ -104,6 +136,25 @@ public class Gameplay {
 		Location current = character.getCurrentLocation();
 		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX() - 1][character.getCurrentLocation().getY()];
 		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
+		if(newLoc instanceof Trapdoor){
+			if(((Trapdoor) newLoc).isLocked()){
+				return;
+			}
+			else{
+				character.setCurrentRoom(((Trapdoor) newLoc).getExit());
+				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
+				character.setCurrentLocation(newRoomLoc); 
+				newRoomLoc.setOccupier(character);
+				current.setOccupier(null);	
+			}			
+		}
+		if(newLoc instanceof Ladder){
+			character.setCurrentRoom(((Ladder) newLoc).getExit());
+			Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
+			character.setCurrentLocation(newRoomLoc); 
+			newRoomLoc.setOccupier(character);
+			current.setOccupier(null);
+		}
 		if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
 			character.moveSpace(newLoc);
 			if(itemOnNewLoc !=null ){
@@ -123,6 +174,25 @@ public class Gameplay {
 		Location current = character.getCurrentLocation();
 		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX()][character.getCurrentLocation().getY() + 1];
 		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
+		if(newLoc instanceof Trapdoor){
+			if(((Trapdoor) newLoc).isLocked()){
+				return;
+			}
+			else{
+				character.setCurrentRoom(((Trapdoor) newLoc).getExit());
+				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
+				character.setCurrentLocation(newRoomLoc); 
+				newRoomLoc.setOccupier(character);
+				current.setOccupier(null);	
+			}			
+		}
+		if(newLoc instanceof Ladder){
+			character.setCurrentRoom(((Ladder) newLoc).getExit());
+			Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
+			character.setCurrentLocation(newRoomLoc); 
+			newRoomLoc.setOccupier(character);
+			current.setOccupier(null);
+		}
 		if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
 			character.moveSpace(newLoc);
 			if(itemOnNewLoc !=null ){
@@ -142,6 +212,25 @@ public class Gameplay {
 		Location current = character.getCurrentLocation();
 		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX()][character.getCurrentLocation().getY() - 1];
 		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
+		if(newLoc instanceof Trapdoor){
+			if(((Trapdoor) newLoc).isLocked()){
+				return;
+			}
+			else{
+				character.setCurrentRoom(((Trapdoor) newLoc).getExit());
+				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
+				character.setCurrentLocation(newRoomLoc); 
+				newRoomLoc.setOccupier(character);
+				current.setOccupier(null);	
+			}			
+		}
+		if(newLoc instanceof Ladder){
+			character.setCurrentRoom(((Ladder) newLoc).getExit());
+			Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
+			character.setCurrentLocation(newRoomLoc); 
+			newRoomLoc.setOccupier(character);
+			current.setOccupier(null);
+		}
 		if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
 			character.moveSpace(newLoc);
 			if(itemOnNewLoc !=null ){
