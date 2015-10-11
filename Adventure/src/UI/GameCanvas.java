@@ -62,28 +62,47 @@ public class GameCanvas extends JPanel {
 		//Creates panel for buttons
 		JPanel button = new JPanel();
 		button.setLayout(new BoxLayout(button, BoxLayout.Y_AXIS));
-		JButton useItem = new JButton("Use Item");
-		useItem.setPreferredSize(new Dimension(150, 100));
-		JButton rotateLeft = new JButton("Rotate Left");
-		rotateLeft.setPreferredSize(new Dimension(150, 100));
+		JButton RL = new JButton("Rotate Left");
+		RL.setPreferredSize(new Dimension(150, 100));
+		RL.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				canvasRen.rotateLeft();
+				System.out.print("l");
+				
+			}
+			
+		});
+		JButton RR = new JButton("Rotate Right");
+		RR.setPreferredSize(new Dimension(150, 100));
+		RR.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				canvasRen.rotateRight();
+				System.out.print("r");
+				
+			}
+			
+		});
 		button.add(Box.createRigidArea(new Dimension(0,150)));
-		button.add(useItem);
+		button.add(RL);
 		button.add(Box.createRigidArea(new Dimension(0,10)));
-		button.add(rotateLeft);
+		button.add(RR);
 		add(button, BorderLayout.LINE_END);
 		
 		//Creates the panel that will contain in the bag
 		JPanel handPanel = new JPanel();
-		//handPanel.setSize(20,20);
-		//handPanel.setBackground(Color.PINK);
 		handPanel.setLayout(new GridLayout(1,6));
 		bag = new JLabel[6];
 		for(int t = 0; t<bag.length;t++){
-				bag[t] = new JLabel(benie);
-				bag[t].setOpaque(true);
-				//bag[t].setText("bob");
-				bag[t].setForeground(Color.BLUE);
-				//bag[t].setIcon(null);
+			ImageIcon icon = new ImageIcon("BlueGhost.png");
+			resize(icon, 70,70);
+			bag[t]= new JLabel(icon);
+			add(bag[t]);
+            setVisible(true);
+			//bag[t] = new JLabel(icon);
 				//bag[t].setVisible(true);
 //				bag[t].addMouseListener(new MouseListener(){
 //					@Override
@@ -99,11 +118,12 @@ public class GameCanvas extends JPanel {
 //					public void mouseExited(MouseEvent e) {
 //					}});
 			
-				handPanel.add(bag[t]);
+				handPanel.add(bag[t], BorderLayout.CENTER);
 				//drawBag();
+				
 				//handPanel.add(useItem);
 		}		
-		handPanel.setVisible(true);
+		//handPanel.setVisible(true);
 		add(handPanel, BorderLayout.SOUTH);
 
 		setVisible(true);
