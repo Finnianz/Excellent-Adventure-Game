@@ -8,11 +8,15 @@ public class StationaryItem extends Item {
 	
 	Boolean interactable;
 	CollectableItem hiddenItem;
+	Boolean unlockable;
+	int keyID;
 	
 	//if interactable is false, hiddenItem should be null
-	public StationaryItem(String imgLoc, Position pos, Boolean interactable, CollectableItem item){
+	public StationaryItem(String imgLoc, Position pos, Boolean interactable, Boolean unlockable, int keyID, CollectableItem item){
 		super(imgLoc, pos);	
 		this.interactable = interactable;
+		this.unlockable = unlockable;
+		this.keyID = keyID;
 		hiddenItem = item;
 	}
 
