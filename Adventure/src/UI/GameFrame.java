@@ -11,12 +11,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.swing.ButtonGroup;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -28,7 +24,6 @@ import javax.swing.JRadioButton;
 
 import Game.Gameplay;
 import Main.Main;
-import render.RenderCanvas;
 
 public class GameFrame extends JFrame implements WindowListener {
 
@@ -145,33 +140,33 @@ public class GameFrame extends JFrame implements WindowListener {
 		}
 		//set up radio buttons for selecting hat
 		JRadioButton beanie = new JRadioButton("Beanie");
-		Yellow.setActionCommand("Beanie"); 
-		Yellow.setSelected(true);
-		Yellow.addActionListener(new ActionListener(){
+		beanie.setActionCommand("Beanie"); 
+		beanie.setSelected(true);
+		beanie.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				playerHat = e.getActionCommand().toString();
 			}			 
 		});
 		JRadioButton cowboy = new JRadioButton("Cowboy");
-		Blue.setActionCommand("Cowboy");
-		Blue.addActionListener(new ActionListener(){
+		cowboy.setActionCommand("Cowboy");
+		cowboy.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				playerHat = e.getActionCommand().toString();
 			}			 
 		});
 		JRadioButton sunhat = new JRadioButton("Sunhat");
-		Green.setActionCommand("Sunhat");
-		Green.addActionListener(new ActionListener(){
+		sunhat.setActionCommand("Sunhat");
+		sunhat.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				playerHat = e.getActionCommand().toString();
 			}			 
 		});
 		JRadioButton tophat = new JRadioButton("Tophat");
-		Red.setActionCommand("Tophat");
-		Red.addActionListener(new ActionListener(){
+		tophat.setActionCommand("Tophat");
+		tophat.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {	
 				playerHat = e.getActionCommand().toString();
@@ -185,10 +180,10 @@ public class GameFrame extends JFrame implements WindowListener {
 		array[3] = tophat;
 
 		ButtonGroup buttons2 = new ButtonGroup();
-		buttons.add(beanie);
-		buttons.add(cowboy);
-		buttons.add(sunhat);
-		buttons.add(tophat);
+		buttons2.add(beanie);
+		buttons2.add(cowboy);
+		buttons2.add(sunhat);
+		buttons2.add(tophat);
 
 		JPanel panel2 = new JPanel();
 		panel2.add(beanie);
@@ -314,5 +309,11 @@ public class GameFrame extends JFrame implements WindowListener {
 		JOptionPane.showMessageDialog(this, "this is a game \nit is not yet clear what to do.", "Instructions",
 				JOptionPane.PLAIN_MESSAGE);
 		JOptionPane.showMessageDialog(this, "more unknown instructions", "Instructions", JOptionPane.PLAIN_MESSAGE);
+	}
+	public String getPlayerColour(){
+		return playerColour;
+	}
+	public String getPlayerHat(){
+		return playerHat;
 	}
 }
