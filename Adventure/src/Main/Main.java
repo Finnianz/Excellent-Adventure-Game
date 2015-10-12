@@ -4,6 +4,7 @@ import Game.Gameplay;
 import UI.GameFrame;
 import render.RenderCanvas;
 
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -25,19 +26,23 @@ public class Main {
 	private static Socket client;
 	private static OutputStreamWriter osw;
 
+	public static InetAddress serverIp;
+
 	public static void main(String[] args) {
 		boolean server = false;
+
 		int nclients = 0;
 		int port = 36768; // default
 
 		try {
+			serverIp = InetAddress.getLocalHost();
 			GameFrame frame = new GameFrame();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		startGame();
+		// startGame();
 	}
 
 	public static void startGame() {
@@ -55,10 +60,10 @@ public class Main {
 		game.getFrame().getC().repaint();
 	}
 
-	public static void joinGame(int port) {
+	public static void joinGame(String server, int port) {
 		Socket s;
 		try {
-			s = new Socket("localhost", port);
+			s = new Socket(server, port);
 			new Slave(s).run();
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -83,7 +88,6 @@ public class Main {
 	public static void hostGame(int port) {
 
 		try {
-
 			// Now, we await connections.
 			ServerSocket ss = new ServerSocket(port);
 			while (1 == 1) {

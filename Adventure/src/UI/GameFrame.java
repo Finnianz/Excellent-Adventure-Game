@@ -1,6 +1,5 @@
 package UI;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -36,10 +35,11 @@ public class GameFrame extends JFrame implements WindowListener {
 	private JMenuItem exit;
 	private JMenuItem instructions;
 	boolean newGame = true;
-	int countOfPlayers =0;
+	int countOfPlayers = 0;
 	private JRadioButton[] array;
-	private String playerColour= "Yellow";
-	private String playerHat= "cowboy";
+	private String playerColour = "Yellow";
+	private String playerHat = "cowboy";
+
 	public GameFrame() {
 		super("Welcome to your Worst Nightmare!");
 		setLayout(new BorderLayout());
@@ -54,63 +54,63 @@ public class GameFrame extends JFrame implements WindowListener {
 		pack();
 		setResizable(true);
 		setVisible(true);
-			showInstructions();
-			c.addKeyListener(new KeyListener(){
+		showInstructions();
+		c.addKeyListener(new KeyListener() {
 
-				@Override
-				public void keyTyped(KeyEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
 
-				@Override
-				public void keyPressed(KeyEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
+			}
 
-				@Override
-				public void keyReleased(KeyEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 	}
 
 	private void inputPlayers() {
 
 		JRadioButton Yellow = new JRadioButton("Yellow");
-		Yellow.setActionCommand("Yellow"); 
+		Yellow.setActionCommand("Yellow");
 		Yellow.setSelected(true);
-		Yellow.addActionListener(new ActionListener(){
+		Yellow.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				playerColour = e.getActionCommand().toString();
-			}			 
+			}
 		});
 		JRadioButton Blue = new JRadioButton("Blue");
 		Blue.setActionCommand("Blue");
-		Blue.addActionListener(new ActionListener(){
+		Blue.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				playerColour = e.getActionCommand().toString();
-			}			 
+			}
 		});
 		JRadioButton Green = new JRadioButton("Green");
 		Green.setActionCommand("Green");
-		Green.addActionListener(new ActionListener(){
+		Green.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				playerColour = e.getActionCommand().toString();
-			}			 
+			}
 		});
 		JRadioButton Red = new JRadioButton("Red");
 		Red.setActionCommand("Red");
-		Red.addActionListener(new ActionListener(){
+		Red.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {	
+			public void actionPerformed(ActionEvent e) {
 				playerColour = e.getActionCommand().toString();
-			}			 
+			}
 		});
 
 		array = new JRadioButton[6];
@@ -130,47 +130,47 @@ public class GameFrame extends JFrame implements WindowListener {
 		panel.add(Blue);
 		panel.add(Green);
 		panel.add(Red);
-		
-		//asks for colour and saves as field
-		int token = JOptionPane.showOptionDialog(this, panel, "Choose your Player Colour:", JOptionPane.YES_NO_CANCEL_OPTION,
-				JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+		// asks for colour and saves as field
+		int token = JOptionPane.showOptionDialog(this, panel, "Choose your Player Colour:",
+				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 		System.out.print(token);
-		if(token==0){
+		if (token == 0) {
 			System.out.print(playerColour);
 		}
-		//set up radio buttons for selecting hat
+		// set up radio buttons for selecting hat
 		JRadioButton beanie = new JRadioButton("Beanie");
-		beanie.setActionCommand("Beanie"); 
+		beanie.setActionCommand("Beanie");
 		beanie.setSelected(true);
-		beanie.addActionListener(new ActionListener(){
+		beanie.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				playerHat = e.getActionCommand().toString();
-			}			 
+			}
 		});
 		JRadioButton cowboy = new JRadioButton("Cowboy");
 		cowboy.setActionCommand("Cowboy");
-		cowboy.addActionListener(new ActionListener(){
+		cowboy.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				playerHat = e.getActionCommand().toString();
-			}			 
+			}
 		});
 		JRadioButton sunhat = new JRadioButton("Sunhat");
 		sunhat.setActionCommand("Sunhat");
-		sunhat.addActionListener(new ActionListener(){
+		sunhat.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				playerHat = e.getActionCommand().toString();
-			}			 
+			}
 		});
 		JRadioButton tophat = new JRadioButton("Tophat");
 		tophat.setActionCommand("Tophat");
-		tophat.addActionListener(new ActionListener(){
+		tophat.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {	
+			public void actionPerformed(ActionEvent e) {
 				playerHat = e.getActionCommand().toString();
-			}			 
+			}
 		});
 
 		array = new JRadioButton[4];
@@ -190,12 +190,12 @@ public class GameFrame extends JFrame implements WindowListener {
 		panel2.add(cowboy);
 		panel2.add(sunhat);
 		panel2.add(tophat);
-		
-		//asks for hat and saves as field playerHat
+
+		// asks for hat and saves as field playerHat
 		int token2 = JOptionPane.showOptionDialog(this, panel2, "Choose your Hat:", JOptionPane.YES_NO_CANCEL_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, null, null);
 		System.out.print(token);
-		if(token2==0){
+		if (token2 == 0) {
 			System.out.print(playerHat);
 		}
 	}
@@ -224,13 +224,17 @@ public class GameFrame extends JFrame implements WindowListener {
 				String choice = (String) JOptionPane.showInputDialog(null, "Please Choose whether Host or Client", "??",
 						JOptionPane.PLAIN_MESSAGE, null, choices, choices[0]);
 				if (choice.equals("Host Game")) {
+					JOptionPane.showMessageDialog(null, "Server started on " + Main.serverIp, null,
+							JOptionPane.PLAIN_MESSAGE);
 					Main.hostGame(Integer.parseInt(
 							JOptionPane.showInputDialog(null, "Enter Port", null, JOptionPane.PLAIN_MESSAGE)));
 
 				} else if (choice.equals("Join Game")) {
 
-					Main.joinGame(Integer.parseInt(
+					Main.joinGame(JOptionPane.showInputDialog(null, "Enter Server", null, JOptionPane.PLAIN_MESSAGE),Integer.parseInt(
 							JOptionPane.showInputDialog(null, "Enter Port", null, JOptionPane.PLAIN_MESSAGE)));
+					JOptionPane.showMessageDialog(null, "Server connected on " + Main.serverIp, "Server deets: ",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 				inputPlayers();
 			}
@@ -241,8 +245,8 @@ public class GameFrame extends JFrame implements WindowListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int r = JOptionPane.showConfirmDialog(c, new JLabel("Exit?"), "Confirm Exit",
-						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				int r = JOptionPane.showConfirmDialog(c, new JLabel("Exit?"), "Confirm Exit", JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE);
 				if (r == JOptionPane.YES_OPTION) {
 					System.exit(0);
 				}
@@ -310,10 +314,12 @@ public class GameFrame extends JFrame implements WindowListener {
 				JOptionPane.PLAIN_MESSAGE);
 		JOptionPane.showMessageDialog(this, "more unknown instructions", "Instructions", JOptionPane.PLAIN_MESSAGE);
 	}
-	public String getPlayerColour(){
+
+	public String getPlayerColour() {
 		return playerColour;
 	}
-	public String getPlayerHat(){
+
+	public String getPlayerHat() {
 		return playerHat;
 	}
 }
