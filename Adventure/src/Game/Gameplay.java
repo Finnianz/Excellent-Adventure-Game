@@ -3,6 +3,7 @@ package Game;
 import java.util.ArrayList;
 
 import render.Drawable;
+import render.DrawableTile;
 import render.RenderCanvas;
 import render.Drawable.Position;
 
@@ -44,7 +45,7 @@ public class Gameplay {
 		MovableItem box = new MovableItem("PlainWall", Position.SQUARE);
 		tower.getFloor()[7][7].setOccupier(box);
 //		tower.addItem(box, tower.getFloor()[7][7]);
-		StationaryItem bookshelf = new StationaryItem("PlainWall", Position.SQUARE, true, false, 2, new CollectableItem("PlainWall", Position.CENTER));
+		StationaryItem bookshelf = new StationaryItem("PlainWall", Position.SQUARE, true, false, 2, new CollectableItem("PlainWall", Position.CENTER, 1));
 		tower.getFloor()[9][6].setOccupier(bookshelf);
 		rooms.add(tower);
 		rooms.add(dungeon);
@@ -220,14 +221,20 @@ public class Gameplay {
 	}
 
 
-//	public void useItem(Item selectedFromBag, Drawable selectedOnBoard, Character player){
-//		//TODO
-//		for(int i = 0; i<player.getCurrentRoom().getDoors().size();i++){
-//			if()
-//		}
-//		
-//		
-//	}
+	public void useItem(CollectableItem selectedFromBag, DrawableTile selectedOnBoard, Character player){
+		int key;
+		for(int i = 0; i<player.getCurrentRoom().getDoors().size();i++){
+			if(selectedOnBoard instanceof Trapdoor){
+				key = ((Trapdoor) selectedOnBoard).getKeyID();
+				if(selectedFromBag.getiD() == key){
+					((Trapdoor) selectedOnBoard).setLockRoom(false);
+					//TODO respawn keys here or when door is used?
+				}
+			}
+		}
+		
+		
+	}
 
 	/**
 	 * @return the rooms
