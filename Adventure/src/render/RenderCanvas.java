@@ -96,9 +96,9 @@ public class RenderCanvas extends JPanel {
 	}
 
 	/**
-	 * Changes the viewing direction to the left
+	 * Changes the viewing direction clockwise
 	 */
-	public void rotateLeft() {
+	public void rotateClockwise() {
 		switch (direction) {
 		case NORTH:
 			direction = Compass.WEST;
@@ -117,9 +117,9 @@ public class RenderCanvas extends JPanel {
 	}
 
 	/**
-	 * Changes the viewing direction to the right
+	 * Changes the viewing direction anticlockwise
 	 */
-	public void rotateRight() {
+	public void rotateAntiClockwise() {
 		switch (direction) {
 		case NORTH:
 			direction = Compass.EAST;

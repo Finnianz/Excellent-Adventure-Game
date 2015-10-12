@@ -11,7 +11,7 @@ import render.RenderCanvas.Compass;
  *
  */
 public class IsometricRenderer {
-	public final int TOP_PADDING = 200;
+	public final int TOP_PADDING = 150;
 	public final int TILE_HEIGHT = 38;
 	public final int TILE_WIDTH = 76;
 	// Coordinates to draw the current viewing direction
