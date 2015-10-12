@@ -28,11 +28,11 @@ public class RenderFrame extends javax.swing.JFrame implements
 		int code = e.getKeyCode();
 		if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_KP_RIGHT) {
 			if(canvas!=null){
-				canvas.rotateRight();
+				//canvas.rotateRight();
 			}
 		} else if (code == KeyEvent.VK_LEFT || code == KeyEvent.VK_KP_LEFT) {
 			if(canvas!=null){
-				canvas.rotateLeft();
+				//canvas.rotateLeft();
 			}
 		}
 	}

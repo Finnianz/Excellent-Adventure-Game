@@ -70,7 +70,7 @@ public class GameCanvas extends JPanel {
 		RL.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				canvasRen.rotateLeft();
+				canvasRen.rotateAntiClockwise();
 				repaint();
 			}
 		});
@@ -80,7 +80,7 @@ public class GameCanvas extends JPanel {
 		RR.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				canvasRen.rotateRight();
+				canvasRen.rotateClockwise();
 				repaint();	
 			}
 		});
