@@ -1,15 +1,12 @@
 package UI;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
@@ -26,10 +23,14 @@ import javax.swing.JRadioButton;
 
 import Game.Gameplay;
 import Main.Main;
-
+/**
+ * 
+ * @author Megan Davidson ID:300313759
+ *
+ */
 public class GameFrame extends JFrame implements WindowListener {
 
-	private GameCanvas c;
+	private GameCanvas canvasOfGame;
 	private JMenuBar menuBar;
 	private JMenu menu;
 	private JMenu helpMenu;
@@ -43,17 +44,17 @@ public class GameFrame extends JFrame implements WindowListener {
 	private String playerColour = "Yellow";
 	private String playerHat = "cowboy";
 	private Gameplay game;
-	public void setGame(Gameplay g){
-		game = g;
-	}
-
+	
+	/**
+	 * Sets up the frame for the game and the keyListener for movement 
+	 */
 	public GameFrame() {
 		super("Welcome to your Worst Nightmare!");
 		setLayout(new BorderLayout());
 		GameCanvas canvas = new GameCanvas();
-		c = canvas;
-		c.setMinimumSize(new Dimension(600, 600));
-		getContentPane().add(c, BorderLayout.CENTER);
+		canvasOfGame = canvas;
+		canvasOfGame.setMinimumSize(new Dimension(600, 600));
+		getContentPane().add(canvasOfGame, BorderLayout.CENTER);
 		setUpMenu();
 		setSize(1500, 1500);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -66,6 +67,11 @@ public class GameFrame extends JFrame implements WindowListener {
 		KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(new MyDispatcher());
 	}
+	
+	/**
+	 * helper class to register the keystrokes
+	 *
+	 */
 	 private class MyDispatcher implements KeyEventDispatcher {
 	        @Override
 	        public boolean dispatchKeyEvent(KeyEvent e) {
@@ -96,9 +102,13 @@ public class GameFrame extends JFrame implements WindowListener {
 	            return false;
 	        }
 	    }
-
+	 /**
+	  * sets up dialogue boxes to get characters to select
+	  * colour and hat types. (are saved as private fields
+	  */
 	private void inputPlayers() {
 
+		//sets up button for colour
 		JRadioButton Yellow = new JRadioButton("Yellow");
 		Yellow.setActionCommand("Yellow");
 		Yellow.setSelected(true);
@@ -219,7 +229,7 @@ public class GameFrame extends JFrame implements WindowListener {
 			System.out.print(playerHat);
 		}
 	}
-
+	//sets up the menu bar giving players options to exit/start new game/get help
 	private void setUpMenu() {
 		menuBar = new JMenuBar();
 		menu = new JMenu("Menu");
@@ -265,7 +275,7 @@ public class GameFrame extends JFrame implements WindowListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int r = JOptionPane.showConfirmDialog(c, new JLabel("Exit?"), "Confirm Exit", JOptionPane.YES_NO_OPTION,
+				int r = JOptionPane.showConfirmDialog(canvasOfGame, new JLabel("Exit?"), "Confirm Exit", JOptionPane.YES_NO_OPTION,
 						JOptionPane.QUESTION_MESSAGE);
 				if (r == JOptionPane.YES_OPTION) {
 					System.exit(0);
@@ -286,19 +296,24 @@ public class GameFrame extends JFrame implements WindowListener {
 	}
 
 	/**
-	 * @return the game
+	 * gets the game canvas
+	 * @return GameCanvas
 	 */
-	// public Game getGame() {
-	// return game;
-	// }
 	public GameCanvas getC() {
-		return c;
+		return canvasOfGame;
 	}
-
+	
+	/**
+	 * sets the canvas of the frame
+	 * @param c
+	 */
 	public void setC(GameCanvas c) {
-		this.c = c;
+		this.canvasOfGame = c;
 	}
 
+	/**
+	 * the dialogue window that open on exiting the game
+	 */
 	public void windowClosing(WindowEvent e) {
 		int r = JOptionPane.showConfirmDialog(this, new JLabel("Exit?"), "Confirm Exit", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE);
@@ -306,40 +321,47 @@ public class GameFrame extends JFrame implements WindowListener {
 			System.exit(0);
 		}
 	}
+	public void windowClosed(WindowEvent e) {}
+	public void windowIconified(WindowEvent e) {}
+	public void windowDeiconified(WindowEvent e) {}
+	public void windowActivated(WindowEvent e) {}
+	public void windowDeactivated(WindowEvent e) {}
+	public void windowOpened(WindowEvent e) {}
 
-	public void windowClosed(WindowEvent e) {
-	}
-
-	public void windowIconified(WindowEvent e) {
-	}
-
-	public void windowDeiconified(WindowEvent e) {
-	}
-
-	public void windowActivated(WindowEvent e) {
-	}
-
-	public void windowDeactivated(WindowEvent e) {
-	}
-
-	public void windowOpened(WindowEvent e) {
-	}
-
-	public static void main(String[] args) {
-		new GameFrame();
-	}
-
+	/**
+	 * Dialogue box that opens when player requests instructions and at the 
+	 * beginning of the game
+	 */
 	public void showInstructions() {
 		JOptionPane.showMessageDialog(this, "this is a game \nit is not yet clear what to do.", "Instructions",
 				JOptionPane.PLAIN_MESSAGE);
 		JOptionPane.showMessageDialog(this, "more unknown instructions", "Instructions", JOptionPane.PLAIN_MESSAGE);
 	}
-
+	
+	/**
+	 * sets the GamePlay of the frame
+	 * @param g
+	 */
+	public void setGame(Gameplay g){
+		game = g;
+	}
+	
+	/**
+	 * @return playerColour
+	 */
 	public String getPlayerColour() {
 		return playerColour;
 	}
 
+	/** 
+	 * @return playerHat
+	 */
 	public String getPlayerHat() {
 		return playerHat;
 	}
+	
+	public static void main(String[] args) {
+		new GameFrame();
+	}
+
 }
