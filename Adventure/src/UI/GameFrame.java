@@ -3,6 +3,9 @@ package UI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -39,6 +42,10 @@ public class GameFrame extends JFrame implements WindowListener {
 	private JRadioButton[] array;
 	private String playerColour = "Yellow";
 	private String playerHat = "cowboy";
+	private Gameplay game;
+	public void setGame(Gameplay g){
+		game = g;
+	}
 
 	public GameFrame() {
 		super("Welcome to your Worst Nightmare!");
@@ -55,27 +62,40 @@ public class GameFrame extends JFrame implements WindowListener {
 		setResizable(true);
 		setVisible(true);
 		showInstructions();
-		c.addKeyListener(new KeyListener() {
 
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
+		KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        manager.addKeyEventDispatcher(new MyDispatcher());
 	}
+	 private class MyDispatcher implements KeyEventDispatcher {
+	        @Override
+	        public boolean dispatchKeyEvent(KeyEvent e) {
+	            if (e.getID() == KeyEvent.KEY_PRESSED) {
+	               if(e.getKeyCode()==(40)){
+	            	   System.out.println("south");   
+	            	  //game.moveSouth('player');
+	            	  
+	            }
+	               if(e.getKeyCode()==(37)){
+	            	   System.out.println("west");   
+	            	 //game.moveWest('player');
+	            }
+	               if(e.getKeyCode()==(38)){
+	            	   System.out.println("north"); 
+	            	 //game.moveNorth('player');
+	            }
+	               if(e.getKeyCode()==(39)){
+	            	   System.out.println("east");  
+	            	 //game.moveEast('player');
+	            }
+
+	            } else if (e.getID() == KeyEvent.KEY_RELEASED) {
+	                
+	            } else if (e.getID() == KeyEvent.KEY_TYPED) {
+	            	
+	            }
+	            return false;
+	        }
+	    }
 
 	private void inputPlayers() {
 

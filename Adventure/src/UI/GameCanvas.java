@@ -59,12 +59,9 @@ public class GameCanvas extends JPanel {
 	public GameCanvas() {
 		setLayout(new BorderLayout());
 		outerPanel = new JPanel();
-		//outerPanel.setPreferredSize(new Dimension(600,600));
-		//System.out.print(outerPanel.getWidth()+outerPanel.getHeight());
 		outerPanel.setLayout(new BorderLayout());
 		outerPanel.add(canvasRen, BorderLayout.CENTER);
 		add(outerPanel);
-		//System.out.print(outerPanel.getWidth()+outerPanel.getHeight());
 		
 		//Creates panel for buttons
 		button = new JPanel();
@@ -77,7 +74,6 @@ public class GameCanvas extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				canvasRen.rotateLeft();
 				repaint();
-			
 			}
 			
 		});
@@ -88,9 +84,7 @@ public class GameCanvas extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				canvasRen.rotateRight();
-				repaint();
-				//drawBoard();
-				
+				repaint();	
 			}
 			
 		});
@@ -125,11 +119,9 @@ public class GameCanvas extends JPanel {
 			
 				handPanel.add(bag[t], BorderLayout.CENTER);
 				//drawBag();
-				
-				//handPanel.add(RR);
 		}		
 		handPanel.setVisible(true);
-		//add(handPanel, BorderLayout.SOUTH);
+		add(handPanel, BorderLayout.SOUTH);
 
 		outerPanel.addMouseListener(new MouseListener(){
 			public void mouseClicked(MouseEvent arg0) {}
