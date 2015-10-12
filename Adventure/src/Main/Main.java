@@ -42,7 +42,7 @@ public class Main {
 			e.printStackTrace();
 		}
 
-		// startGame();
+		 startGame();
 	}
 
 	public static void startGame() {

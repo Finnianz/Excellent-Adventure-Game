@@ -3,6 +3,7 @@ package UI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -47,6 +48,9 @@ public class GameCanvas extends JPanel {
 	private String selectedItem;
 	private Game.Item[] bagToDraw;
 	private ImageIcon benie = resize(makeImageIcon("Beanie.png"),70,70);
+	private JPanel button;
+	private JPanel handPanel;
+	private Container contentPane;
 	/**
 	 * Creates a new Canvas and sets up the board
 	 *
@@ -55,13 +59,15 @@ public class GameCanvas extends JPanel {
 	public GameCanvas() {
 		setLayout(new BorderLayout());
 		outerPanel = new JPanel();
-		outerPanel.setSize(300,300);
-		outerPanel.setLayout(null);
+		//outerPanel.setPreferredSize(new Dimension(600,600));
+		//System.out.print(outerPanel.getWidth()+outerPanel.getHeight());
+		outerPanel.setLayout(new BorderLayout());
 		outerPanel.add(canvasRen, BorderLayout.CENTER);
-		
+		add(outerPanel);
+		//System.out.print(outerPanel.getWidth()+outerPanel.getHeight());
 		
 		//Creates panel for buttons
-		JPanel button = new JPanel();
+		button = new JPanel();
 		button.setLayout(new BoxLayout(button, BoxLayout.Y_AXIS));
 		JButton RL = new JButton("Rotate Left");
 		RL.setPreferredSize(new Dimension(150, 100));
@@ -71,7 +77,7 @@ public class GameCanvas extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				canvasRen.rotateLeft();
 				repaint();
-				
+			
 			}
 			
 		});
@@ -83,6 +89,7 @@ public class GameCanvas extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				canvasRen.rotateRight();
 				repaint();
+				//drawBoard();
 				
 			}
 			
@@ -91,7 +98,7 @@ public class GameCanvas extends JPanel {
 		button.add(RL);
 		button.add(Box.createRigidArea(new Dimension(0,10)));
 		button.add(RR);
-		add(button, BorderLayout.LINE_END);
+		add(button, BorderLayout.EAST);
 		
 		//Creates the panel that will contain in the bag
 		JPanel handPanel = new JPanel();
@@ -100,11 +107,8 @@ public class GameCanvas extends JPanel {
 		for(int t = 0; t<bag.length;t++){
 			ImageIcon icon = new ImageIcon("BlueGhost.png");
 			resize(icon, 70,70);
-			bag[t]= new JLabel(icon);
-			add(bag[t]);
-            setVisible(true);
-			//bag[t] = new JLabel(icon);
-				//bag[t].setVisible(true);
+			bag[t] = new JLabel(icon);
+				bag[t].setVisible(true);
 //				bag[t].addMouseListener(new MouseListener(){
 //					@Override
 //					public void mouseClicked(MouseEvent e) {
@@ -122,14 +126,11 @@ public class GameCanvas extends JPanel {
 				handPanel.add(bag[t], BorderLayout.CENTER);
 				//drawBag();
 				
-				//handPanel.add(useItem);
+				//handPanel.add(RR);
 		}		
-		//handPanel.setVisible(true);
-		add(handPanel, BorderLayout.SOUTH);
+		handPanel.setVisible(true);
+		//add(handPanel, BorderLayout.SOUTH);
 
-		setVisible(true);
-		add(outerPanel);
-		drawBoard();
 		outerPanel.addMouseListener(new MouseListener(){
 			public void mouseClicked(MouseEvent arg0) {}
 			public void mouseEntered(MouseEvent e) {}
@@ -159,21 +160,22 @@ public class GameCanvas extends JPanel {
 	public RenderCanvas getRenderCanvas(){
 		return canvasRen;
 	}
-	
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
+	}
+
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(600, 600);
 	}
 
 	public void drawBoard() {
-		
+		button.paint(this.getGraphics());
 	}
 
-	@Override
-	public void paint(Graphics g) {
-		canvasRen.paint(g);
-	}
-
+	
 	/**
 	 * @return the xClick
 	 */
