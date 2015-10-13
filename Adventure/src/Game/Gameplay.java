@@ -31,7 +31,7 @@ public class Gameplay implements Serializable {
 		//set up trapdoor/ladder with empty tile next to each one
 		Location doorLoc = tower.getFloor()[4][4];
 		Location empty = tower.getFloor()[5][4];
-		Trapdoor t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(), new Item("SkullDoor", Position.WALL_NW, tower.getFloor()[4][4], tower), doorLoc.getOccupier(),4 ,4 , tower, dungeon, 1);
+		Trapdoor t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(), new Item("SkullDoor", Position.FLOOR, tower.getFloor()[4][4], tower), doorLoc.getOccupier(),4 ,4 , tower, dungeon, 1);
 		tower.getFloor()[4][4] = t1;
 		tower.addDoor(t1);
 		EmptyTile e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(), new Item("FloorBlock", Position.FLOOR, tower.getFloor()[5][4], tower), empty.getOccupier(), 5, 5);
@@ -70,8 +70,12 @@ public class Gameplay implements Serializable {
 		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
 			if(newLoc instanceof Trapdoor){
 				if(!((Trapdoor) newLoc).isLocked()){
+					character.moveSpace(newLoc);
+					current.setOccupier(null);
+					newLoc.setOccupier(character);
+					//TODO Remove println
+					System.out.println("moving east");					
 					return;
-					//TODO stand on locked door
 				}
 				else{
 					character.setCurrentRoom(((Trapdoor) newLoc).getExit());
@@ -104,6 +108,9 @@ public class Gameplay implements Serializable {
 			else if (itemOnNewLoc instanceof StationaryItem){
 				((StationaryItem) itemOnNewLoc).interact();
 			}
+			else if(itemOnNewLoc instanceof MovableItem){
+				((MovableItem) itemOnNewLoc).move(newLoc, current, character.getCurrentRoom(), character);
+			}
 		}
 	}
 
@@ -114,6 +121,11 @@ public class Gameplay implements Serializable {
 		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
 			if(newLoc instanceof Trapdoor){
 				if(!((Trapdoor) newLoc).isLocked()){
+					character.moveSpace(newLoc);
+					current.setOccupier(null);
+					newLoc.setOccupier(character);
+					//TODO Remove println
+					System.out.println("moving east");	
 					return;
 					//TODO stand on locked door
 				}
@@ -147,6 +159,9 @@ public class Gameplay implements Serializable {
 			else if (itemOnNewLoc instanceof StationaryItem){
 				((StationaryItem) itemOnNewLoc).interact();
 			}
+			else if(itemOnNewLoc instanceof MovableItem){
+				((MovableItem) itemOnNewLoc).move(newLoc, current, character.getCurrentRoom(), character);
+			}
 		}
 	}
 
@@ -157,6 +172,11 @@ public class Gameplay implements Serializable {
 		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
 			if(newLoc instanceof Trapdoor){
 				if(!((Trapdoor) newLoc).isLocked()){
+					character.moveSpace(newLoc);
+					current.setOccupier(null);
+					newLoc.setOccupier(character);
+					//TODO Remove println
+					System.out.println("moving east");	
 					return;
 					//TODO stand on locked door
 				}
@@ -190,6 +210,9 @@ public class Gameplay implements Serializable {
 			else if (itemOnNewLoc instanceof StationaryItem){
 				((StationaryItem) itemOnNewLoc).interact();
 			}
+			else if(itemOnNewLoc instanceof MovableItem){
+				((MovableItem) itemOnNewLoc).move(newLoc, current, character.getCurrentRoom(), character);
+			}
 		}
 	}
 
@@ -200,6 +223,11 @@ public class Gameplay implements Serializable {
 		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
 			if(newLoc instanceof Trapdoor){
 				if(!((Trapdoor) newLoc).isLocked()){
+					character.moveSpace(newLoc);
+					current.setOccupier(null);
+					newLoc.setOccupier(character);
+					//TODO Remove println
+					System.out.println("moving east");	
 					return;
 					//TODO stand on locked door
 				}
@@ -232,6 +260,9 @@ public class Gameplay implements Serializable {
 			}
 			else if (itemOnNewLoc instanceof StationaryItem){
 				((StationaryItem) itemOnNewLoc).interact();
+			}
+			else if(itemOnNewLoc instanceof MovableItem){
+				((MovableItem) itemOnNewLoc).move(newLoc, current, character.getCurrentRoom(), character);
 			}
 		}
 	}
