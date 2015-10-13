@@ -17,44 +17,103 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class Main {
-	private static final int DEFAULT_CLK_PERIOD = 20;
-	private static final int DEFAULT_BROADCAST_CLK_PERIOD = 5;
 	private static Socket client;
 	private static OutputStreamWriter osw;
 
 	public static InetAddress serverIp;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		// ======================================================
+		// ======== First, parse command-line arguments =========
+		// ======================================================
 		boolean server = false;
+		String url = null;
+		int port = 7777; // default
+		for (int i = 0; i != args.length; ++i) {
+			if (args[i].startsWith("-")) {
+				String arg = args[i];
+				if (arg.equals("-server")) {
+					server = true;
+				} else if (arg.equals("-connect")) {
+					url = args[++i];
+					port = Integer.parseInt(args[++i]);
+				} else if (arg.equals("-single")) {
+					startGame();
+				}
+			}
 
-		int nclients = 0;
-		int port = 36768; // default
+			if (url != null && server) {
+				System.out.println("Cannot be a server and connect to another server!");
+				System.exit(1);
+			}
 
-		try {
-			serverIp = InetAddress.getLocalHost();
-			GameFrame frame = new GameFrame();
+			if (server) {
+				// Run in Server mode
+				try {
+					runServer(port);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else if (url != null) {
+				// Run in client mode
+				try {
+					runClient(url, port);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 
-		} catch (Exception e) {
-			e.printStackTrace();
+	private static void runClient(String url, int port) throws Exception {
+		Socket s = new Socket("localhost", 7777);
+
+		InputStream obj = s.getInputStream();
+		BufferedReader br = new BufferedReader(new InputStreamReader(obj));
+
+		String str;
+
+		while ((str = br.readLine()) != null) {
+			System.out.println("From Server with Love : " + str);
 		}
 
-		 startGame();
+		br.close();
+		s.close();
+
+	}
+
+	private static void runServer(int port) throws Exception {
+		ServerSocket ss = new ServerSocket(7777);
+		Socket s = ss.accept();
+		System.out.println("Connection Established");
+		OutputStream obj = s.getOutputStream();
+		PrintStream ps = new PrintStream(obj);
+		String str = "Hello Cleint";
+		ps.println(str);
+		ps.println("bye");
+		ps.close();
+		ss.close();
+		s.close();
 	}
 
 	public static void startGame() {
 		List<Game.Character> characters = new ArrayList<Game.Character>();
-
 		Gameplay game = new Gameplay(characters);
 
 		RenderCanvas renderCanv = new RenderCanvas();
 		game.setCanvas(renderCanv);
 
-		GameFrame gameFrame = new GameFrame();
-		game.setFrame(gameFrame);
+		GameFrame frame = new GameFrame();
+		game.setFrame(frame);
 
 		game.getFrame().getC().getRenderCanvas().setRoom(game.getRooms().get(0));
 		game.getFrame().getC().repaint();
@@ -72,17 +131,6 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		/*
-		 * Socket s; DataInputStream din; DataOutputStream dout;
-		 * 
-		 * try { client = new Socket("localhost", port); osw = new
-		 * OutputStreamWriter(client.getOutputStream());
-		 * 
-		 * } catch (UnknownHostException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); } catch (IOException e) { // TODO Auto-generated
-		 * catch block e.printStackTrace(); }
-		 */
 	}
 
 	public static void hostGame(int port) {
@@ -96,7 +144,6 @@ public class Main {
 
 				Master connection = new Master(s);
 				connection.start();
-				System.out.println("whhoooohooooo");
 				return; // done
 			}
 
@@ -105,27 +152,5 @@ public class Main {
 		{
 			System.err.println("I/O error: " + e.getMessage());
 		}
-
-		/*
-		 * new Thread(new Runnable() {
-		 * 
-		 * @Override public void run() {
-		 * 
-		 * try {
-		 * 
-		 * ServerSocket server = new ServerSocket(port); client =
-		 * server.accept();
-		 * 
-		 * BufferedReader br = new BufferedReader(new
-		 * InputStreamReader(client.getInputStream())); String line = "";//
-		 * testing JOptionPane.showMessageDialog(null, "Connection Success! " +
-		 * line + '!');
-		 * 
-		 * while (true) { line = br.readLine();// just for testing if (line !=
-		 * null) { JOptionPane.showInputDialog(null, "Message Received", "" +
-		 * line); } }
-		 * 
-		 * } catch (IOException e) { e.printStackTrace(); } } }).start();
-		 */
 	}
 }
