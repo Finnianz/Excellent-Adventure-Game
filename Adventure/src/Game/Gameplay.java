@@ -56,6 +56,7 @@ public class Gameplay implements Serializable {
 		Character player1 = new Character("BlueGhost", "CowboyHat", "Player1", tower, playerLoc);
 		playerLoc.setOccupier(player1);
 		characters.add(player1);
+		characters.set(0,player1);
 		
 	
 	}

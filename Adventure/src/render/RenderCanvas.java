@@ -160,5 +160,9 @@ public class RenderCanvas extends JPanel {
 	public Drawable getSelectedObject() {
 		return selectedObject;
 	}
+	
+	public Compass getDirection() {
+		return direction;
+	}
 
 }

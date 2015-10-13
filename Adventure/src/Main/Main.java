@@ -1,6 +1,8 @@
 package Main;
 
+import Game.Character;
 import Game.Gameplay;
+import Game.Location;
 import UI.GameFrame;
 import render.RenderCanvas;
 
@@ -28,6 +30,8 @@ public class Main {
 	private static OutputStreamWriter osw;
 
 	public static InetAddress serverIp;
+	
+	private static Gameplay game;
 
 	public static void main(String[] args) throws IOException {
 		// ======================================================
@@ -107,7 +111,9 @@ public class Main {
 
 	public static void startGame() {
 		List<Game.Character> characters = new ArrayList<Game.Character>();
-		Gameplay game = new Gameplay(characters);
+		//add player
+		
+		game = new Gameplay(characters);
 
 		RenderCanvas renderCanv = new RenderCanvas();
 		game.setCanvas(renderCanv);
@@ -152,5 +158,86 @@ public class Main {
 		{
 			System.err.println("I/O error: " + e.getMessage());
 		}
+	}
+
+	public static void moveLeft(){
+		RenderCanvas.Compass direction = game.getFrame().getC().getRenderCanvas().getDirection();
+		switch(direction){
+		case NORTH:
+			game.moveWest(game.getCharacters().get(0));
+			break;
+		case SOUTH:
+			game.moveEast(game.getCharacters().get(0));
+			break;
+		case EAST:
+			game.moveNorth(game.getCharacters().get(0));
+			break;
+		case WEST:
+			game.moveSouth(game.getCharacters().get(0));	
+			break;
+		}
+		game.getFrame().getC().repaint();
+		
+		
+	}
+
+	public static void moveRight(){
+		RenderCanvas.Compass direction = game.getFrame().getC().getRenderCanvas().getDirection();
+		switch(direction){
+		case NORTH:
+			game.moveEast(game.getCharacters().get(0));
+			break;
+		case SOUTH:
+			game.moveWest(game.getCharacters().get(0));
+			break;
+		case EAST:
+			game.moveSouth(game.getCharacters().get(0));
+			break;
+		case WEST:
+			game.moveNorth(game.getCharacters().get(0));	
+			break;
+		}
+		game.getFrame().getC().repaint();
+		
+	}
+
+	public static void moveUp(){
+		RenderCanvas.Compass direction = game.getFrame().getC().getRenderCanvas().getDirection();
+		switch(direction){
+		case NORTH:
+			game.moveNorth(game.getCharacters().get(0));
+			break;
+		case SOUTH:
+			game.moveSouth(game.getCharacters().get(0));
+			break;
+		case EAST:
+			game.moveEast(game.getCharacters().get(0));
+			break;
+		case WEST:
+			game.moveWest(game.getCharacters().get(0));	
+			break;
+		}
+		game.getFrame().getC().repaint();
+		
+	}
+
+	public static void moveDown(){
+		RenderCanvas.Compass direction = game.getFrame().getC().getRenderCanvas().getDirection();
+		switch(direction){
+		case NORTH:
+			game.moveSouth(game.getCharacters().get(0));
+			break;
+		case SOUTH:
+			game.moveNorth(game.getCharacters().get(0));
+			break;
+		case EAST:
+			game.moveWest(game.getCharacters().get(0));
+			break;
+		case WEST:
+			game.moveEast(game.getCharacters().get(0));	
+			break;
+		}
+		game.getFrame().getC().repaint();
+		
 	}
 }
