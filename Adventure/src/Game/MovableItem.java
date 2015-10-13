@@ -5,8 +5,8 @@ import render.Drawable.Position;
 
 public class MovableItem extends Item {
 
-	public MovableItem(String imgLoc, Position pos){
-		super(imgLoc, pos);
+	public MovableItem(String imgLoc, Position pos, Location loc, Room room){
+		super(imgLoc, pos, loc, room);
 	}
 	
 	public void move(Location currentLoc, Location playerLoc, Room currentRoom, Character ch){

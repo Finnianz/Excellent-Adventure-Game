@@ -11,8 +11,10 @@ public class Item extends Drawable{
 	public Room roomID;
 	public ImageIcon image;
 	
-	public Item(String imgLoc, Position pos){
+	public Item(String imgLoc, Position pos, Location loc, Room room){
 		super(imgLoc, pos);
+		this.loc = loc;
+		this.roomID = room;
 	}
 
 	/**

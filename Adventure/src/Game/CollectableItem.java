@@ -7,8 +7,8 @@ public class CollectableItem extends Item {
 	private int iD;
 	
 
-	public CollectableItem(String imgLoc, Position pos, int iD){
-		super(imgLoc, pos);
+	public CollectableItem(String imgLoc, Position pos, Room room,Location loc, int iD){
+		super(imgLoc, pos, loc, room);
 		this.iD = iD;
 	}
 		

@@ -35,6 +35,10 @@ public class Main {
 	private static GameFrame frame;
 
 	public static void main(String[] args) throws IOException {
+
+		List<Game.Character> characters = new ArrayList<Game.Character>();
+		game = new Gameplay(characters);
+
 		// ======================================================
 		// ======== First, parse command-line arguments =========
 		// ======================================================
@@ -81,7 +85,7 @@ public class Main {
 
 	private static void runClient(String url, int port) throws Exception {
 		Socket s = new Socket(url, port);
-		System.out.println("From Server with Love : ");
+		System.out.println("From Client with Love : ");
 
 		new Slave(s).run();
 
@@ -105,14 +109,14 @@ public class Main {
 			Master connection;
 			// Now, we await connections.
 			ServerSocket ss = new ServerSocket(port);
-			System.out.println("From Server with Love 2: ");
+			System.out.println("From Server with Love : ");
 
 			while (1 == 1) {
 				// Wait for a socket
 				Socket s = ss.accept();
 				System.out.println("ACCEPTED CONNECTION FROM: " + s.getInetAddress());
 
-				connection = new Master(s, frame);
+				connection = new Master(s, frame, game);
 				connection.run();
 
 				return; // done
@@ -169,7 +173,7 @@ public class Main {
 				// Wait for a socket
 				Socket s = ss.accept();
 
-				Master connection = new Master(s, frame);
+				Master connection = new Master(s, frame, game);
 				return; // done
 			}
 
