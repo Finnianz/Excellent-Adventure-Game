@@ -30,8 +30,9 @@ public class Main {
 	private static OutputStreamWriter osw;
 
 	public static InetAddress serverIp;
-	
+
 	private static Gameplay game;
+	private static GameFrame frame;
 
 	public static void main(String[] args) throws IOException {
 		// ======================================================
@@ -39,7 +40,7 @@ public class Main {
 		// ======================================================
 		boolean server = false;
 		String url = null;
-		int port = 7777; // default
+		int port = 7778; // default
 		for (int i = 0; i != args.length; ++i) {
 			if (args[i].startsWith("-")) {
 				String arg = args[i];
@@ -79,46 +80,66 @@ public class Main {
 	}
 
 	private static void runClient(String url, int port) throws Exception {
-		Socket s = new Socket("localhost", 7777);
+		Socket s = new Socket(url, port);
+		System.out.println("From Server with Love : ");
 
-		InputStream obj = s.getInputStream();
-		BufferedReader br = new BufferedReader(new InputStreamReader(obj));
+		new Slave(s).run();
 
-		String str;
-
-		while ((str = br.readLine()) != null) {
-			System.out.println("From Server with Love : " + str);
-		}
-
-		br.close();
-		s.close();
+		/*
+		 * // extra for testing InputStream obj = s.getInputStream();
+		 * BufferedReader br = new BufferedReader(new InputStreamReader(obj));
+		 * 
+		 * String str;
+		 * 
+		 * while ((str = br.readLine()) != null) { System.out.println(
+		 * "From Server with Love : " + str); }
+		 * 
+		 * br.close(); s.close();
+		 */
 
 	}
 
 	private static void runServer(int port) throws Exception {
-		ServerSocket ss = new ServerSocket(7777);
-		Socket s = ss.accept();
-		System.out.println("Connection Established");
-		OutputStream obj = s.getOutputStream();
-		PrintStream ps = new PrintStream(obj);
-		String str = "Hello Cleint";
-		ps.println(str);
-		ps.println("bye");
-		ps.close();
-		ss.close();
-		s.close();
+
+		try {
+			Master connection;
+			// Now, we await connections.
+			ServerSocket ss = new ServerSocket(port);
+			System.out.println("From Server with Love 2: ");
+
+			while (1 == 1) {
+				// Wait for a socket
+				Socket s = ss.accept();
+				System.out.println("ACCEPTED CONNECTION FROM: " + s.getInetAddress());
+
+				connection = new Master(s, frame);
+				connection.run();
+
+				return; // done
+			}
+		} catch (IOException e) {
+			System.err.println("I/O error: " + e.getMessage());
+		}
+
+		/*
+		 * ServerSocket ss = new ServerSocket(7777); Socket s = ss.accept();
+		 * System.out.println("Connection Established"); OutputStream obj =
+		 * s.getOutputStream(); PrintStream ps = new PrintStream(obj); String
+		 * str = "Hello Cleint"; ps.println(str); ps.println("bye"); ps.close();
+		 * ss.close(); s.close();
+		 */
 	}
 
 	public static void startGame() {
 		List<Game.Character> characters = new ArrayList<Game.Character>();
-		//add player
-		
+		// add player
+
 		game = new Gameplay(characters);
 
 		RenderCanvas renderCanv = new RenderCanvas();
 		game.setCanvas(renderCanv);
 
-		GameFrame frame = new GameFrame();
+		frame = new GameFrame();
 		game.setFrame(frame);
 
 		game.getFrame().getC().getRenderCanvas().setRoom(game.getRooms().get(0));
@@ -148,8 +169,7 @@ public class Main {
 				// Wait for a socket
 				Socket s = ss.accept();
 
-				Master connection = new Master(s);
-				connection.start();
+				Master connection = new Master(s, frame);
 				return; // done
 			}
 
@@ -160,9 +180,9 @@ public class Main {
 		}
 	}
 
-	public static void moveLeft(){
+	public static void moveLeft() {
 		RenderCanvas.Compass direction = game.getFrame().getC().getRenderCanvas().getDirection();
-		switch(direction){
+		switch (direction) {
 		case NORTH:
 			game.moveWest(game.getCharacters().get(0));
 			break;
@@ -173,17 +193,16 @@ public class Main {
 			game.moveNorth(game.getCharacters().get(0));
 			break;
 		case WEST:
-			game.moveSouth(game.getCharacters().get(0));	
+			game.moveSouth(game.getCharacters().get(0));
 			break;
 		}
 		game.getFrame().getC().repaint();
-		
-		
+
 	}
 
-	public static void moveRight(){
+	public static void moveRight() {
 		RenderCanvas.Compass direction = game.getFrame().getC().getRenderCanvas().getDirection();
-		switch(direction){
+		switch (direction) {
 		case NORTH:
 			game.moveEast(game.getCharacters().get(0));
 			break;
@@ -194,16 +213,16 @@ public class Main {
 			game.moveSouth(game.getCharacters().get(0));
 			break;
 		case WEST:
-			game.moveNorth(game.getCharacters().get(0));	
+			game.moveNorth(game.getCharacters().get(0));
 			break;
 		}
 		game.getFrame().getC().repaint();
-		
+
 	}
 
-	public static void moveUp(){
+	public static void moveUp() {
 		RenderCanvas.Compass direction = game.getFrame().getC().getRenderCanvas().getDirection();
-		switch(direction){
+		switch (direction) {
 		case NORTH:
 			game.moveNorth(game.getCharacters().get(0));
 			break;
@@ -214,16 +233,16 @@ public class Main {
 			game.moveEast(game.getCharacters().get(0));
 			break;
 		case WEST:
-			game.moveWest(game.getCharacters().get(0));	
+			game.moveWest(game.getCharacters().get(0));
 			break;
 		}
 		game.getFrame().getC().repaint();
-		
+
 	}
 
-	public static void moveDown(){
+	public static void moveDown() {
 		RenderCanvas.Compass direction = game.getFrame().getC().getRenderCanvas().getDirection();
-		switch(direction){
+		switch (direction) {
 		case NORTH:
 			game.moveSouth(game.getCharacters().get(0));
 			break;
@@ -234,10 +253,10 @@ public class Main {
 			game.moveWest(game.getCharacters().get(0));
 			break;
 		case WEST:
-			game.moveEast(game.getCharacters().get(0));	
+			game.moveEast(game.getCharacters().get(0));
 			break;
 		}
 		game.getFrame().getC().repaint();
-		
+
 	}
 }

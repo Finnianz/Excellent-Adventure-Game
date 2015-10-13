@@ -2,6 +2,7 @@ package render;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serializable;
 
 import render.RenderCanvas.Compass;
 
@@ -10,7 +11,7 @@ import render.RenderCanvas.Compass;
  * @author Paige Halliwell ID:300316022
  *
  */
-public class IsometricRenderer {
+public class IsometricRenderer implements Serializable {
 	public final int TOP_PADDING = 150;
 	public final int TILE_HEIGHT = 38;
 	public final int TILE_WIDTH = 76;

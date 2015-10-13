@@ -14,13 +14,31 @@ import UI.*;
  * responsible for transmitting information to the slave about the current board
  * state.
  */
-public final class Master extends Thread {
+public final class Master implements Runnable {
 
 	private final Socket socket;
+	private final GameFrame frame;
 
-	public Master(Socket socket) {
+	public Master(Socket socket, GameFrame f) {
 		this.socket = socket;
+		frame = f;
+	}
 
+	@Override
+	public void run() {
+		try {
+
+			OutputStream os = socket.getOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(os);
+			GameFrame frame = new GameFrame();
+			oos.writeObject(frame);
+
+			oos.close();
+			socket.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 }
