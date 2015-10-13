@@ -1,6 +1,5 @@
 package UI;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,6 +14,7 @@ import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -34,7 +34,7 @@ import render.RenderCanvas;
  * @author Megan Davidson ID:300313759
  *
  */
-public class GameCanvas extends JPanel {
+public class GameCanvas extends JPanel implements Serializable {
 	private JPanel outerPanel;
 	private int xClick = -1;
 	private int yClick = -1;
@@ -46,28 +46,27 @@ public class GameCanvas extends JPanel {
 	private JPanel handPanel;
 
 	/**
-	 * Creates a new Canvas and sets up the board
-	 *Does this by creating a series of JPanels containing the 
-	 *different elements (renderCanvas/bag/buttons) and 
-	 *then adding them to the canvas
+	 * Creates a new Canvas and sets up the board Does this by creating a series
+	 * of JPanels containing the different elements (renderCanvas/bag/buttons)
+	 * and then adding them to the canvas
 	 * 
 	 */
 	public GameCanvas() {
 		setLayout(new BorderLayout());
-		
-		//creating panel and adding the render canvas
+
+		// creating panel and adding the render canvas
 		outerPanel = new JPanel();
 		outerPanel.setLayout(new BorderLayout());
 		outerPanel.add(canvasRen, BorderLayout.CENTER);
 		add(outerPanel);
-		
-		//Creates panel and adding buttons
+
+		// Creates panel and adding buttons
 		button = new JPanel();
 		button.setLayout(new BoxLayout(button, BoxLayout.Y_AXIS));
 		ImageIcon antiClock = new ImageIcon(getClass().getResource("anticl.png"));
 		JButton RL = new JButton("AntiClockWise", antiClock);
 		RL.setPreferredSize(new Dimension(50, 50));
-		RL.addActionListener(new ActionListener(){
+		RL.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				canvasRen.rotateAntiClockwise();
@@ -77,18 +76,18 @@ public class GameCanvas extends JPanel {
 		ImageIcon clockWise = new ImageIcon(getClass().getResource("clockw.png"));
 		JButton RR = new JButton("ClockWise        ", clockWise);
 		RR.setPreferredSize(new Dimension(50, 50));
-		RR.addActionListener(new ActionListener(){
+		RR.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				canvasRen.rotateClockwise();
-				repaint();	
+				repaint();
 			}
 		});
-		button.add(Box.createRigidArea(new Dimension(0,30)));
+		button.add(Box.createRigidArea(new Dimension(0, 30)));
 		button.add(RL);
-		button.add(Box.createRigidArea(new Dimension(0,10)));
+		button.add(Box.createRigidArea(new Dimension(0, 10)));
 		button.add(RR);
-		button.add(Box.createRigidArea(new Dimension(0,10)));
+		button.add(Box.createRigidArea(new Dimension(0, 10)));
 		JPanel text = new JPanel();
 		JTextArea textArea = new JTextArea(20, 15);
 		JScrollPane scrollPane = new JScrollPane(textArea);
@@ -97,66 +96,87 @@ public class GameCanvas extends JPanel {
 		text.add(textArea);
 		button.add(text);
 		add(button, BorderLayout.EAST);
-		
-		//Creates the panel and adding bag 
+
+		// Creates the panel and adding bag
 		handPanel = new JPanel();
-		handPanel.setLayout(new GridLayout(1,9));
+		handPanel.setLayout(new GridLayout(1, 9));
 		bag = new JLabel[9];
-		for(int t = 0; t<bag.length;t++){
-			ImageIcon icon2 = new ImageIcon(getClass().getResource("greentile.png")); 
-			//TODO above is for temp displaying bad, need gamelogic
+		for (int t = 0; t < bag.length; t++) {
+			ImageIcon icon2 = new ImageIcon(getClass().getResource("greentile.png"));
+			// TODO above is for temp displaying bad, need gamelogic
 			bag[t] = new JLabel(icon2);
-				bag[t].setVisible(true);
-				bag[t].addMouseListener(new MouseListener(){
-					@Override
-					public void mouseClicked(MouseEvent e) {
+			bag[t].setVisible(true);
+			bag[t].addMouseListener(new MouseListener() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
 					System.out.print("test");
-					}
-					public void mousePressed(MouseEvent e) {
-					}
-					public void mouseReleased(MouseEvent e) {
-					}
-					public void mouseEntered(MouseEvent e) {
-					}
-					public void mouseExited(MouseEvent e) {
-					}});
-			
-				handPanel.add(bag[t], BorderLayout.CENTER);
-				//drawBag(); TODO drawing the proper logic complete
-		}		
+				}
+
+				public void mousePressed(MouseEvent e) {
+				}
+
+				public void mouseReleased(MouseEvent e) {
+				}
+
+				public void mouseEntered(MouseEvent e) {
+				}
+
+				public void mouseExited(MouseEvent e) {
+				}
+			});
+
+			handPanel.add(bag[t], BorderLayout.CENTER);
+			// drawBag(); TODO drawing the proper logic complete
+		}
 		handPanel.setVisible(true);
 		add(handPanel, BorderLayout.SOUTH);
 
-		outerPanel.addMouseListener(new MouseListener(){
-			public void mouseClicked(MouseEvent arg0) {}
-			public void mouseEntered(MouseEvent e) {}
-			public void mouseExited(MouseEvent e) {}
-			public void mousePressed(MouseEvent e) {}
+		outerPanel.addMouseListener(new MouseListener() {
+			public void mouseClicked(MouseEvent arg0) {
+			}
+
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			public void mouseExited(MouseEvent e) {
+			}
+
+			public void mousePressed(MouseEvent e) {
+			}
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				repaint();
 				DrawableTile objectClicked = canvasRen.clickedOn(e);
-				//TODO check actions
+				// TODO check actions
 			}
 		});
 		outerPanel.addComponentListener(new ComponentListener() {
-    		public void componentResized(ComponentEvent e) {
-    			canvasRen.setSize(e.getComponent().getSize());
-    		}
-    		public void componentHidden(ComponentEvent e) {}
-    		public void componentMoved(ComponentEvent e) {}
-    		public void componentShown(ComponentEvent e) {}
-    	});
-		
+			public void componentResized(ComponentEvent e) {
+				canvasRen.setSize(e.getComponent().getSize());
+			}
+
+			public void componentHidden(ComponentEvent e) {
+			}
+
+			public void componentMoved(ComponentEvent e) {
+			}
+
+			public void componentShown(ComponentEvent e) {
+			}
+		});
+
 	}
+
 	/**
 	 * returns the render Canvas
+	 * 
 	 * @return RenderCanvas
 	 */
-	public RenderCanvas getRenderCanvas(){
+	public RenderCanvas getRenderCanvas() {
 		return canvasRen;
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -167,31 +187,31 @@ public class GameCanvas extends JPanel {
 		return new Dimension(600, 600);
 	}
 
-/**
- * Draws the actual images in the bag in to the panel
- */
-	public void drawBag(){
-//		if(bagToDraw!=null){
-		for(int a = 0; a<bag.length; a++){
-//					if(bagToDraw[a]!=null){
-//						ImageIcon card = getItem(bagToDraw[a]);
-//						bag[a].setIcon(benie);
-					}
-//					else{
-//						bag[a].setIcon(null);
-//					}
-//				}
-//			}
-	
+	/**
+	 * Draws the actual images in the bag in to the panel
+	 */
+	public void drawBag() {
+		// if(bagToDraw!=null){
+		for (int a = 0; a < bag.length; a++) {
+			// if(bagToDraw[a]!=null){
+			// ImageIcon card = getItem(bagToDraw[a]);
+			// bag[a].setIcon(benie);
 		}
-	
-	public ImageIcon getItem(Game.Item i){
-		return null; //remove for compiling
+		// else{
+		// bag[a].setIcon(null);
+		// }
+		// }
+		// }
+
 	}
-	
-	
+
+	public ImageIcon getItem(Game.Item i) {
+		return null; // remove for compiling
+	}
+
 	/**
 	 * helper method for changing the size of image icons
+	 * 
 	 * @param image
 	 * @param width
 	 * @param height

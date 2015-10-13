@@ -1,5 +1,6 @@
 package Game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import render.Drawable;
@@ -11,7 +12,7 @@ import java.util.List;
 
 import UI.GameFrame;
 
-public class Gameplay {
+public class Gameplay implements Serializable {
 
 	private RenderCanvas canvas;
 	private GameFrame frame;

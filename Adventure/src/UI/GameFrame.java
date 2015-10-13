@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
@@ -28,7 +29,7 @@ import Main.Main;
  * @author Megan Davidson ID:300313759
  *
  */
-public class GameFrame extends JFrame implements WindowListener {
+public class GameFrame extends JFrame implements WindowListener , Serializable {
 
 	private GameCanvas canvasOfGame;
 	private JMenuBar menuBar;
