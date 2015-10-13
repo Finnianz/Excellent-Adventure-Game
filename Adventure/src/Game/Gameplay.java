@@ -43,10 +43,12 @@ public class Gameplay implements Serializable {
 		e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(), empty.getFloor(), empty.getOccupier(), 5, 5);
 		dungeon.getFloor()[5][4] = e1;
 		//Set up items in Tower
-		MovableItem box = new MovableItem("PlainWall", Position.SQUARE);
+		Location boxLoc = tower.getFloor()[7][7];
+		MovableItem box = new MovableItem("PlainWall", Position.SQUARE, boxLoc, tower);
 		tower.getFloor()[7][7].setOccupier(box);
 		//		tower.addItem(box, tower.getFloor()[7][7]);
-		StationaryItem bookshelf = new StationaryItem("PlainWall", Position.SQUARE, true, false, 2, new CollectableItem("PlainWall", Position.CENTER, 1));
+		Location book = tower.getFloor()[9][6];
+		StationaryItem bookshelf = new StationaryItem("PlainWall", Position.SQUARE,book,tower, true, false, 2, new CollectableItem("PlainWall", Position.CENTER,tower,null, 1));
 		tower.getFloor()[9][6].setOccupier(bookshelf);
 		rooms.add(tower);
 		rooms.add(dungeon);
@@ -78,6 +80,7 @@ public class Gameplay implements Serializable {
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);	
 					((Trapdoor) newLoc).setLockRoom(true);
+					canvas.setRoom(character.getCurrentRoom());
 				}			
 			}
 			if(newLoc instanceof Ladder){
@@ -121,6 +124,7 @@ public class Gameplay implements Serializable {
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);	
 					((Trapdoor) newLoc).setLockRoom(true);
+					canvas.setRoom(character.getCurrentRoom());
 				}			
 			}
 			if(newLoc instanceof Ladder){
@@ -163,6 +167,7 @@ public class Gameplay implements Serializable {
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);	
 					((Trapdoor) newLoc).setLockRoom(true);
+					canvas.setRoom(character.getCurrentRoom());
 				}			
 			}
 			if(newLoc instanceof Ladder){
@@ -205,6 +210,7 @@ public class Gameplay implements Serializable {
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);	
 					((Trapdoor) newLoc).setLockRoom(true);
+					canvas.setRoom(character.getCurrentRoom());
 				}			
 			}
 			if(newLoc instanceof Ladder){

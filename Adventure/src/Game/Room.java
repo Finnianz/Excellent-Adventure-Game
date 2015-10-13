@@ -27,23 +27,23 @@ public class Room {
 		setFloor(new Location[width][height]);
 		for(int i=0;i<floor.length;i++){
 			for(int j= 0;j<floor.length;j++){
-				Drawable floortile = new Item("FloorBlock", Position.FLOOR);
+				Drawable floortile = new Item("FloorBlock", Position.FLOOR, floor[i][j], this);
 				Drawable occupier = null;
 				Drawable wallNE = null;
 				Drawable wallNW = null;
 				Drawable wallSE = null;
 				Drawable wallSW = null;
 				if(i==0){
-					wallNW = new Item("PlainWall1", Position.WALL_NW);
+					wallNW = new Item("PlainWall1", Position.WALL_NW, floor[i][j], this);
 				}
 				if(j==0){
-					wallSW = new Item("PlainWall1", Position.WALL_SW);
+					wallSW = new Item("PlainWall1", Position.WALL_SW, floor[i][j], this);
 				}
 				if(i==floor.length-1){
-					wallSE = new Item("PlainWall1", Position.WALL_SE);
+					wallSE = new Item("PlainWall1", Position.WALL_SE, floor[i][j], this);
 				}
 				if(j==floor.length-1){
-					wallNE = new Item("PlainWall1", Position.WALL_NE);
+					wallNE = new Item("PlainWall1", Position.WALL_NE, floor[i][j], this);
 				}
 				floor[i][j] = new Location(wallNE, wallNW, wallSE,wallSW, floortile, occupier, i , j);
 			}
