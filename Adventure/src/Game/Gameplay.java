@@ -23,9 +23,9 @@ public class Gameplay implements Serializable {
 	public Gameplay(List<Character> characters) {
 
 		this.characters = characters;
-		
+
 		//Set up first 2 rooms
-		
+
 		Room tower = new Room(1, 10, 10);
 		Room dungeon = new Room(2, 10, 10);
 		//set up trapdoor/ladder with empty tile next to each one
@@ -45,180 +45,188 @@ public class Gameplay implements Serializable {
 		//Set up items in Tower
 		MovableItem box = new MovableItem("PlainWall", Position.SQUARE);
 		tower.getFloor()[7][7].setOccupier(box);
-//		tower.addItem(box, tower.getFloor()[7][7]);
+		//		tower.addItem(box, tower.getFloor()[7][7]);
 		StationaryItem bookshelf = new StationaryItem("PlainWall", Position.SQUARE, true, false, 2, new CollectableItem("PlainWall", Position.CENTER, 1));
 		tower.getFloor()[9][6].setOccupier(bookshelf);
 		rooms.add(tower);
 		rooms.add(dungeon);
-		
+
 		//add player
 		Location playerLoc = tower.getFloor()[3][7];
 		Character player1 = new Character("BlueGhost", "CowboyHat", "Player1", tower, playerLoc);
 		playerLoc.setOccupier(player1);
 		characters.add(player1);
 		characters.set(0,player1);
-		
-	
+
+
 	}
 
 	public void moveEast(Character character) {
 		Location current = character.getCurrentLocation();
-		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX() + 1][character.getCurrentLocation().getY()];
+		if(current.getY()+1<character.getCurrentRoom().getFloor().length){
+		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX()][character.getCurrentLocation().getY() +1];
 		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
-		if(newLoc instanceof Trapdoor){
-			if(((Trapdoor) newLoc).isLocked()){
-				return;
-				//TODO stand on locked door
+			if(newLoc instanceof Trapdoor){
+				if(!((Trapdoor) newLoc).isLocked()){
+					return;
+					//TODO stand on locked door
+				}
+				else{
+					character.setCurrentRoom(((Trapdoor) newLoc).getExit());
+					Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()][newLoc.getY()+1];
+					character.setCurrentLocation(newRoomLoc); 
+					newRoomLoc.setOccupier(character);
+					current.setOccupier(null);	
+					((Trapdoor) newLoc).setLockRoom(true);
+				}			
 			}
-			else{
-				character.setCurrentRoom(((Trapdoor) newLoc).getExit());
-				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
+			if(newLoc instanceof Ladder){
+				character.setCurrentRoom(((Ladder) newLoc).getExit());
+				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()][newLoc.getY()+1];
 				character.setCurrentLocation(newRoomLoc); 
 				newRoomLoc.setOccupier(character);
-				current.setOccupier(null);	
-				((Trapdoor) newLoc).setLockRoom(true);
-			}			
-		}
-		if(newLoc instanceof Ladder){
-			character.setCurrentRoom(((Ladder) newLoc).getExit());
-			Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
-			character.setCurrentLocation(newRoomLoc); 
-			newRoomLoc.setOccupier(character);
-			current.setOccupier(null);
-		}
-		if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
-			character.moveSpace(newLoc);
-			if(itemOnNewLoc !=null ){
-				character.pickUpItem((CollectableItem) newLoc.getOccupier());
+				current.setOccupier(null);
 			}
-			current.setOccupier(null);
-			newLoc.setOccupier(character);
-			//TODO Remove println
-			System.out.println("moving east");
-			
-		}
-		else if (itemOnNewLoc instanceof StationaryItem){
-			((StationaryItem) itemOnNewLoc).interact();
+			if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
+				character.moveSpace(newLoc);
+				if(itemOnNewLoc !=null ){
+					character.pickUpItem((CollectableItem) newLoc.getOccupier());
+				}
+				current.setOccupier(null);
+				newLoc.setOccupier(character);
+				//TODO Remove println
+				System.out.println("moving east");
+
+			}
+			else if (itemOnNewLoc instanceof StationaryItem){
+				((StationaryItem) itemOnNewLoc).interact();
+			}
 		}
 	}
-	
+
 	public void moveWest(Character character) {
 		Location current = character.getCurrentLocation();
-		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX() - 1][character.getCurrentLocation().getY()];
+		if(current.getY()-1>=0){
+		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX()][character.getCurrentLocation().getY()-1];
 		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
-		if(newLoc instanceof Trapdoor){
-			if(((Trapdoor) newLoc).isLocked()){
-				return;
-				//TODO stand on locked door
+			if(newLoc instanceof Trapdoor){
+				if(!((Trapdoor) newLoc).isLocked()){
+					return;
+					//TODO stand on locked door
+				}
+				else{
+					character.setCurrentRoom(((Trapdoor) newLoc).getExit());
+					Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()][newLoc.getY()-1];
+					character.setCurrentLocation(newRoomLoc); 
+					newRoomLoc.setOccupier(character);
+					current.setOccupier(null);	
+					((Trapdoor) newLoc).setLockRoom(true);
+				}			
 			}
-			else{
-				character.setCurrentRoom(((Trapdoor) newLoc).getExit());
-				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
+			if(newLoc instanceof Ladder){
+				character.setCurrentRoom(((Ladder) newLoc).getExit());
+				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()][newLoc.getY()-1];
 				character.setCurrentLocation(newRoomLoc); 
 				newRoomLoc.setOccupier(character);
-				current.setOccupier(null);	
-				((Trapdoor) newLoc).setLockRoom(true);
-			}			
-		}
-		if(newLoc instanceof Ladder){
-			character.setCurrentRoom(((Ladder) newLoc).getExit());
-			Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
-			character.setCurrentLocation(newRoomLoc); 
-			newRoomLoc.setOccupier(character);
-			current.setOccupier(null);
-		}
-		if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
-			character.moveSpace(newLoc);
-			if(itemOnNewLoc !=null ){
-				character.pickUpItem((CollectableItem) newLoc.getOccupier());
+				current.setOccupier(null);
 			}
-			current.setOccupier(null);
-			newLoc.setOccupier(character);
-			//TODO Remove println
-			System.out.println("moving west");
-		}
-		else if (itemOnNewLoc instanceof StationaryItem){
-			((StationaryItem) itemOnNewLoc).interact();
+			if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
+				character.moveSpace(newLoc);
+				if(itemOnNewLoc !=null ){
+					character.pickUpItem((CollectableItem) newLoc.getOccupier());
+				}
+				current.setOccupier(null);
+				newLoc.setOccupier(character);
+				//TODO Remove println
+				System.out.println("moving west");
+			}
+			else if (itemOnNewLoc instanceof StationaryItem){
+				((StationaryItem) itemOnNewLoc).interact();
+			}
 		}
 	}
-	
+
 	public void moveSouth(Character character) {
 		Location current = character.getCurrentLocation();
-		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX()][character.getCurrentLocation().getY() + 1];
+		if(current.getX()+1<character.getCurrentRoom().getFloor().length){
+		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX() + 1][character.getCurrentLocation().getY()];
 		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
-		if(newLoc instanceof Trapdoor){
-			if(((Trapdoor) newLoc).isLocked()){
-				return;
-				//TODO stand on locked door
+			if(newLoc instanceof Trapdoor){
+				if(!((Trapdoor) newLoc).isLocked()){
+					return;
+					//TODO stand on locked door
+				}
+				else{
+					character.setCurrentRoom(((Trapdoor) newLoc).getExit());
+					Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
+					character.setCurrentLocation(newRoomLoc); 
+					newRoomLoc.setOccupier(character);
+					current.setOccupier(null);	
+					((Trapdoor) newLoc).setLockRoom(true);
+				}			
 			}
-			else{
-				character.setCurrentRoom(((Trapdoor) newLoc).getExit());
+			if(newLoc instanceof Ladder){
+				character.setCurrentRoom(((Ladder) newLoc).getExit());
 				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
 				character.setCurrentLocation(newRoomLoc); 
 				newRoomLoc.setOccupier(character);
-				current.setOccupier(null);	
-				((Trapdoor) newLoc).setLockRoom(true);
-			}			
-		}
-		if(newLoc instanceof Ladder){
-			character.setCurrentRoom(((Ladder) newLoc).getExit());
-			Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
-			character.setCurrentLocation(newRoomLoc); 
-			newRoomLoc.setOccupier(character);
-			current.setOccupier(null);
-		}
-		if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
-			character.moveSpace(newLoc);
-			if(itemOnNewLoc !=null ){
-				character.pickUpItem((CollectableItem) newLoc.getOccupier());
+				current.setOccupier(null);
 			}
-			current.setOccupier(null);
-			newLoc.setOccupier(character);
-			//TODO Remove println
-			System.out.println("moving South");
-		}
-		else if (itemOnNewLoc instanceof StationaryItem){
-			((StationaryItem) itemOnNewLoc).interact();
+			if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
+				character.moveSpace(newLoc);
+				if(itemOnNewLoc !=null ){
+					character.pickUpItem((CollectableItem) newLoc.getOccupier());
+				}
+				current.setOccupier(null);
+				newLoc.setOccupier(character);
+				//TODO Remove println
+				System.out.println("moving South");
+			}
+			else if (itemOnNewLoc instanceof StationaryItem){
+				((StationaryItem) itemOnNewLoc).interact();
+			}
 		}
 	}
-	
+
 	public void moveNorth(Character character) {
 		Location current = character.getCurrentLocation();
-		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX()][character.getCurrentLocation().getY() - 1];
+		if(current.getX()-1>=0){
+		Location newLoc = character.getCurrentRoom().getFloor()[character.getCurrentLocation().getX()-1][character.getCurrentLocation().getY()];
 		Drawable itemOnNewLoc = character.getCurrentRoom().checkLocation(newLoc);
-		if(newLoc instanceof Trapdoor){
-			if(((Trapdoor) newLoc).isLocked()){
-				return;
-				//TODO stand on locked door
+			if(newLoc instanceof Trapdoor){
+				if(!((Trapdoor) newLoc).isLocked()){
+					return;
+					//TODO stand on locked door
+				}
+				else{
+					character.setCurrentRoom(((Trapdoor) newLoc).getExit());
+					Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()-1][newLoc.getY()];
+					character.setCurrentLocation(newRoomLoc); 
+					newRoomLoc.setOccupier(character);
+					current.setOccupier(null);	
+					((Trapdoor) newLoc).setLockRoom(true);
+				}			
 			}
-			else{
-				character.setCurrentRoom(((Trapdoor) newLoc).getExit());
-				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
+			if(newLoc instanceof Ladder){
+				character.setCurrentRoom(((Ladder) newLoc).getExit());
+				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()-1][newLoc.getY()];
 				character.setCurrentLocation(newRoomLoc); 
 				newRoomLoc.setOccupier(character);
-				current.setOccupier(null);	
-				((Trapdoor) newLoc).setLockRoom(true);
-			}			
-		}
-		if(newLoc instanceof Ladder){
-			character.setCurrentRoom(((Ladder) newLoc).getExit());
-			Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
-			character.setCurrentLocation(newRoomLoc); 
-			newRoomLoc.setOccupier(character);
-			current.setOccupier(null);
-		}
-		if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
-			character.moveSpace(newLoc);
-			if(itemOnNewLoc !=null ){
-				character.pickUpItem((CollectableItem) newLoc.getOccupier());
+				current.setOccupier(null);
 			}
-			current.setOccupier(null);
-			newLoc.setOccupier(character);
-			//TODO Remove println
-			System.out.println("moving north");
-		}
-		else if (itemOnNewLoc instanceof StationaryItem){
-			((StationaryItem) itemOnNewLoc).interact();
+			if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
+				character.moveSpace(newLoc);
+				if(itemOnNewLoc !=null ){
+					character.pickUpItem((CollectableItem) newLoc.getOccupier());
+				}
+				current.setOccupier(null);
+				newLoc.setOccupier(character);
+				//TODO Remove println
+				System.out.println("moving north");
+			}
+			else if (itemOnNewLoc instanceof StationaryItem){
+				((StationaryItem) itemOnNewLoc).interact();
+			}
 		}
 	}
 
@@ -234,8 +242,8 @@ public class Gameplay implements Serializable {
 				}
 			}
 		}
-		
-		
+
+
 	}
 
 	/**
