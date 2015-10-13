@@ -7,6 +7,7 @@ import java.net.*;
 
 import Game.*;
 import UI.*;
+import render.RenderCanvas;
 
 /**
  * A master connection receives events from a slave connection via a socket.
@@ -18,10 +19,12 @@ public final class Master implements Runnable {
 
 	private final Socket socket;
 	private final GameFrame frame;
+	private Gameplay game;
 
-	public Master(Socket socket, GameFrame f) {
+	public Master(Socket socket, GameFrame f, Gameplay g) {
 		this.socket = socket;
 		frame = f;
+		game = g;
 	}
 
 	@Override
@@ -32,6 +35,8 @@ public final class Master implements Runnable {
 			ObjectOutputStream oos = new ObjectOutputStream(os);
 			GameFrame frame = new GameFrame();
 			oos.writeObject(frame);
+
+			oos.writeObject(game);
 
 			oos.close();
 			socket.close();

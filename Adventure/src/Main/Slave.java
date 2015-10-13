@@ -35,6 +35,9 @@ public final class Slave implements Runnable, KeyListener {
 				System.out.println("Frame Arrived");
 			}
 
+			Gameplay game = (Gameplay) ois.readObject();
+
+			game.setFrame(frame);
 			is.close();
 			s.close();
 
