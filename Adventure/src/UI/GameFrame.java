@@ -402,7 +402,7 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 	 */
 	public void win(){
 		JOptionPane.showMessageDialog(this, ("CONGRATULATIONS!!\n you escaped the tower now you can seek revenge"
-				 ), "You Escaped", JOptionPane.PLAIN_MESSAGE, new ImageIcon(getClass().getResource("escape.gif")));
+				), "You Escaped", JOptionPane.PLAIN_MESSAGE, new ImageIcon(getClass().getResource("escape.gif")));
 		System.exit(0);
 	}
 	/**
@@ -413,7 +413,7 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 				), "You Didn't Escape", JOptionPane.PLAIN_MESSAGE);
 		System.exit(0);
 	}
-	
+
 	/**
 	 * sets the GamePlay of the frame
 	 * 

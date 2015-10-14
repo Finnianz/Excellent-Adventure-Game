@@ -18,7 +18,17 @@ public class StationaryItem extends Item {
 	Boolean unlockable;
 	int keyID;
 
-	//if interactable and unlockable are false, hiddenItem should be null
+	/**
+	 * if interactable and unlockable are false, hiddenItem should be null
+	 * @param imgLoc
+	 * @param pos
+	 * @param loc
+	 * @param room
+	 * @param interactable
+	 * @param unlockable
+	 * @param keyID
+	 * @param item
+	 */
 	public StationaryItem(String imgLoc, Position pos, Location loc, Room room, Boolean interactable, Boolean unlockable, int keyID, CollectableItem item){
 		super(imgLoc, pos, loc, room);	
 		this.interactable = interactable;
@@ -27,7 +37,9 @@ public class StationaryItem extends Item {
 		hiddenItem = item;
 	}
 
-
+	/**
+	 * lets the player interact with the item if interactable
+	 */
 	public void interact(){
 		if(interactable){
 			//TODO

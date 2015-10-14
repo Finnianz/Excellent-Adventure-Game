@@ -29,6 +29,11 @@ public class Gameplay implements Serializable {
 	private List<Character> characters = new ArrayList<Character>();
 	private boolean multi;
 
+	/**
+	 * starts a new gameplay
+	 * @param characters
+	 * @param multi
+	 */
 	public Gameplay(List<Character> characters, boolean multi) {
 
 		this.characters = characters;
@@ -44,6 +49,7 @@ public class Gameplay implements Serializable {
 		Room room7 = new Room(7, 10, 10);
 		Room room8 = new Room(8, 10, 10);
 		// set up trapdoor/ladder with empty tile next to each one
+		//room one
 		Location doorLoc = room1.getFloor()[4][4];
 		Location empty = room1.getFloor()[5][4];
 		Trapdoor t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(),
@@ -72,7 +78,9 @@ public class Gameplay implements Serializable {
 		CollectableItem key = new CollectableItem("SkelKey", Position.CENTER, room1, null, 1, bookshelf);
 		bookshelf.setHiddenItem(key);
 		room1.getFloor()[9][6].setOccupier(bookshelf);
+		//========================
 		//set up 2nd room
+		//========================
 		doorLoc = room2.getFloor()[7][7];
 		empty = room2.getFloor()[8][7];
 		t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(),
@@ -101,7 +109,9 @@ public class Gameplay implements Serializable {
 		key = new CollectableItem("SkelKey", Position.CENTER, room2, null, 3, novel);
 		novel.setHiddenItem(key);
 		room2.getFloor()[5][0].setOccupier(bookshelf);
+		//======================
 		//set up 3rd room
+		//======================
 		doorLoc = room3.getFloor()[3][9];
 		empty = room3.getFloor()[4][9];
 		t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(),
@@ -132,7 +142,9 @@ public class Gameplay implements Serializable {
 		key = new CollectableItem("Batkey", Position.CENTER, room3, null, 4, bookshelf);
 		bookshelf.setHiddenItem(key);
 		room3.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		//==================
 		//set up room4
+		//==================
 		doorLoc = room4.getFloor()[7][4];
 		empty = room4.getFloor()[8][4];
 		t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(),
@@ -175,7 +187,9 @@ public class Gameplay implements Serializable {
 		itemLoc = room4.getFloor()[7][1];
 		box = new MovableItem("box", Position.CENTER, itemLoc, room4);
 		room4.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(box);
+		//====================
 		//set up room5
+		//====================
 		doorLoc = room5.getFloor()[2][2];
 		empty = room5.getFloor()[3][2];
 		t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(),
@@ -194,7 +208,7 @@ public class Gameplay implements Serializable {
 		e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(), new Item("FloorBlock", Position.FLOOR, room6.getFloor()[empty.getX()][empty.getY()], room6),
 				empty.getOccupier(), empty.getX(), empty.getY());
 		room6.getFloor()[empty.getX()][empty.getY()] = e1;
-		
+
 		doorLoc = room5.getFloor()[8][8];
 		empty = room5.getFloor()[9][8];
 		t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(),
@@ -233,7 +247,9 @@ public class Gameplay implements Serializable {
 		key = new CollectableItem("ghostkey", Position.CENTER, room5, null, 6, bookshelf);
 		bookshelf.setHiddenItem(key);
 		room5.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		//===================
 		//set up room 6
+		//===================
 		doorLoc = room6.getFloor()[6][6];
 		empty = room6.getFloor()[7][6];
 		t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(),
@@ -288,7 +304,9 @@ public class Gameplay implements Serializable {
 		key = new CollectableItem("batkey", Position.CENTER, room6, null, 8, bookshelf);
 		bookshelf.setHiddenItem(key);
 		room6.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		//========================
 		//set up room 7
+		//========================
 		doorLoc = room7.getFloor()[2][1];
 		empty = room7.getFloor()[3][1];
 		t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(),
@@ -339,10 +357,10 @@ public class Gameplay implements Serializable {
 		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room7, false, false, 0, null);
 		room7.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
 		itemLoc = room7.getFloor()[9][4];
-		
-		
-		
-		
+
+
+
+
 		rooms.add(room1);
 		rooms.add(room2);
 		rooms.add(room3);
@@ -351,7 +369,7 @@ public class Gameplay implements Serializable {
 		rooms.add(room6);
 		rooms.add(room7);
 		rooms.add(room8);
-		
+
 		// add player
 		Location playerLoc = room1.getFloor()[3][7];
 		Character player1 = characters.get(0);
@@ -371,7 +389,10 @@ public class Gameplay implements Serializable {
 		}
 
 	}
-
+	/**
+	 * moves the character east
+	 * @param character
+	 */
 	public void moveEast(Character character) {
 		Location current = character.getCurrentLocation();
 		if (current.getY() + 1 < character.getCurrentRoom().getFloor().length) {
@@ -420,7 +441,10 @@ public class Gameplay implements Serializable {
 			}
 		}
 	}
-
+	/**
+	 * moves character west
+	 * @param character
+	 */
 	public void moveWest(Character character) {
 		Location current = character.getCurrentLocation();
 		if (current.getY() - 1 >= 0) {
@@ -468,7 +492,10 @@ public class Gameplay implements Serializable {
 			}
 		}
 	}
-
+	/**
+	 * moves character South
+	 * @param character
+	 */
 	public void moveSouth(Character character) {
 		Location current = character.getCurrentLocation();
 		if (current.getX() + 1 < character.getCurrentRoom().getFloor().length) {
@@ -515,7 +542,10 @@ public class Gameplay implements Serializable {
 			}
 		}
 	}
-
+	/**
+	 * moves character north
+	 * @param character
+	 */
 	public void moveNorth(Character character) {
 		Location current = character.getCurrentLocation();
 		if (current.getX() - 1 >= 0) {
@@ -563,7 +593,12 @@ public class Gameplay implements Serializable {
 			}
 		}
 	}
-
+	/**
+	 * allows character to use item
+	 * @param selectedFromBag
+	 * @param selectedOnBoard
+	 * @param player
+	 */
 	public void useItem(CollectableItem selectedFromBag, DrawableTile selectedOnBoard, Character player) {
 		int key;
 		for (int i = 0; i < player.getCurrentRoom().getDoors().size(); i++) {
@@ -592,7 +627,7 @@ public class Gameplay implements Serializable {
 	}
 
 	/**
-	 * 
+	 * adds character to the game
 	 */
 	public void addCharacter(Game.Character character) {
 		characters.add(character);

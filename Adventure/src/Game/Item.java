@@ -12,11 +12,17 @@ import render.*;
  */
 
 public class Item extends Drawable{
-	
+
 	public Location loc;
 	public Room roomID;
 
-	
+	/**
+	 * Sets up a new item
+	 * @param imgLoc
+	 * @param pos
+	 * @param loc
+	 * @param room
+	 */
 	public Item(String imgLoc, Position pos, Location loc, Room room){
 		super(imgLoc, pos);
 		this.loc = loc;

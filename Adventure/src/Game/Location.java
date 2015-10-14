@@ -9,10 +9,20 @@ import render.Drawable.Position;
  */
 
 public class Location extends DrawableTile{
-	
+
 	private int x;
 	private int y;
-	
+	/**
+	 * sets up a new location
+	 * @param wallNE
+	 * @param wallNW
+	 * @param wallSE
+	 * @param wallSW
+	 * @param floor
+	 * @param occupier
+	 * @param x
+	 * @param y
+	 */
 	public Location(Drawable wallNE, Drawable wallNW, Drawable wallSE,
 			Drawable wallSW, Drawable floor, Drawable occupier, int x, int y){
 		super(wallNE, wallNW, wallSE, wallSW, floor, occupier);
@@ -27,7 +37,7 @@ public class Location extends DrawableTile{
 	public int getX() {
 		return x;
 	}
-	
+
 	/**
 	 * @return the y
 	 */

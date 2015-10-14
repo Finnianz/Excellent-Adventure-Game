@@ -231,7 +231,7 @@ public class GameCanvas extends JPanel implements Serializable {
 			}
 		}
 	}
-	
+
 	/**
 	 * helper method for changing the size of image icons
 	 * 

@@ -22,10 +22,12 @@ public class Room {
 	private List<Item> items = new ArrayList <Item>();
 	private Location[][] floor; 
 	private List<Trapdoor> doors =  new ArrayList<Trapdoor>();
-	
-	
+
 	/**
 	 * rooms must be square at the moment.  ie. width == height
+	 * @param id
+	 * @param width
+	 * @param height
 	 */
 	public Room(int id, int width, int height){
 		this.roomID = id;
@@ -54,13 +56,19 @@ public class Room {
 				}
 				floor[i][j] = new Location(wallNE, wallNW, wallSE,wallSW, floortile, occupier, i , j);
 			}
-		  }
+		}
 	}
-
+	/**
+	 * 
+	 * @return width of room
+	 */
 	public int getWidth(){
 		return this.width;
 	}
-	
+	/**
+	 * 
+	 * @return height of room
+	 */
 	public int height(){
 		return this.height;
 	}
@@ -104,6 +112,6 @@ public class Room {
 	public void addDoor(Trapdoor door) {
 		this.doors.add(door);
 	}
-	
-	
+
+
 }

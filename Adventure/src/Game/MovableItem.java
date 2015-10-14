@@ -14,7 +14,13 @@ public class MovableItem extends Item {
 	public MovableItem(String imgLoc, Position pos, Location loc, Room room){
 		super(imgLoc, pos, loc, room);
 	}
-	
+	/**
+	 * moves the player
+	 * @param currentLoc
+	 * @param playerLoc
+	 * @param currentRoom
+	 * @param ch
+	 */
 	public void move(Location currentLoc, Location playerLoc, Room currentRoom, Character ch){
 		int newX = currentLoc.getX() + (currentLoc.getX() - playerLoc.getX());
 		int newY = currentLoc.getY() + (currentLoc.getY() - playerLoc.getY());
