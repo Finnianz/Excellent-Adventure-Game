@@ -113,8 +113,8 @@ public class GameCanvas extends JPanel implements Serializable {
 			bag[t].addMouseListener(new MouseListener() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(currentLabel!=null){
-					currentLabel.setBorder(null);
+					if (currentLabel != null) {
+						currentLabel.setBorder(null);
 					}
 					Object event = e.getSource();
 					currentLabel = (JLabel) event;
@@ -158,12 +158,12 @@ public class GameCanvas extends JPanel implements Serializable {
 				repaint();
 				DrawableTile objectClicked = canvasRen.clickedOn(e);
 				int bagIndex;
-				for(int i=0;i<bagToDraw.size(); i++){
-					if(bag[i]==currentLabel){
-						bagIndex=i;
+				for (int i = 0; i < bagToDraw.size(); i++) {
+					if (bag[i] == currentLabel) {
+						bagIndex = i;
 						Main.useItem(bagIndex, objectClicked);
 					}
-					
+
 				}
 				drawBag();
 				// TODO check actions
@@ -209,21 +209,19 @@ public class GameCanvas extends JPanel implements Serializable {
 	 * Draws the actual images in the bag in to the panel
 	 */
 	public void drawBag() {
-		if(!Main.getBag().isEmpty()){
+		if (!Main.getBag().isEmpty()) {
 			bagToDraw = Main.getBag();
 			for (int a = 0; a < bagToDraw.size(); a++) {
-				if(bagToDraw.get(a)!=null){
-					BufferedImage bi =  bagToDraw.get(a).getImage();
-					 ImageIcon icon = resize(bi, 2000,2000);
+				if (bagToDraw.get(a) != null) {
+					BufferedImage bi = bagToDraw.get(a).getImage();
+					ImageIcon icon = resize(bi, 2000, 2000);
 					bag[a].setIcon(icon);
-				}
-				else{
+				} else {
 					bag[a].setIcon(new ImageIcon(getClass().getResource("emptyBag.png")));
 				}
 			}
-		}
-		else{
-			for(int a = 0; a < bag.length; a++){
+		} else {
+			for (int a = 0; a < bag.length; a++) {
 				bag[a].setIcon(new ImageIcon(getClass().getResource("emptyBag.png")));
 			}
 		}
@@ -238,7 +236,8 @@ public class GameCanvas extends JPanel implements Serializable {
 	 * @return ImageIcon
 	 */
 	public static ImageIcon resize(BufferedImage image, int width, int height) {
-		//BufferedImage bi = new BufferedImage(width, height, BufferedImage.TRANSLUCENT);
+		// BufferedImage bi = new BufferedImage(width, height,
+		// BufferedImage.TRANSLUCENT);
 		Graphics2D g2d = (Graphics2D) image.createGraphics();
 		g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
 		g2d.drawImage(image, 0, 0, width, height, null);

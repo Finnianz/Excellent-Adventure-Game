@@ -57,11 +57,13 @@ public final class Master implements Runnable {
 
 				if (input.available() != 0) {
 
-					// read direction event from client and return x,y for movement.
+					// read direction event from client and return x,y for
+					// movement.
 					int dir = input.readInt();
 					switch (dir) {
 					case 1:
 						Main.moveUp(1);
+						
 						output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getX());
 						output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getY());
 						break;
@@ -88,7 +90,8 @@ public final class Master implements Runnable {
 				RenderCanvas renderCanv = new RenderCanvas();
 				Main.game.setCanvas(renderCanv);
 
-				Main.game.getFrame().getC().getRenderCanvas().setRoom(Main.game.getRooms().get(0));
+				Main.game.getFrame().getC().getRenderCanvas()
+						.setRoom(Main.game.getCharacters().get(0).getCurrentRoom());
 				Main.game.getFrame().getC().repaint();
 
 			}

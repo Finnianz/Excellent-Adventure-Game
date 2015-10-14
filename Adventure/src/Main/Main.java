@@ -36,7 +36,7 @@ public class Main {
 
 	public static InetAddress serverIp;
 
-	private static Gameplay game;
+	public static Gameplay game;
 	private static GameFrame frame;
 	public static List<Game.Character> characters = new ArrayList<Character>();
 
@@ -117,7 +117,7 @@ public class Main {
 				Socket s = ss.accept();
 				System.out.println("ACCEPTED CONNECTION FROM: " + s.getInetAddress());
 
-				connection = new Master(s, game);
+				connection = new Master(s);
 
 				connection.run();
 
@@ -177,7 +177,7 @@ public class Main {
 				// Wait for a socket
 				Socket s = ss.accept();
 
-				Master connection = new Master(s, game);
+				Master connection = new Master(s);
 				return; // done
 			}
 
@@ -273,17 +273,17 @@ public class Main {
 	}
 
 	public static void setRoom(Room room) {
-		frame.getC().getRenderCanvas().setRoom(room);
+		game.getFrame().getC().getRenderCanvas().setRoom(room);
 	}
-	
-	public static List<Game.CollectableItem>getBag(){
+
+	public static List<Game.CollectableItem> getBag() {
 		return game.getCharacters().get(0).getItems();
 	}
-	
-	public static void useItem(int bagIndex, DrawableTile door){
+
+	public static void useItem(int bagIndex, DrawableTile door) {
 		CollectableItem key = game.getCharacters().get(0).getItems().get(bagIndex);
-		if(door instanceof Trapdoor){
-		key.use((Trapdoor) door, game.getCharacters().get(0));
+		if (door instanceof Trapdoor) {
+			key.use((Trapdoor) door, game.getCharacters().get(0));
 		}
 	}
 }
