@@ -139,6 +139,11 @@ public class RenderCanvas extends JPanel {
 		// repaint();
 	}
 
+	/**
+	 * Returns a tile if it contains 
+	 * @param e
+	 * @return
+	 */
 	public DrawableTile clickedOn(MouseEvent e) {
 
 		if (board != null) {

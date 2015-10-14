@@ -282,7 +282,7 @@ public abstract class Drawable {
 	}
 
 	/**
-	 * returns true if the onscreen position of object is contains the given point
+	 * returns if the onscreen position of object is contains the given point
 	 * @param x
 	 * @param y
 	 * @return
@@ -304,8 +304,8 @@ public abstract class Drawable {
 	 * draw image in the bag, rather than the on screen coordinates
 	 * @param g
 	 */
-	public void drawInBag(Graphics g){
-		g.drawImage(images.getImage(direction), 0,0, null);
+	public BufferedImage getImage(){
+		return(images.getImage(direction));
 	}
 
 	/**
