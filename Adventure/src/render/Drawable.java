@@ -287,6 +287,14 @@ public abstract class Drawable {
 	public boolean isSelected() {
 		return selected;
 	}
+	
+	/**
+	 * draw image in the bag, rather than the on screen coordinates
+	 * @param g
+	 */
+	public void drawInBag(Graphics g){
+		g.drawImage(images.getImage(direction), 0,0, null);
+	}
 
 	/**
 	 * @param selected
