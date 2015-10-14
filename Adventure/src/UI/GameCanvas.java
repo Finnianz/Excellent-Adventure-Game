@@ -28,6 +28,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
 
+import Game.CollectableItem;
 import Game.Item;
 import Main.Main;
 import render.DrawableTile;
@@ -45,7 +46,7 @@ public class GameCanvas extends JPanel implements Serializable {
 	private RenderCanvas canvasRen = new RenderCanvas();
 	private JLabel[] bag;
 	private String selectedItem;
-	private List<Item> bagToDraw;
+	private List<CollectableItem> bagToDraw;
 	private JPanel button;
 	private JPanel handPanel;
 	private JLabel currentLabel;
@@ -108,7 +109,6 @@ public class GameCanvas extends JPanel implements Serializable {
 		bag = new JLabel[9];
 		for (int t = 0; t < bag.length; t++) {
 			ImageIcon icon2 = new ImageIcon(getClass().getResource("emptyBag.png"));
-			// TODO above is for temp displaying bad, need gamelogic
 			bag[t] = new JLabel(icon2);
 			bag[t].setVisible(true);
 			bag[t].addMouseListener(new MouseListener() {
@@ -122,7 +122,6 @@ public class GameCanvas extends JPanel implements Serializable {
 					currentLabel = (JLabel) event;
 					Border b = BorderFactory.createLineBorder(Color.red, 5);
 					currentLabel.setBorder(b);
-					//currentLabel.setIcon(new ImageIcon(getClass().getResource("greenTile.png")));
 				}
 
 				public void mousePressed(MouseEvent e) {
@@ -160,6 +159,14 @@ public class GameCanvas extends JPanel implements Serializable {
 			public void mouseReleased(MouseEvent e) {
 				repaint();
 				DrawableTile objectClicked = canvasRen.clickedOn(e);
+				int bagIndex;
+				for(int i=0;i<bagToDraw.size(); i++){
+					if(bag[i]==currentLabel){
+						bagIndex=i;
+						Main.useItem(bagIndex, objectClicked);
+					}
+					
+				}
 				// TODO check actions
 			}
 		});
@@ -203,18 +210,13 @@ public class GameCanvas extends JPanel implements Serializable {
 	 * Draws the actual images in the bag in to the panel
 	 */
 	public void drawBag() {
-
-		System.out.print("called");
-
-		//bagToDraw = Main.getBag();
 		if(!Main.getBag().isEmpty()){
 			bagToDraw = Main.getBag();
 			for (int a = 0; a < bagToDraw.size(); a++) {
 				if(bagToDraw.get(a)!=null){
-					BufferedImage bi =  bagToDraw.get(a).getImage();//bagToDraw.get(a).drawInBag();
+					BufferedImage bi =  bagToDraw.get(a).getImage();
 					 ImageIcon icon = resize(bi, 2000,2000);
 					bag[a].setIcon(icon);
-					System.out.print("bam");
 				}
 				else{
 					bag[a].setIcon(new ImageIcon(getClass().getResource("emptyBag.png")));

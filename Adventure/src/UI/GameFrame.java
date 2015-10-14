@@ -80,31 +80,21 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 		public boolean dispatchKeyEvent(KeyEvent e) {
 			if (e.getID() == KeyEvent.KEY_PRESSED) {
 				if (e.getKeyCode() == (40)) {
-					System.out.println("down");
 					Main.moveDown(0);
 					canvasOfGame.drawBag();
-					// game.moveSouth('player');
 
 				}
 				if (e.getKeyCode() == (37)) {
-					System.out.println("left");
 					Main.moveLeft(0);
 					canvasOfGame.drawBag();
-					// game.moveWest('player');
 				}
 				if (e.getKeyCode() == (38)) {
-					System.out.println("up");
 					Main.moveUp(0);
 					canvasOfGame.drawBag();
-
-					// game.moveNorth('player');
 				}
 				if (e.getKeyCode() == (39)) {
-					System.out.println("right");
 					Main.moveRight(0);
 					canvasOfGame.drawBag();
-
-					// game.moveEast('player');
 				}
 
 			} else if (e.getID() == KeyEvent.KEY_RELEASED) {
