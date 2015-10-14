@@ -10,6 +10,7 @@ import render.Drawable.Position;
 
 import java.util.List;
 
+import Main.Main;
 import UI.GameFrame;
 
 public class Gameplay implements Serializable {
@@ -101,7 +102,8 @@ public class Gameplay implements Serializable {
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
 					((Trapdoor) newLoc).setLockRoom(true);
-					canvas.setRoom(character.getCurrentRoom());
+					Main.setRoom(character.getCurrentRoom());
+					
 				}
 			}
 			if (newLoc instanceof Ladder) {
@@ -110,6 +112,7 @@ public class Gameplay implements Serializable {
 				character.setCurrentLocation(newRoomLoc);
 				newRoomLoc.setOccupier(character);
 				current.setOccupier(null);
+				Main.setRoom(character.getCurrentRoom());
 			}
 			if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
 				character.moveSpace(newLoc);
@@ -151,7 +154,7 @@ public class Gameplay implements Serializable {
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
 					((Trapdoor) newLoc).setLockRoom(true);
-					canvas.setRoom(character.getCurrentRoom());
+					Main.setRoom(character.getCurrentRoom());
 				}
 			}
 			if (newLoc instanceof Ladder) {
@@ -160,6 +163,7 @@ public class Gameplay implements Serializable {
 				character.setCurrentLocation(newRoomLoc);
 				newRoomLoc.setOccupier(character);
 				current.setOccupier(null);
+				Main.setRoom(character.getCurrentRoom());
 			}
 			if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
 				character.moveSpace(newLoc);
@@ -200,7 +204,8 @@ public class Gameplay implements Serializable {
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
 					((Trapdoor) newLoc).setLockRoom(true);
-					canvas.setRoom(character.getCurrentRoom());
+
+					Main.setRoom(character.getCurrentRoom());
 				}
 			}
 			if (newLoc instanceof Ladder) {
@@ -209,6 +214,7 @@ public class Gameplay implements Serializable {
 				character.setCurrentLocation(newRoomLoc);
 				newRoomLoc.setOccupier(character);
 				current.setOccupier(null);
+				Main.setRoom(character.getCurrentRoom());
 			}
 			if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
 				character.moveSpace(newLoc);
@@ -249,7 +255,8 @@ public class Gameplay implements Serializable {
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
 					((Trapdoor) newLoc).setLockRoom(true);
-					canvas.setRoom(character.getCurrentRoom());
+
+					Main.setRoom(character.getCurrentRoom());
 				}
 			}
 			if (newLoc instanceof Ladder) {
@@ -258,6 +265,7 @@ public class Gameplay implements Serializable {
 				character.setCurrentLocation(newRoomLoc);
 				newRoomLoc.setOccupier(character);
 				current.setOccupier(null);
+				Main.setRoom(character.getCurrentRoom());
 			}
 			if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
 				character.moveSpace(newLoc);

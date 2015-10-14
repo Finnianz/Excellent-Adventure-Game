@@ -6,7 +6,7 @@ public class Trapdoor extends Location {
 
 	private final Room currentRoom;
 	private final Room exitRoom;
-	Boolean unlocked = false;
+	Boolean unlocked = true;
 	private int keyID;
 	
 	public Trapdoor(Drawable wallNE, Drawable wallNW, Drawable wallSE,

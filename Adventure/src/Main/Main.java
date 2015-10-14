@@ -3,6 +3,7 @@ package Main;
 import Game.Character;
 import Game.Gameplay;
 import Game.Location;
+import Game.Room;
 import UI.GameFrame;
 import render.RenderCanvas;
 
@@ -261,5 +262,9 @@ public class Main {
 		}
 		game.getFrame().getC().repaint();
 
+	}
+	
+	public static void setRoom(Room room){
+		frame.getC().getRenderCanvas().setRoom(room);
 	}
 }
