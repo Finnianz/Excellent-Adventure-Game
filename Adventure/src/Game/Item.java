@@ -6,10 +6,9 @@ import render.*;
 
 public class Item extends Drawable{
 	
-//	public String itemType;
 	public Location loc;
 	public Room roomID;
-	public ImageIcon image;
+
 	
 	public Item(String imgLoc, Position pos, Location loc, Room room){
 		super(imgLoc, pos);
@@ -45,10 +44,4 @@ public class Item extends Drawable{
 		this.roomID = roomID;
 	}
 
-	/**
-	 * @return the image
-	 */
-	public ImageIcon getImage() {
-		return image;
-	}
 }
