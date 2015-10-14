@@ -44,7 +44,7 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 	int countOfPlayers = 0;
 	private JRadioButton[] array;
 	private String playerColour = "Yellow";
-	private String playerHat = "cowboy";
+	private String playerHat = "Beanie";
 	private Gameplay game;
 
 	/**
@@ -185,6 +185,8 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				playerHat = e.getActionCommand().toString();
+				System.out.print(playerHat);
+				System.out.print(e.getActionCommand().toString());
 			}
 		});
 		JRadioButton cowboy = new JRadioButton("Cowboy");
