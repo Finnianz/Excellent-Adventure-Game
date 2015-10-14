@@ -66,7 +66,7 @@ public final class Slave implements Runnable, KeyListener {
 				// read event of keypress
 				int x = input.readInt();
 				int y = input.readInt();
-				
+
 				Main.game.getCharacters().get(1).setCurrentLocation(Main.game.getRooms().get(0).getFloor()[x][y]);
 				Main.game.getFrame().getC().repaint();
 			}
