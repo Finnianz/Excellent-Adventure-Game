@@ -82,23 +82,27 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 				if (e.getKeyCode() == (40)) {
 					System.out.println("down");
 					Main.moveDown(0);
+					canvasOfGame.drawBag();
 					// game.moveSouth('player');
 
 				}
 				if (e.getKeyCode() == (37)) {
 					System.out.println("left");
 					Main.moveLeft(0);
+					canvasOfGame.drawBag();
 					// game.moveWest('player');
 				}
 				if (e.getKeyCode() == (38)) {
 					System.out.println("up");
 					Main.moveUp(0);
+					canvasOfGame.drawBag();
 
 					// game.moveNorth('player');
 				}
 				if (e.getKeyCode() == (39)) {
 					System.out.println("right");
 					Main.moveRight(0);
+					canvasOfGame.drawBag();
 
 					// game.moveEast('player');
 				}
@@ -365,7 +369,11 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 				+ "your friends thought it would be fun to ditch you\n unfortunately you then got scared to death \n by the spirits. Now you must escape the tower\n "
 				+ "so you can get revenge!\n"
 				+ "          GOOD LUCK GETTING OUT!!!!!!\n\n"), "Instructions", JOptionPane.PLAIN_MESSAGE, new ImageIcon(getClass().getResource("Tower2.jpg")));
-		JOptionPane.showMessageDialog(this, "You must make your way down the tower. Hunt around the rooms ", "Instructions", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(this, "You must make your way down the tower. \n"
+				+ "Hunt around the rooms find a key and make \n"
+				+ "your way through the trap door and if you forgot\n"
+				+ " someting you can make your way back up the ladder\n"
+				+ " if you dare!", "Instructions", JOptionPane.PLAIN_MESSAGE);
 	}
 
 	/**
