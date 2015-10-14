@@ -33,11 +33,9 @@ public class Main {
 
 	private static Gameplay game;
 	private static GameFrame frame;
+	static List<Game.Character> characters;
 
 	public static void main(String[] args) throws IOException {
-
-		List<Game.Character> characters = new ArrayList<Game.Character>();
-		game = new Gameplay(characters);
 
 		// ======================================================
 		// ======== First, parse command-line arguments =========
@@ -116,7 +114,7 @@ public class Main {
 				Socket s = ss.accept();
 				System.out.println("ACCEPTED CONNECTION FROM: " + s.getInetAddress());
 
-				connection = new Master(s, frame, game);
+				connection = new Master(s, game);
 				connection.run();
 
 				return; // done
@@ -135,15 +133,17 @@ public class Main {
 	}
 
 	public static void startGame() {
-		List<Game.Character> characters = new ArrayList<Game.Character>();
+		characters = new ArrayList<Character>();
 		// add player
+		frame = new GameFrame();
+		frame.inputPlayers();
 
+		characters.add(new Character(frame.getPlayerColour() + "Ghost", frame.getPlayerHat() + "Hat", frame.getName()));
 		game = new Gameplay(characters);
 
 		RenderCanvas renderCanv = new RenderCanvas();
 		game.setCanvas(renderCanv);
 
-		frame = new GameFrame();
 		game.setFrame(frame);
 
 		game.getFrame().getC().getRenderCanvas().setRoom(game.getRooms().get(0));
@@ -173,7 +173,7 @@ public class Main {
 				// Wait for a socket
 				Socket s = ss.accept();
 
-				Master connection = new Master(s, frame, game);
+				Master connection = new Master(s, game);
 				return; // done
 			}
 

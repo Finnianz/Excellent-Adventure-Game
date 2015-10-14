@@ -6,6 +6,7 @@ import java.io.*;
 import java.net.*;
 
 import Game.*;
+import Game.Character;
 import UI.*;
 import render.RenderCanvas;
 
@@ -18,32 +19,55 @@ import render.RenderCanvas;
 public final class Master implements Runnable {
 
 	private final Socket socket;
-	private final GameFrame frame;
+
 	private Gameplay game;
 
-	public Master(Socket socket, GameFrame f, Gameplay g) {
+	public Master(Socket socket, Gameplay g) {
 		this.socket = socket;
-		frame = f;
 		game = g;
 	}
 
 	@Override
 	public void run() {
 		try {
-
-			OutputStream os = socket.getOutputStream();
-			ObjectOutputStream oos = new ObjectOutputStream(os);
 			GameFrame frame = new GameFrame();
-			oos.writeObject(frame);
+			frame.inputPlayers();
+			game.addCharacter(
+					new Character(frame.getPlayerColour() + "Ghost", frame.getPlayerHat() + "Hat", frame.getName()));
+			DataInputStream input = new DataInputStream(socket.getInputStream());
+			DataOutputStream output = new DataOutputStream(socket.getOutputStream());
 
-			oos.writeObject(game);
+			// first read char selection from client
+			boolean exit = false;
+			while (!exit) {
 
-			oos.close();
-			socket.close();
+				if (!input.readUTF().equals(null)) {
 
-		} catch (Exception e) {
-			System.out.println(e);
+					// read character selection from client.
+					String name = input.readUTF();
+					String color = input.readUTF();
+					String hat = input.readUTF();
+					game.addCharacter(new Character(color + "Ghost", hat + "Hat", name));
+
+				}
+
+				// Now, broadcast the server character to client
+
+				output.writeUTF(game.getFrame().getName());
+				output.writeUTF(game.getFrame().getPlayerColour());
+				output.writeUTF(game.getFrame().getPlayerHat());
+
+				output.flush();
+
+			}
+			socket.close(); // release socket ... v.important!
+		} catch (
+
+		IOException e)
+
+		{
+			System.err.println("PLAYER DISCONNECTED");
+
 		}
 	}
-
 }

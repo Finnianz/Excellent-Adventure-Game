@@ -15,11 +15,9 @@ public class Character extends CustomisableCharacter{
 	private List<Item> items = new ArrayList<Item>();
 	
 	
-	public Character(String imgLoc, String hatname, String name, Room room, Location loc){
+	public Character(String imgLoc, String hatname, String name){
 		super(imgLoc, hatname);
 		this.name = name;
-		this.currentRoom = room;
-		this.currentLocation = loc;
 	}
 	
 	public void moveSpace(Location newLoc){

@@ -7,6 +7,7 @@ import java.io.*;
 import java.net.*;
 
 import Game.*;
+import Game.Character;
 import UI.*;
 
 /**
@@ -16,9 +17,9 @@ import UI.*;
 public final class Slave implements Runnable, KeyListener {
 
 	private Socket socket;
-	private Gameplay game;
 	private DataOutputStream output;
 	private DataInputStream input;
+	List<Game.Character> characters;
 	// Name??
 
 	public Slave(Socket socket) {
@@ -28,23 +29,48 @@ public final class Slave implements Runnable, KeyListener {
 	public void run() {
 		try {
 			Socket s = socket;
-			InputStream is = s.getInputStream();
-			ObjectInputStream ois = new ObjectInputStream(is);
-			GameFrame frame = (GameFrame) ois.readObject();
-			if (frame != null) {
-				System.out.println("Frame Arrived");
+			Character player1;
+
+			GameFrame frame = new GameFrame();
+			frame.inputPlayers();
+
+			output = new DataOutputStream(socket.getOutputStream());
+			input = new DataInputStream(socket.getInputStream());
+
+			// first write char selection to server
+			output.writeUTF(frame.getName());
+			output.writeUTF(frame.getPlayerColour());
+			output.writeUTF(frame.getPlayerHat());
+
+			if (!input.readUTF().equals(null)) {
+
+				// read character selection from server.
+				String name = input.readUTF();
+				String color = input.readUTF();
+				String hat = input.readUTF();
+				player1 = new Character(color + "Ghost", hat + "Hat", name);
+
+				characters = new ArrayList<Game.Character>();
+				characters.add(player1);
+				characters.add(new Character(frame.getPlayerColour() + "Ghost", frame.getPlayerHat() + "Hat",
+						frame.getName()));
 			}
+			new Gameplay(characters);
+			socket.close(); // release socket ... v.important!
+		} catch (IOException e) {
+			System.err.println("I/O Error: " + e.getMessage());
+			e.printStackTrace(System.err);
+		}
 
-			Gameplay game = (Gameplay) ois.readObject();
+		catch (
 
-			game.setFrame(frame);
-			is.close();
-			s.close();
+		Exception e)
 
-		} catch (Exception e) {
+		{
 			System.out.println("Error: " + e.getMessage());
 			e.printStackTrace(System.err);
 		}
+
 	}
 	// The following intercept keyboard events from the user.
 

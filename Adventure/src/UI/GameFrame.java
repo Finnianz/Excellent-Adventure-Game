@@ -24,12 +24,13 @@ import javax.swing.JRadioButton;
 
 import Game.Gameplay;
 import Main.Main;
+
 /**
  * 
  * @author Megan Davidson ID:300313759
  *
  */
-public class GameFrame extends JFrame implements WindowListener , Serializable {
+public class GameFrame extends JFrame implements WindowListener, Serializable {
 
 	private GameCanvas canvasOfGame;
 	private JMenuBar menuBar;
@@ -45,9 +46,9 @@ public class GameFrame extends JFrame implements WindowListener , Serializable {
 	private String playerColour = "Yellow";
 	private String playerHat = "cowboy";
 	private Gameplay game;
-	
+
 	/**
-	 * Sets up the frame for the game and the keyListener for movement 
+	 * Sets up the frame for the game and the keyListener for movement
 	 */
 	public GameFrame() {
 		super("Welcome to your Worst Nightmare!");
@@ -66,56 +67,57 @@ public class GameFrame extends JFrame implements WindowListener , Serializable {
 		showInstructions();
 
 		KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-        manager.addKeyEventDispatcher(new MyDispatcher());
+		manager.addKeyEventDispatcher(new MyDispatcher());
 	}
-	
+
 	/**
 	 * helper class to register the keystrokes
 	 *
 	 */
-	 private class MyDispatcher implements KeyEventDispatcher {
-	        @Override
-	        public boolean dispatchKeyEvent(KeyEvent e) {
-	            if (e.getID() == KeyEvent.KEY_PRESSED) {
-	               if(e.getKeyCode()==(40)){
-	            	   System.out.println("down");
-	            	   Main.moveDown();
-	            	  //game.moveSouth('player');
-	            	  
-	            }
-	               if(e.getKeyCode()==(37)){
-	            	   System.out.println("left");   
-	            	   Main.moveLeft();
-		            	  //game.moveWest('player');
-	            }
-	               if(e.getKeyCode()==(38)){
-	            	   System.out.println("up"); 
-	            	   Main.moveUp();
-		            	  
-	            	 //game.moveNorth('player');
-	            }
-	               if(e.getKeyCode()==(39)){
-	            	   System.out.println("right");
-	            	   Main.moveRight();
-		            	  
-	            	 //game.moveEast('player');
-	            }
+	private class MyDispatcher implements KeyEventDispatcher {
+		@Override
+		public boolean dispatchKeyEvent(KeyEvent e) {
+			if (e.getID() == KeyEvent.KEY_PRESSED) {
+				if (e.getKeyCode() == (40)) {
+					System.out.println("down");
+					Main.moveDown();
+					// game.moveSouth('player');
 
-	            } else if (e.getID() == KeyEvent.KEY_RELEASED) {
-	                
-	            } else if (e.getID() == KeyEvent.KEY_TYPED) {
-	            	
-	            }
-	            return false;
-	        }
-	    }
-	 /**
-	  * sets up dialogue boxes to get characters to select
-	  * colour and hat types. (are saved as private fields
-	  */
-	private void inputPlayers() {
+				}
+				if (e.getKeyCode() == (37)) {
+					System.out.println("left");
+					Main.moveLeft();
+					// game.moveWest('player');
+				}
+				if (e.getKeyCode() == (38)) {
+					System.out.println("up");
+					Main.moveUp();
 
-		//sets up button for colour
+					// game.moveNorth('player');
+				}
+				if (e.getKeyCode() == (39)) {
+					System.out.println("right");
+					Main.moveRight();
+
+					// game.moveEast('player');
+				}
+
+			} else if (e.getID() == KeyEvent.KEY_RELEASED) {
+
+			} else if (e.getID() == KeyEvent.KEY_TYPED) {
+
+			}
+			return false;
+		}
+	}
+
+	/**
+	 * sets up dialogue boxes to get characters to select colour and hat types.
+	 * (are saved as private fields
+	 */
+	public void inputPlayers() {
+
+		// sets up button for colour
 		JRadioButton Yellow = new JRadioButton("Yellow");
 		Yellow.setActionCommand("Yellow");
 		Yellow.setSelected(true);
@@ -236,7 +238,9 @@ public class GameFrame extends JFrame implements WindowListener , Serializable {
 			System.out.print(playerHat);
 		}
 	}
-	//sets up the menu bar giving players options to exit/start new game/get help
+
+	// sets up the menu bar giving players options to exit/start new game/get
+	// help
 	private void setUpMenu() {
 		menuBar = new JMenuBar();
 		menu = new JMenu("Menu");
@@ -268,8 +272,9 @@ public class GameFrame extends JFrame implements WindowListener , Serializable {
 
 				} else if (choice.equals("Join Game")) {
 
-					Main.joinGame(JOptionPane.showInputDialog(null, "Enter Server", null, JOptionPane.PLAIN_MESSAGE),Integer.parseInt(
-							JOptionPane.showInputDialog(null, "Enter Port", null, JOptionPane.PLAIN_MESSAGE)));
+					Main.joinGame(JOptionPane.showInputDialog(null, "Enter Server", null, JOptionPane.PLAIN_MESSAGE),
+							Integer.parseInt(
+									JOptionPane.showInputDialog(null, "Enter Port", null, JOptionPane.PLAIN_MESSAGE)));
 					JOptionPane.showMessageDialog(null, "Server connected on " + Main.serverIp, "Server deets: ",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
@@ -282,8 +287,8 @@ public class GameFrame extends JFrame implements WindowListener , Serializable {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int r = JOptionPane.showConfirmDialog(canvasOfGame, new JLabel("Exit?"), "Confirm Exit", JOptionPane.YES_NO_OPTION,
-						JOptionPane.QUESTION_MESSAGE);
+				int r = JOptionPane.showConfirmDialog(canvasOfGame, new JLabel("Exit?"), "Confirm Exit",
+						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if (r == JOptionPane.YES_OPTION) {
 					System.exit(0);
 				}
@@ -304,14 +309,16 @@ public class GameFrame extends JFrame implements WindowListener , Serializable {
 
 	/**
 	 * gets the game canvas
+	 * 
 	 * @return GameCanvas
 	 */
 	public GameCanvas getC() {
 		return canvasOfGame;
 	}
-	
+
 	/**
 	 * sets the canvas of the frame
+	 * 
 	 * @param c
 	 */
 	public void setC(GameCanvas c) {
@@ -328,15 +335,27 @@ public class GameFrame extends JFrame implements WindowListener , Serializable {
 			System.exit(0);
 		}
 	}
-	public void windowClosed(WindowEvent e) {}
-	public void windowIconified(WindowEvent e) {}
-	public void windowDeiconified(WindowEvent e) {}
-	public void windowActivated(WindowEvent e) {}
-	public void windowDeactivated(WindowEvent e) {}
-	public void windowOpened(WindowEvent e) {}
+
+	public void windowClosed(WindowEvent e) {
+	}
+
+	public void windowIconified(WindowEvent e) {
+	}
+
+	public void windowDeiconified(WindowEvent e) {
+	}
+
+	public void windowActivated(WindowEvent e) {
+	}
+
+	public void windowDeactivated(WindowEvent e) {
+	}
+
+	public void windowOpened(WindowEvent e) {
+	}
 
 	/**
-	 * Dialogue box that opens when player requests instructions and at the 
+	 * Dialogue box that opens when player requests instructions and at the
 	 * beginning of the game
 	 */
 	public void showInstructions() {
@@ -344,15 +363,16 @@ public class GameFrame extends JFrame implements WindowListener , Serializable {
 				JOptionPane.PLAIN_MESSAGE);
 		JOptionPane.showMessageDialog(this, "more unknown instructions", "Instructions", JOptionPane.PLAIN_MESSAGE);
 	}
-	
+
 	/**
 	 * sets the GamePlay of the frame
+	 * 
 	 * @param g
 	 */
-	public void setGame(Gameplay g){
+	public void setGame(Gameplay g) {
 		game = g;
 	}
-	
+
 	/**
 	 * @return playerColour
 	 */
@@ -360,13 +380,13 @@ public class GameFrame extends JFrame implements WindowListener , Serializable {
 		return playerColour;
 	}
 
-	/** 
+	/**
 	 * @return playerHat
 	 */
 	public String getPlayerHat() {
 		return playerHat;
 	}
-	
+
 	public static void main(String[] args) {
 		new GameFrame();
 	}
