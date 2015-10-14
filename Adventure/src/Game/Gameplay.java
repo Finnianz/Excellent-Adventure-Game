@@ -44,19 +44,19 @@ public class Gameplay implements Serializable {
 		Location ladderLoc = dungeon.getFloor()[4][4];
 		empty = dungeon.getFloor()[5][4];
 		Ladder l1 = new Ladder(ladderLoc.getWallNE(), ladderLoc.getWallNW(), ladderLoc.getWallSE(),
-				ladderLoc.getWallSW(), ladderLoc.getFloor(), ladderLoc.getOccupier(), 4, 4, dungeon, tower);
+				ladderLoc.getWallSW(), ladderLoc.getFloor(), new Item("Ladder", Position.CENTER, tower.getFloor()[5][4], dungeon), 4, 4, dungeon, tower);
 		dungeon.getFloor()[4][4] = l1;
 		e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(), empty.getFloor(),
 				empty.getOccupier(), 5, 5);
 		dungeon.getFloor()[5][4] = e1;
 		// Set up items in Tower
 		Location boxLoc = tower.getFloor()[7][7];
-		MovableItem box = new MovableItem("PlainWall", Position.SQUARE, boxLoc, tower);
+		MovableItem box = new MovableItem("Box", Position.SQUARE, boxLoc, tower);
 		tower.getFloor()[7][7].setOccupier(box);
 		// tower.addItem(box, tower.getFloor()[7][7]);
 		Location book = tower.getFloor()[9][6];
-		StationaryItem bookshelf = new StationaryItem("PlainWall", Position.SQUARE, book, tower, true, false, 2,
-				new CollectableItem("PlainWall", Position.CENTER, tower, null, 1));
+		StationaryItem bookshelf = new StationaryItem("RedBook", Position.CENTER, book, tower, true, false, 2,
+				new CollectableItem("SkelKey", Position.CENTER, tower, null, 1));
 		tower.getFloor()[9][6].setOccupier(bookshelf);
 		rooms.add(tower);
 		rooms.add(dungeon);
