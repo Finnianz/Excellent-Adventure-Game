@@ -20,11 +20,9 @@ public final class Master implements Runnable {
 
 	private final Socket socket;
 
-	private Gameplay game;
-
-	public Master(Socket socket, Gameplay g) {
+	public Master(Socket socket) {
 		this.socket = socket;
-		game = g;
+
 	}
 
 	@Override
@@ -39,52 +37,59 @@ public final class Master implements Runnable {
 			DataInputStream input = new DataInputStream(socket.getInputStream());
 			DataOutputStream output = new DataOutputStream(socket.getOutputStream());
 
+			// read character selection from client.
+			String color = input.readUTF();
+			String hat = input.readUTF();
+			Main.characters.add(new Character(color + "Ghost", hat + "Hat", "Player1"));
+
+			// System.out.println("??" + color + hat);
+			Main.game = new Gameplay(Main.characters, true);
+			Main.game.setFrame(frame);
+
+			// Now, broadcast the server character to client
+
+			output.writeUTF(Main.game.getFrame().getPlayerColour());
+			output.writeUTF(Main.game.getFrame().getPlayerHat());
+
 			// first read char selection from client
 			boolean exit = false;
 			while (!exit) {
 
-				// read character selection from client.
-				String color = input.readUTF();
-				String hat = input.readUTF();
-				Main.characters.add(new Character(color + "Ghost", hat + "Hat", "Player1"));
-
-				// System.out.println("??" + color + hat);
-				game = new Gameplay(Main.characters, true);
-				game.setFrame(frame);
-
-				// Now, broadcast the server character to client
-
-				output.writeUTF(game.getFrame().getPlayerColour());
-				output.writeUTF(game.getFrame().getPlayerHat());
-
-				// now render game
-				RenderCanvas renderCanv = new RenderCanvas();
-				game.setCanvas(renderCanv);
-
-				game.getFrame().getC().getRenderCanvas().setRoom(game.getRooms().get(0));
-				game.getFrame().getC().repaint();
-
 				if (input.available() != 0) {
 
-					// read direction event from client.
+					// read direction event from client and return x,y for movement.
 					int dir = input.readInt();
 					switch (dir) {
 					case 1:
 						Main.moveUp(1);
+						output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getX());
+						output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getY());
 						break;
 					case 2:
 						Main.moveDown(1);
+						output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getX());
+						output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getY());
 						break;
 					case 3:
 						Main.moveRight(1);
+						output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getX());
+						output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getY());
 						break;
 					case 4:
 						Main.moveLeft(1);
+						output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getX());
+						output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getY());
 						break;
 					}
 				}
 
 				output.flush();
+				// now render game
+				RenderCanvas renderCanv = new RenderCanvas();
+				Main.game.setCanvas(renderCanv);
+
+				Main.game.getFrame().getC().getRenderCanvas().setRoom(Main.game.getRooms().get(0));
+				Main.game.getFrame().getC().repaint();
 
 			}
 			socket.close(); // release socket ... v.important!
