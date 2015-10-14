@@ -15,8 +15,6 @@ public class IsometricRenderer implements Serializable {
 	public final int TOP_PADDING = 150;
 	public final int TILE_HEIGHT = 38;
 	public final int TILE_WIDTH = 76;
-	// Coordinates to draw the current viewing direction
-	public final int COMPASS_OFFSET = 20;
 
 	/**
 	 * Draws the array from back to front if looking to the north
@@ -30,11 +28,6 @@ public class IsometricRenderer implements Serializable {
 		int y = maxLength - 1;// Reference int to second array
 		int startingX = x;// number x starts at for current row
 		int startingY = y;// number y starts at for current row
-
-		// Draw letter to show current viewing direction
-		g.setColor(Color.WHITE);
-		g.drawString("N", COMPASS_OFFSET, COMPASS_OFFSET);
-
 		// while current row < than the max
 		while (currentRow < maxLength * 2) {
 
@@ -82,9 +75,6 @@ public class IsometricRenderer implements Serializable {
 		int y = maxLength - 1;// Reference int to second array
 		int startingX = x;// number x starts at for current row
 		int startingY = y;// number y starts at for current row
-
-		g.setColor(Color.WHITE);
-		g.drawString("E", COMPASS_OFFSET, COMPASS_OFFSET);
 		// while current row < than the max
 		while (currentRow < maxLength * 2) {
 
@@ -131,9 +121,6 @@ public class IsometricRenderer implements Serializable {
 		int y = 0;// Reference int to second array
 		int startingX = x;// number x starts at for current row
 		int startingY = y;// number y starts at for current row
-
-		g.setColor(Color.WHITE);
-		g.drawString("S", COMPASS_OFFSET, COMPASS_OFFSET);
 		// while current row < than the max
 		while (currentRow < maxLength * 2) {
 
@@ -181,8 +168,6 @@ public class IsometricRenderer implements Serializable {
 		int y = 0;// Reference int to second array
 		int startingX = x;// number x starts at for current row
 		int startingY = y;// number y starts at for current row
-		g.setColor(Color.WHITE);
-		g.drawString("W", COMPASS_OFFSET, COMPASS_OFFSET);
 		// while current row < than the max
 		while (currentRow < maxLength * 2) {
 

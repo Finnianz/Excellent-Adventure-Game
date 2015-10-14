@@ -29,6 +29,7 @@ public class RenderCanvas extends JPanel {
 	private DrawableTile[][] board;
 	private int height = 0;
 	private int width = 0;
+	private AnimationSequence compassImg = new AnimationSequence("Compass");
 
 	public enum Compass {
 		NORTH, EAST, SOUTH, WEST;
@@ -75,6 +76,7 @@ public class RenderCanvas extends JPanel {
 	public void paint(Graphics g) {
 		g.setColor(Color.GRAY);
 		g.fillRect(0, 0, width, height);
+		g.drawImage(compassImg.getImage(direction), 0, 0, (int)(compassImg.getImage(direction).getWidth()*.5), (int)(compassImg.getImage(direction).getHeight()*.5), null);
 		if (board == null)
 			return;
 		switch (direction) {
