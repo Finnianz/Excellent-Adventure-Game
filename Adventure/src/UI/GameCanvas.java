@@ -239,8 +239,6 @@ public class GameCanvas extends JPanel implements Serializable {
 	 * @return ImageIcon
 	 */
 	public static ImageIcon resize(BufferedImage image, int width, int height) {
-		// BufferedImage bi = new BufferedImage(width, height,
-		// BufferedImage.TRANSLUCENT);
 		Graphics2D g2d = (Graphics2D) image.createGraphics();
 		g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
 		g2d.drawImage(image, 0, 0, width, height, null);

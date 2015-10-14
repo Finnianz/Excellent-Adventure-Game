@@ -95,6 +95,24 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 					Main.moveRight(0);
 					canvasOfGame.drawBag();
 				}
+				if (Main.characters.size() > 1) {
+					if (e.getKeyCode() == (87)) {
+						Main.moveUp(1);
+						canvasOfGame.drawBag();
+					}
+					if (e.getKeyCode() == (83)) {
+						Main.moveDown(1);
+						canvasOfGame.drawBag();
+					}
+					if (e.getKeyCode() == (65)) {
+						Main.moveLeft(1);
+						canvasOfGame.drawBag();
+					}
+					if (e.getKeyCode() == (68)) {
+						Main.moveRight(1);
+						canvasOfGame.drawBag();
+					}
+				}
 
 			} else if (e.getID() == KeyEvent.KEY_RELEASED) {
 
