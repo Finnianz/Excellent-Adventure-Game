@@ -372,13 +372,16 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 				+ "\n\nWhile inside...\n"
 				+ "you got separated by a prankster jumping out from behind a bookshelf\nunfortunately you then fell down a rusty trapdoor and died...\n "
 				+ "\nas a ghost you must find your way out so you can get revenge!\n"
-				+ "                      GOOD LUCK GETTING OUT!!!!!!\n\n"), "Instructions", JOptionPane.PLAIN_MESSAGE, new ImageIcon(getClass().getResource("Tower2.jpg")));
+				+ "                      GOOD LUCK GETTING OUT!!!!!!\n\n"), "Instructions", JOptionPane.PLAIN_MESSAGE, new ImageIcon(getClass().getResource("hauntedHouse.gif")));
 		ImageIcon image =new ImageIcon(getClass().getResource("Instructions.png"));
 		JOptionPane.showMessageDialog(this, "                       YOU MUST MAKE YOUR WAY DOWN THE TOWER. \n\n"
 				+ ">Hunt around the rooms find a key and make "
 				+ "your way through the trapdoor\n   --by selecting the key and clicking on the door.\n\n >If you forgot"
 				+ " something you can make your way back up the ladder\n   --But beware the door will lock again behind you\n\n"
 				+ ">Some items you can push around the room and others if \nyou bump into them they may drop out a useful object ", "Instructions", JOptionPane.PLAIN_MESSAGE, image);
+	}
+	public void win(){
+		JOptionPane.showMessageDialog(this, ("you win"), "Winner", JOptionPane.PLAIN_MESSAGE, new ImageIcon(getClass().getResource("win.gif")));
 	}
 
 	/**

@@ -59,7 +59,6 @@ public class GameCanvas extends JPanel implements Serializable {
 	 */
 	public GameCanvas() {
 		setLayout(new BorderLayout());
-		//setDefaultSize(2000,2000);
 		// creating panel and adding the render canvas
 		outerPanel = new JPanel();
 		outerPanel.setLayout(new BorderLayout());
@@ -229,11 +228,7 @@ public class GameCanvas extends JPanel implements Serializable {
 			}
 		}
 	}
-
-	public ImageIcon getItem(Game.Item i) {
-		return null; // remove for compiling
-	}
-
+	
 	/**
 	 * helper method for changing the size of image icons
 	 * 
