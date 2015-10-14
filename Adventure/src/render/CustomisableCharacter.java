@@ -16,6 +16,11 @@ public class CustomisableCharacter extends Drawable {
 	private Direction dir = Direction.DOWN;
 	private final int HAT_DISPLACEMENT = 30;
 
+	/**
+	 * 
+	 * @param characterImgLoc
+	 * @param hatString
+	 */
 	public CustomisableCharacter(String characterImgLoc, String hatString) {
 		super(characterImgLoc, Position.CENTER);
 		hatImages = new AnimationSequence(hatString);

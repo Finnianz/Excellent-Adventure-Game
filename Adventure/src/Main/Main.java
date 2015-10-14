@@ -5,6 +5,7 @@ import Game.Gameplay;
 import Game.Location;
 import Game.Room;
 import UI.GameFrame;
+import render.CustomisableCharacter.Direction;
 import render.RenderCanvas;
 
 import java.net.InetAddress;
@@ -185,6 +186,7 @@ public class Main {
 	}
 
 	public static void moveLeft() {
+		game.getCharacters().get(0).setDirection(Direction.LEFT);
 		RenderCanvas.Compass direction = game.getFrame().getC().getRenderCanvas().getDirection();
 		switch (direction) {
 		case NORTH:
@@ -205,6 +207,7 @@ public class Main {
 	}
 
 	public static void moveRight() {
+		game.getCharacters().get(0).setDirection(Direction.RIGHT);
 		RenderCanvas.Compass direction = game.getFrame().getC().getRenderCanvas().getDirection();
 		switch (direction) {
 		case NORTH:
@@ -225,6 +228,7 @@ public class Main {
 	}
 
 	public static void moveUp() {
+		game.getCharacters().get(0).setDirection(Direction.UP);
 		RenderCanvas.Compass direction = game.getFrame().getC().getRenderCanvas().getDirection();
 		switch (direction) {
 		case NORTH:
@@ -245,6 +249,7 @@ public class Main {
 	}
 
 	public static void moveDown() {
+		game.getCharacters().get(0).setDirection(Direction.DOWN);
 		RenderCanvas.Compass direction = game.getFrame().getC().getRenderCanvas().getDirection();
 		switch (direction) {
 		case NORTH:
