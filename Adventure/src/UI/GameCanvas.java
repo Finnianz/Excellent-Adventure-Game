@@ -191,7 +191,7 @@ public class GameCanvas extends JPanel implements Serializable {
 	 * Draws the actual images in the bag in to the panel
 	 */
 	public void drawBag() {
-		 if(bagToDraw!=null){
+		 if(true){
 		for (int a = 0; a < bag.length; a++) {
 			 if(bagToDraw[a]!=null){
 			 ImageIcon card = getItem(bagToDraw[a]);
