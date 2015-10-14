@@ -48,8 +48,10 @@ public class StationaryItem extends Item {
 						dropLoc = this.getRoomID().getFloor()[this.getLoc().getX()][this.getLoc().getY() + 1];
 					}
 					else{
-						dropLoc = this.getRoomID().getFloor()[this.getLoc().getX()][this.getLoc().getY()-1];
-					}					
+						if(this.getLoc().getY()-1 >=0){
+							dropLoc = this.getRoomID().getFloor()[this.getLoc().getX()][this.getLoc().getY()-1];
+						}					
+					}
 					dropLoc.setOccupier(hiddenItem);	
 					itemFound = true;
 				}
@@ -57,7 +59,7 @@ public class StationaryItem extends Item {
 		}
 
 	}
-	
+
 	/**
 	 * @return the hiddenItem
 	 */
@@ -88,6 +90,6 @@ public class StationaryItem extends Item {
 	public void setItemFound(Boolean itemFound) {
 		this.itemFound = itemFound;
 	}
-	
-	
+
+
 }
