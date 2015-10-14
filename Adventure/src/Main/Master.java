@@ -1,5 +1,9 @@
+//Team 19 
+//Finnian Dempsey 300276760
 
+//
 package Main;
+
 
 import java.util.*;
 import java.io.*;
@@ -12,14 +16,16 @@ import render.RenderCanvas;
 
 /**
  * A master connection receives events from a slave connection via a socket.
- * These events are registered with the board. The master connection is also
- * responsible for transmitting information to the slave about the current board
- * state.
+ * These events are registered with the game. The master connection is also
+ * responsible for transmitting information to the slave about the current game.
  */
 public final class Master implements Runnable {
 
 	private final Socket socket;
 
+	
+	
+	
 	public Master(Socket socket) {
 		this.socket = socket;
 
