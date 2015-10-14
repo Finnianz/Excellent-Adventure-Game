@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -185,8 +186,6 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				playerHat = e.getActionCommand().toString();
-				System.out.print(playerHat);
-				System.out.print(e.getActionCommand().toString());
 			}
 		});
 		JRadioButton cowboy = new JRadioButton("Cowboy");
@@ -361,9 +360,12 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 	 * beginning of the game
 	 */
 	public void showInstructions() {
-		JOptionPane.showMessageDialog(this, "this is a game \nit is not yet clear what to do.", "Instructions",
-				JOptionPane.PLAIN_MESSAGE);
-		JOptionPane.showMessageDialog(this, "more unknown instructions", "Instructions", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(this, ("\n\n"
+				+ "It was halloween and foolishy you and\nyour friends go to a haunted house. While inside \n"
+				+ "your friends thought it would be fun to ditch you\n unfortunately you then got scared to death \n by the spirits. Now you must escape the tower\n "
+				+ "so you can get revenge!\n"
+				+ "          GOOD LUCK GETTING OUT!!!!!!\n\n"), "Instructions", JOptionPane.PLAIN_MESSAGE, new ImageIcon(getClass().getResource("Tower2.jpg")));
+		JOptionPane.showMessageDialog(this, "You must make your way down the tower. Hunt around the rooms ", "Instructions", JOptionPane.PLAIN_MESSAGE);
 	}
 
 	/**

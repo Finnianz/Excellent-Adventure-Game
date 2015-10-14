@@ -56,7 +56,9 @@ public class Gameplay implements Serializable {
 		// tower.addItem(box, tower.getFloor()[7][7]);
 		Location book = tower.getFloor()[9][6];
 		StationaryItem bookshelf = new StationaryItem("RedBook", Position.CENTER, book, tower, true, false, 2,
-				new CollectableItem("SkelKey", Position.CENTER, tower, null, 1));
+				null);
+		CollectableItem key = new CollectableItem("SkelKey", Position.CENTER, tower, null, 1, bookshelf);
+		bookshelf.setHiddenItem(key);
 		tower.getFloor()[9][6].setOccupier(bookshelf);
 		rooms.add(tower);
 		rooms.add(dungeon);
@@ -92,16 +94,14 @@ public class Gameplay implements Serializable {
 					character.moveSpace(newLoc);
 					current.setOccupier(null);
 					newLoc.setOccupier(character);
-					// TODO Remove println
-					System.out.println("moving east");
-					return;
-				} else {
+				} 
+				else {
 					character.setCurrentRoom(((Trapdoor) newLoc).getExit());
 					Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
 					character.setCurrentLocation(newRoomLoc);
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
-					((Trapdoor) newLoc).setLockRoom(true);
+					((Trapdoor) newLoc).setUnLockRoom(false);
 					Main.setRoom(character.getCurrentRoom());
 					
 				}
@@ -121,12 +121,11 @@ public class Gameplay implements Serializable {
 				}
 				current.setOccupier(null);
 				newLoc.setOccupier(character);
-				// TODO Remove println
-				System.out.println("moving east");
-
-			} else if (itemOnNewLoc instanceof StationaryItem) {
+			} 
+			else if (itemOnNewLoc instanceof StationaryItem) {
 				((StationaryItem) itemOnNewLoc).interact();
-			} else if (itemOnNewLoc instanceof MovableItem) {
+			}
+			else if (itemOnNewLoc instanceof MovableItem) {
 				((MovableItem) itemOnNewLoc).move(newLoc, current, character.getCurrentRoom(), character);
 			}
 		}
@@ -143,17 +142,14 @@ public class Gameplay implements Serializable {
 					character.moveSpace(newLoc);
 					current.setOccupier(null);
 					newLoc.setOccupier(character);
-					// TODO Remove println
-					System.out.println("moving east");
-					return;
-					// TODO stand on locked door
-				} else {
+		} 
+				else {
 					character.setCurrentRoom(((Trapdoor) newLoc).getExit());
 					Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
 					character.setCurrentLocation(newRoomLoc);
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
-					((Trapdoor) newLoc).setLockRoom(true);
+					((Trapdoor) newLoc).setUnLockRoom(false);
 					Main.setRoom(character.getCurrentRoom());
 				}
 			}
@@ -172,11 +168,11 @@ public class Gameplay implements Serializable {
 				}
 				current.setOccupier(null);
 				newLoc.setOccupier(character);
-				// TODO Remove println
-				System.out.println("moving west");
-			} else if (itemOnNewLoc instanceof StationaryItem) {
+			} 
+			else if (itemOnNewLoc instanceof StationaryItem) {
 				((StationaryItem) itemOnNewLoc).interact();
-			} else if (itemOnNewLoc instanceof MovableItem) {
+			} 
+			else if (itemOnNewLoc instanceof MovableItem) {
 				((MovableItem) itemOnNewLoc).move(newLoc, current, character.getCurrentRoom(), character);
 			}
 		}
@@ -193,18 +189,13 @@ public class Gameplay implements Serializable {
 					character.moveSpace(newLoc);
 					current.setOccupier(null);
 					newLoc.setOccupier(character);
-					// TODO Remove println
-					System.out.println("moving east");
-					return;
-					// TODO stand on locked door
 				} else {
 					character.setCurrentRoom(((Trapdoor) newLoc).getExit());
 					Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX() + 1][newLoc.getY()];
 					character.setCurrentLocation(newRoomLoc);
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
-					((Trapdoor) newLoc).setLockRoom(true);
-
+					((Trapdoor) newLoc).setUnLockRoom(false);
 					Main.setRoom(character.getCurrentRoom());
 				}
 			}
@@ -223,11 +214,11 @@ public class Gameplay implements Serializable {
 				}
 				current.setOccupier(null);
 				newLoc.setOccupier(character);
-				// TODO Remove println
-				System.out.println("moving South");
-			} else if (itemOnNewLoc instanceof StationaryItem) {
+			} 
+			else if (itemOnNewLoc instanceof StationaryItem) {
 				((StationaryItem) itemOnNewLoc).interact();
-			} else if (itemOnNewLoc instanceof MovableItem) {
+			} 
+			else if (itemOnNewLoc instanceof MovableItem) {
 				((MovableItem) itemOnNewLoc).move(newLoc, current, character.getCurrentRoom(), character);
 			}
 		}
@@ -244,17 +235,14 @@ public class Gameplay implements Serializable {
 					character.moveSpace(newLoc);
 					current.setOccupier(null);
 					newLoc.setOccupier(character);
-					// TODO Remove println
-					System.out.println("moving east");
-					return;
-					// TODO stand on locked door
-				} else {
+				} 
+				else {
 					character.setCurrentRoom(((Trapdoor) newLoc).getExit());
 					Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
 					character.setCurrentLocation(newRoomLoc);
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
-					((Trapdoor) newLoc).setLockRoom(true);
+					((Trapdoor) newLoc).setUnLockRoom(false);
 
 					Main.setRoom(character.getCurrentRoom());
 				}
@@ -274,11 +262,11 @@ public class Gameplay implements Serializable {
 				}
 				current.setOccupier(null);
 				newLoc.setOccupier(character);
-				// TODO Remove println
-				System.out.println("moving north");
-			} else if (itemOnNewLoc instanceof StationaryItem) {
+			} 
+			else if (itemOnNewLoc instanceof StationaryItem) {
 				((StationaryItem) itemOnNewLoc).interact();
-			} else if (itemOnNewLoc instanceof MovableItem) {
+			} 
+			else if (itemOnNewLoc instanceof MovableItem) {
 				((MovableItem) itemOnNewLoc).move(newLoc, current, character.getCurrentRoom(), character);
 			}
 		}
@@ -290,8 +278,7 @@ public class Gameplay implements Serializable {
 			if (selectedOnBoard instanceof Trapdoor) {
 				key = ((Trapdoor) selectedOnBoard).getKeyID();
 				if (selectedFromBag.getiD() == key) {
-					((Trapdoor) selectedOnBoard).setLockRoom(false);
-					// TODO respawn keys here or when door is used?
+					((Trapdoor) selectedOnBoard).setUnLockRoom(false);
 				}
 			}
 		}

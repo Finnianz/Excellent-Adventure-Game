@@ -51,4 +51,37 @@ public class StationaryItem extends Item {
 		}
 
 	}
+	
+	/**
+	 * @return the hiddenItem
+	 */
+	public CollectableItem getHiddenItem() {
+		return hiddenItem;
+	}
+
+
+	/**
+	 * @param hiddenItem the hiddenItem to set
+	 */
+	public void setHiddenItem(CollectableItem hiddenItem) {
+		this.hiddenItem = hiddenItem;
+	}
+
+
+	/**
+	 * @return the itemFound
+	 */
+	public Boolean getItemFound() {
+		return itemFound;
+	}
+
+
+	/**
+	 * @param itemFound the itemFound to set
+	 */
+	public void setItemFound(Boolean itemFound) {
+		this.itemFound = itemFound;
+	}
+	
+	
 }
