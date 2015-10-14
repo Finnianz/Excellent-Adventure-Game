@@ -1,5 +1,7 @@
 package Main;
 
+//Team 19
+//Finnian Dempsey 300276760
 import java.util.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -15,7 +17,9 @@ import render.DrawableTile;
 import render.RenderCanvas;
 
 /**
- * A slave connection
+ * A slave connection receives information about the current state of the board
+ * and relays that into the local copy of the game. The slave connection also
+ * notifies the master connection of key presses and mouse clicks by the player.
  */
 
 public final class Slave implements Runnable, KeyListener, MouseListener {
@@ -24,6 +28,14 @@ public final class Slave implements Runnable, KeyListener, MouseListener {
 	private DataOutputStream output;
 	private DataInputStream input;
 	// Name??
+
+	/**
+	 * Construct a slave connection from a socket. A slave connection does no
+	 * local computation, other than to render the changes given from the server
+	 * 
+	 * @param socket
+	 * 
+	 */
 
 	public Slave(Socket socket) {
 		this.socket = socket;
