@@ -18,7 +18,7 @@ public class MovableItem extends Item {
 	public void move(Location currentLoc, Location playerLoc, Room currentRoom, Character ch){
 		int newX = currentLoc.getX() + (currentLoc.getX() - playerLoc.getX());
 		int newY = currentLoc.getY() + (currentLoc.getY() - playerLoc.getY());
-		if(newX <= currentRoom.getWidth() && newY <= currentRoom.getWidth()){
+		if(newX < currentRoom.getWidth() && newY < currentRoom.getWidth()&& newX>=0 && newY>=0){
 			Location newLoc = currentRoom.getFloor()[newX][newY];
 			Drawable itemOnLoc = currentRoom.checkLocation(newLoc);
 			if(itemOnLoc == null && !(newLoc instanceof Trapdoor) && !(newLoc instanceof Ladder) && !(newLoc instanceof EmptyTile)){
