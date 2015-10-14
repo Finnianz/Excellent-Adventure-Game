@@ -34,7 +34,7 @@ public class Gameplay implements Serializable {
 		Trapdoor t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(), new Item("SkullDoor", Position.FLOOR, tower.getFloor()[4][4], tower), doorLoc.getOccupier(),4 ,4 , tower, dungeon, 1);
 		tower.getFloor()[4][4] = t1;
 		tower.addDoor(t1);
-		EmptyTile e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(), new Item("FloorBlock", Position.FLOOR, tower.getFloor()[5][4], tower), empty.getOccupier(), 5, 5);
+		EmptyTile e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(), new Item("FloorBlock", Position.FLOOR, tower.getFloor()[5][4], tower), empty.getOccupier(), 5, 4);
 		tower.getFloor()[5][4] = e1;
 		Location ladderLoc = dungeon.getFloor()[4][4];
 		empty = dungeon.getFloor()[5][4];
