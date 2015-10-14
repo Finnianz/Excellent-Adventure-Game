@@ -57,6 +57,12 @@ public final class Master implements Runnable {
 				output.writeUTF(game.getFrame().getPlayerColour());
 				output.writeUTF(game.getFrame().getPlayerHat());
 
+				RenderCanvas renderCanv = new RenderCanvas();
+				game.setCanvas(renderCanv);
+
+				game.getFrame().getC().getRenderCanvas().setRoom(game.getRooms().get(0));
+				game.getFrame().getC().repaint();
+
 				output.flush();
 
 			}

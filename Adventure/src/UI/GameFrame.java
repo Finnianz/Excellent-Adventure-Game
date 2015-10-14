@@ -250,8 +250,8 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 		startNewSingle = new JMenuItem("Start Single Player Game");
 		startNewSingle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Gameplay(new ArrayList<Game.Character>());
 				inputPlayers();
+				Main.startGame();
 			}
 		});
 		menu.add(startNewSingle);
