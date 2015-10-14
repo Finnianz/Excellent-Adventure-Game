@@ -267,14 +267,26 @@ public abstract class Drawable {
 		return true;
 	}
 
+	/**
+	 * ticks the animation forward one frame
+	 */
 	public void animationTick() {
 		images.animationTick();
 	}
 
+	/**
+	 * switches the active animation track
+	 */
 	public void changeAnimation() {
 		images.changeState();
 	}
 
+	/**
+	 * returns true if the onscreen position of object is contains the given point
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public boolean isContained(int x, int y) {
 		int width = (int) (images.getImage(direction).getWidth() * SCALE);
 		int height = (int) ((int) images.getImage(direction).getHeight() * SCALE);
@@ -304,6 +316,10 @@ public abstract class Drawable {
 		this.selected = selected;
 	}
 
+	/**
+	 * 
+	 * @return yOnScreen
+	 */
 	public int getYOnScreen() {
 		return yOnScreen;
 	}

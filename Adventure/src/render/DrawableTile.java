@@ -268,6 +268,12 @@ public class DrawableTile {
 		this.occupier = occupier;
 	}
 
+	/**
+	 * checks if the floor tile of this drawableTile contains the point clickedOn
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public DrawableTile isClickedOn(int x, int y) {
 		if (floor.isContained(x, y)) {
 			return this;
