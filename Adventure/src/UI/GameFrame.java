@@ -68,6 +68,7 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 
 		KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 		manager.addKeyEventDispatcher(new MyDispatcher());
+		//win();
 	}
 
 	/**
@@ -81,7 +82,6 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 				if (e.getKeyCode() == (40)) {
 					Main.moveDown(0);
 					canvasOfGame.drawBag();
-
 				}
 				if (e.getKeyCode() == (37)) {
 					Main.moveLeft(0);
@@ -381,7 +381,7 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 				+ ">Some items you can push around the room and others if \nyou bump into them they may drop out a useful object ", "Instructions", JOptionPane.PLAIN_MESSAGE, image);
 	}
 	public void win(){
-		JOptionPane.showMessageDialog(this, ("you win"), "Winner", JOptionPane.PLAIN_MESSAGE, new ImageIcon(getClass().getResource("win.gif")));
+		JOptionPane.showMessageDialog(this, ("you win"), "Winner", JOptionPane.PLAIN_MESSAGE, new ImageIcon(getClass().getResource("escape.gif")));
 	}
 
 	/**
