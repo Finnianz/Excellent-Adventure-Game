@@ -59,7 +59,7 @@ public class GameCanvas extends JPanel implements Serializable {
 	 */
 	public GameCanvas() {
 		setLayout(new BorderLayout());
-
+		//setDefaultSize(2000,2000);
 		// creating panel and adding the render canvas
 		outerPanel = new JPanel();
 		outerPanel.setLayout(new BorderLayout());

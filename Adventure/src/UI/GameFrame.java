@@ -62,7 +62,6 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 		setSize(1500, 1500);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(this);
-		pack();
 		setResizable(true);
 		setVisible(true);
 		showInstructions();
@@ -369,15 +368,17 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 	 */
 	public void showInstructions() {
 		JOptionPane.showMessageDialog(this, ("\n\n"
-				+ "It was halloween and foolishy you and\nyour friends go to a haunted house. While inside \n"
-				+ "your friends thought it would be fun to ditch you\n unfortunately you then got scared to death \n by the spirits. Now you must escape the tower\n "
-				+ "so you can get revenge!\n"
-				+ "          GOOD LUCK GETTING OUT!!!!!!\n\n"), "Instructions", JOptionPane.PLAIN_MESSAGE, new ImageIcon(getClass().getResource("Tower2.jpg")));
-		JOptionPane.showMessageDialog(this, "You must make your way down the tower. \n"
-				+ "Hunt around the rooms find a key and make \n"
-				+ "your way through the trap door and if you forgot\n"
-				+ " someting you can make your way back up the ladder\n"
-				+ " if you dare!", "Instructions", JOptionPane.PLAIN_MESSAGE);
+				+ "Its halloween and foolishy you and your friends go to a haunted Tower. "
+				+ "\n\nWhile inside...\n"
+				+ "you got separated by a prankster jumping out from behind a bookshelf\nunfortunately you then fell down a rusty trapdoor and died...\n "
+				+ "\nas a ghost you must find your way out so you can get revenge!\n"
+				+ "                      GOOD LUCK GETTING OUT!!!!!!\n\n"), "Instructions", JOptionPane.PLAIN_MESSAGE, new ImageIcon(getClass().getResource("Tower2.jpg")));
+		ImageIcon image =new ImageIcon(getClass().getResource("Instructions.png"));
+		JOptionPane.showMessageDialog(this, "                       YOU MUST MAKE YOUR WAY DOWN THE TOWER. \n\n"
+				+ ">Hunt around the rooms find a key and make "
+				+ "your way through the trapdoor\n   --by selecting the key and clicking on the door.\n\n >If you forgot"
+				+ " something you can make your way back up the ladder\n   --But beware the door will lock again behind you\n\n"
+				+ ">Some items you can push around the room and others if \nyou bump into them they may drop out a useful object ", "Instructions", JOptionPane.PLAIN_MESSAGE, image);
 	}
 
 	/**
