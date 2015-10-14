@@ -223,6 +223,11 @@ public class GameCanvas extends JPanel implements Serializable {
 				}
 			}
 		}
+		else{
+			for(int a = 0; a < bag.length; a++){
+				bag[a].setIcon(new ImageIcon(getClass().getResource("emptyBag.png")));
+			}
+		}
 	}
 
 	public ImageIcon getItem(Game.Item i) {
