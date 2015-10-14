@@ -109,6 +109,7 @@ public class Gameplay implements Serializable {
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
 					((Trapdoor) newLoc).setUnLockRoom(false);
+					newLoc.getFloor().changeAnimation();
 					Main.setRoom(character.getCurrentRoom());
 					
 				}
@@ -157,6 +158,7 @@ public class Gameplay implements Serializable {
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
 					((Trapdoor) newLoc).setUnLockRoom(false);
+					newLoc.getFloor().changeAnimation();
 					Main.setRoom(character.getCurrentRoom());
 				}
 			}
@@ -203,6 +205,7 @@ public class Gameplay implements Serializable {
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
 					((Trapdoor) newLoc).setUnLockRoom(false);
+					newLoc.getFloor().changeAnimation();
 					Main.setRoom(character.getCurrentRoom());
 				}
 			}
@@ -250,7 +253,7 @@ public class Gameplay implements Serializable {
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
 					((Trapdoor) newLoc).setUnLockRoom(false);
-
+					newLoc.getFloor().changeAnimation();
 					Main.setRoom(character.getCurrentRoom());
 				}
 			}

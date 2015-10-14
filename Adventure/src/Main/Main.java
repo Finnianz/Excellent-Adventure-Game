@@ -283,7 +283,7 @@ public class Main {
 	public static void useItem(int bagIndex, DrawableTile door){
 		CollectableItem key = game.getCharacters().get(0).getItems().get(bagIndex);
 		if(door instanceof Trapdoor){
-		key.use((Trapdoor) door);
+		key.use((Trapdoor) door, game.getCharacters().get(0));
 		}
 	}
 }
