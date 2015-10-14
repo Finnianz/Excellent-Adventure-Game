@@ -56,32 +56,36 @@ public final class Master implements Runnable {
 			while (!exit) {
 
 				if (input.available() != 0) {
+					if (input.readUTF().equals("button")) {
+						// read direction event from client and return x,y for
+						// movement.
+						int dir = input.readInt();
+						switch (dir) {
+						case 1:
+							Main.moveUp(1);
+							output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getX());
+							output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getY());
+							break;
+						case 2:
+							Main.moveDown(1);
+							output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getX());
+							output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getY());
+							break;
+						case 3:
+							Main.moveRight(1);
+							output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getX());
+							output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getY());
+							break;
+						case 4:
+							Main.moveLeft(1);
+							output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getX());
+							output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getY());
+							break;
+						}
+					} else if (input.readUTF().equals("click")) {
+						System.out.println("X : " + input.readInt());
+						System.out.println("Y : " + input.readInt());
 
-					// read direction event from client and return x,y for
-					// movement.
-					int dir = input.readInt();
-					switch (dir) {
-					case 1:
-						Main.moveUp(1);
-						
-						output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getX());
-						output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getY());
-						break;
-					case 2:
-						Main.moveDown(1);
-						output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getX());
-						output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getY());
-						break;
-					case 3:
-						Main.moveRight(1);
-						output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getX());
-						output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getY());
-						break;
-					case 4:
-						Main.moveLeft(1);
-						output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getX());
-						output.writeInt(Main.game.getCharacters().get(1).getCurrentLocation().getY());
-						break;
 					}
 				}
 

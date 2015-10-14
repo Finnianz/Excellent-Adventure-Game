@@ -143,6 +143,7 @@ public class Main {
 		frame.inputPlayers();
 
 		characters.add(new Character(frame.getPlayerColour() + "Ghost", frame.getPlayerHat() + "Hat", frame.getName()));
+
 		game = new Gameplay(characters, false);
 
 		RenderCanvas renderCanv = new RenderCanvas();
@@ -285,5 +286,11 @@ public class Main {
 		if (door instanceof Trapdoor) {
 			key.use((Trapdoor) door, game.getCharacters().get(0));
 		}
+	}
+
+	public static void winGame(Game.Character ch) {
+		System.out.println("Win Main");
+		game.getFrame().win();
+
 	}
 }

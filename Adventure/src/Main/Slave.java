@@ -3,19 +3,22 @@ package Main;
 import java.util.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.*;
 import java.net.*;
 
 import Game.*;
 import Game.Character;
 import UI.*;
+import render.DrawableTile;
 import render.RenderCanvas;
 
 /**
  * A slave connection
  */
 
-public final class Slave implements Runnable, KeyListener {
+public final class Slave implements Runnable, KeyListener, MouseListener {
 
 	private Socket socket;
 	private DataOutputStream output;
@@ -97,15 +100,19 @@ public final class Slave implements Runnable, KeyListener {
 		try {
 			int code = e.getKeyCode();
 			if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_KP_RIGHT) {
+				output.writeUTF("button");
 				output.writeInt(3);
 
 			} else if (code == KeyEvent.VK_LEFT || code == KeyEvent.VK_KP_LEFT) {
+				output.writeUTF("button");
 				output.writeInt(4);
 
 			} else if (code == KeyEvent.VK_UP) {
+				output.writeUTF("button");
 				output.writeInt(1);
 
 			} else if (code == KeyEvent.VK_DOWN) {
+				output.writeUTF("button");
 				output.writeInt(2);
 			}
 			output.flush();
@@ -123,6 +130,43 @@ public final class Slave implements Runnable, KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		try {
+			output.writeUTF("click");
+			output.writeInt(e.getX());
+			output.writeInt(e.getY());
+
+		} catch (IOException ioe) {
+			// something went wrong trying to communicate the click to the
+			// server. So, we just ignore it.
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
