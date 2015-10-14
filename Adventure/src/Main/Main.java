@@ -276,13 +276,14 @@ public class Main {
 		frame.getC().getRenderCanvas().setRoom(room);
 	}
 	
-	public static List<Game.Item>getBag(){
+	public static List<Game.CollectableItem>getBag(){
 		return game.getCharacters().get(0).getItems();
 	}
 	
-	public static void useItem(CollectableItem key, DrawableTile door){
+	public static void useItem(int bagIndex, DrawableTile door){
+		CollectableItem key = game.getCharacters().get(0).getItems().get(bagIndex);
 		if(door instanceof Trapdoor){
-		key.use((Trapdoor) door);
+		key.use((Trapdoor) door, game.getCharacters().get(0));
 		}
 	}
 }

@@ -1,18 +1,24 @@
 package Game;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 import render.*;
 import render.Drawable.Position;
 
+/**
+ * 
+ * @author Michelle O'Neill ID:301025406
+ *
+ */
 
 public class Character extends CustomisableCharacter{
 	
 	private final String name;
 	private Room currentRoom;
 	private Location currentLocation;
-	private List<Item> items = new ArrayList<Item>();
+	private List<CollectableItem> items = new ArrayList<CollectableItem>();
 	
 	
 	public Character(String imgLoc, String hatname, String name){
@@ -28,7 +34,7 @@ public class Character extends CustomisableCharacter{
 		items.add(item);
 	}
 	
-	public List<Item> getItems(){
+	public List<CollectableItem> getItems(){
 		return items;
 	}
 	

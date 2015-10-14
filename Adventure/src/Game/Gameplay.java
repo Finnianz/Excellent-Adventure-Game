@@ -1,5 +1,6 @@
 package Game;
 
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -12,6 +13,12 @@ import java.util.List;
 
 import Main.Main;
 import UI.GameFrame;
+
+/**
+ * 
+ * @author Michelle O'Neill ID:301025406
+ *
+ */
 
 public class Gameplay implements Serializable {
 
@@ -102,6 +109,7 @@ public class Gameplay implements Serializable {
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
 					((Trapdoor) newLoc).setUnLockRoom(false);
+					newLoc.getFloor().changeAnimation();
 					Main.setRoom(character.getCurrentRoom());
 					
 				}
@@ -150,6 +158,7 @@ public class Gameplay implements Serializable {
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
 					((Trapdoor) newLoc).setUnLockRoom(false);
+					newLoc.getFloor().changeAnimation();
 					Main.setRoom(character.getCurrentRoom());
 				}
 			}
@@ -196,6 +205,7 @@ public class Gameplay implements Serializable {
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
 					((Trapdoor) newLoc).setUnLockRoom(false);
+					newLoc.getFloor().changeAnimation();
 					Main.setRoom(character.getCurrentRoom());
 				}
 			}
@@ -243,7 +253,7 @@ public class Gameplay implements Serializable {
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
 					((Trapdoor) newLoc).setUnLockRoom(false);
-
+					newLoc.getFloor().changeAnimation();
 					Main.setRoom(character.getCurrentRoom());
 				}
 			}

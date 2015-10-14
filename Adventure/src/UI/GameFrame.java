@@ -80,27 +80,21 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 		public boolean dispatchKeyEvent(KeyEvent e) {
 			if (e.getID() == KeyEvent.KEY_PRESSED) {
 				if (e.getKeyCode() == (40)) {
-					System.out.println("down");
 					Main.moveDown(0);
-					// game.moveSouth('player');
+					canvasOfGame.drawBag();
 
 				}
 				if (e.getKeyCode() == (37)) {
-					System.out.println("left");
 					Main.moveLeft(0);
-					// game.moveWest('player');
+					canvasOfGame.drawBag();
 				}
 				if (e.getKeyCode() == (38)) {
-					System.out.println("up");
 					Main.moveUp(0);
-
-					// game.moveNorth('player');
+					canvasOfGame.drawBag();
 				}
 				if (e.getKeyCode() == (39)) {
-					System.out.println("right");
 					Main.moveRight(0);
-
-					// game.moveEast('player');
+					canvasOfGame.drawBag();
 				}
 
 			} else if (e.getID() == KeyEvent.KEY_RELEASED) {
@@ -173,10 +167,17 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 
 		// asks for colour and saves as field
 		int token = JOptionPane.showOptionDialog(this, panel, "Choose your Player Colour:",
-				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-		System.out.print(token);
-		if (token == 0) {
-			System.out.print(playerColour);
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+		if (token == 1) {
+			int r = JOptionPane.showConfirmDialog(canvasOfGame, new JLabel("Exit?"), "Confirm Exit",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			if (r == JOptionPane.YES_OPTION) {
+				System.exit(0);
+			}
+			if (r == JOptionPane.NO_OPTION) {
+				int token3 = JOptionPane.showOptionDialog(this, panel, "Choose your Player Colour:",
+						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+			}
 		}
 		// set up radio buttons for selecting hat
 		JRadioButton beanie = new JRadioButton("Beanie");
@@ -232,11 +233,18 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 		panel2.add(tophat);
 
 		// asks for hat and saves as field playerHat
-		int token2 = JOptionPane.showOptionDialog(this, panel2, "Choose your Hat:", JOptionPane.YES_NO_CANCEL_OPTION,
+		int token2 = JOptionPane.showOptionDialog(this, panel2, "Choose your Hat:", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, null, null);
-		System.out.print(token);
-		if (token2 == 0) {
-			System.out.print(playerHat);
+		if (token2 == 1) {
+			int r = JOptionPane.showConfirmDialog(canvasOfGame, new JLabel("Exit?"), "Confirm Exit",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			if (r == JOptionPane.YES_OPTION) {
+				System.exit(0);
+			}
+			if (r == JOptionPane.NO_OPTION) {
+				int token4 = JOptionPane.showOptionDialog(this, panel2, "Choose your Hat:", JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, null, null);
+			}
 		}
 	}
 
@@ -365,7 +373,11 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 				+ "your friends thought it would be fun to ditch you\n unfortunately you then got scared to death \n by the spirits. Now you must escape the tower\n "
 				+ "so you can get revenge!\n"
 				+ "          GOOD LUCK GETTING OUT!!!!!!\n\n"), "Instructions", JOptionPane.PLAIN_MESSAGE, new ImageIcon(getClass().getResource("Tower2.jpg")));
-		JOptionPane.showMessageDialog(this, "You must make your way down the tower. Hunt around the rooms ", "Instructions", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(this, "You must make your way down the tower. \n"
+				+ "Hunt around the rooms find a key and make \n"
+				+ "your way through the trap door and if you forgot\n"
+				+ " someting you can make your way back up the ladder\n"
+				+ " if you dare!", "Instructions", JOptionPane.PLAIN_MESSAGE);
 	}
 
 	/**

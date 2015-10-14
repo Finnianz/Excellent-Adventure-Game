@@ -4,6 +4,12 @@ import javax.swing.ImageIcon;
 
 import render.Drawable.Position;
 
+/**
+ * 
+ * @author Michelle O'Neill ID:301025406
+ *
+ */
+
 public class StationaryItem extends Item {
 
 	Boolean interactable;
@@ -38,7 +44,7 @@ public class StationaryItem extends Item {
 					itemFound = true;
 				}
 				else{
-					if(this.getLoc().getY() + 1 < this.getRoomID().getFloor().length){
+					if(this.getLoc().getY() + 1 < this.getRoomID().getFloor().length && this.getRoomID().getFloor()[this.getLoc().getX()][this.getLoc().getY()+1].getOccupier()==null ){
 						dropLoc = this.getRoomID().getFloor()[this.getLoc().getX()][this.getLoc().getY() + 1];
 					}
 					else{

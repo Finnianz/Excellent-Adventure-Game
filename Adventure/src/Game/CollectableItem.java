@@ -1,4 +1,9 @@
 package Game;
+/**
+ * 
+ * @author Michelle O'Neill ID:301025406
+ *
+ */
 
 public class CollectableItem extends Item {
 
@@ -12,11 +17,12 @@ public class CollectableItem extends Item {
 		this.hidingPlace = hidingPlace;
 	}
 
-	public void use(Trapdoor door){
+	public void use(Trapdoor door, Character ch){
 		if(door.getKeyID() == iD){
 			door.setUnLockRoom(true);
 			door.getFloor().changeAnimation();
 			respawn();
+			ch.getItems().remove(this);
 		}
 	}
 

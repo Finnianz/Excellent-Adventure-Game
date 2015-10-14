@@ -7,6 +7,13 @@ import java.util.Map;
 
 import render.*;
 import render.Drawable.Position;
+
+/**
+ * 
+ * @author Michelle O'Neill ID:301025406
+ *
+ */
+
 public class Room {
 
 	private final int roomID;

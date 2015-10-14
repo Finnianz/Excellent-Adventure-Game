@@ -15,7 +15,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -26,6 +28,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
 
+import Game.CollectableItem;
+import Game.Item;
+import Main.Main;
 import render.DrawableTile;
 import render.RenderCanvas;
 
@@ -41,9 +46,10 @@ public class GameCanvas extends JPanel implements Serializable {
 	private RenderCanvas canvasRen = new RenderCanvas();
 	private JLabel[] bag;
 	private String selectedItem;
-	private Game.Item[] bagToDraw;
+	private List<CollectableItem> bagToDraw;
 	private JPanel button;
 	private JPanel handPanel;
+	private JLabel currentLabel;
 
 	/**
 	 * Creates a new Canvas and sets up the board Does this by creating a series
@@ -102,14 +108,19 @@ public class GameCanvas extends JPanel implements Serializable {
 		handPanel.setLayout(new GridLayout(1, 9));
 		bag = new JLabel[9];
 		for (int t = 0; t < bag.length; t++) {
-			ImageIcon icon2 = new ImageIcon(getClass().getResource("greentile.png"));
-			// TODO above is for temp displaying bad, need gamelogic
+			ImageIcon icon2 = new ImageIcon(getClass().getResource("emptyBag.png"));
 			bag[t] = new JLabel(icon2);
 			bag[t].setVisible(true);
 			bag[t].addMouseListener(new MouseListener() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					System.out.print("test");
+					if(currentLabel!=null){
+					currentLabel.setBorder(null);
+					}
+					Object event = e.getSource();
+					currentLabel = (JLabel) event;
+					Border b = BorderFactory.createLineBorder(Color.red, 5);
+					currentLabel.setBorder(b);
 				}
 
 				public void mousePressed(MouseEvent e) {
@@ -126,7 +137,6 @@ public class GameCanvas extends JPanel implements Serializable {
 			});
 
 			handPanel.add(bag[t], BorderLayout.CENTER);
-			// drawBag(); TODO drawing the proper logic complete
 		}
 		handPanel.setVisible(true);
 		add(handPanel, BorderLayout.SOUTH);
@@ -148,6 +158,15 @@ public class GameCanvas extends JPanel implements Serializable {
 			public void mouseReleased(MouseEvent e) {
 				repaint();
 				DrawableTile objectClicked = canvasRen.clickedOn(e);
+				int bagIndex;
+				for(int i=0;i<bagToDraw.size(); i++){
+					if(bag[i]==currentLabel){
+						bagIndex=i;
+						Main.useItem(bagIndex, objectClicked);
+					}
+					
+				}
+				drawBag();
 				// TODO check actions
 			}
 		});
@@ -191,18 +210,25 @@ public class GameCanvas extends JPanel implements Serializable {
 	 * Draws the actual images in the bag in to the panel
 	 */
 	public void drawBag() {
-		 if(true){
-		for (int a = 0; a < bag.length; a++) {
-			 if(bagToDraw[a]!=null){
-			 ImageIcon card = getItem(bagToDraw[a]);
-			 bag[a].setIcon(card);
+		if(!Main.getBag().isEmpty()){
+			bagToDraw = Main.getBag();
+			for (int a = 0; a < bagToDraw.size(); a++) {
+				if(bagToDraw.get(a)!=null){
+					BufferedImage bi =  bagToDraw.get(a).getImage();
+					 ImageIcon icon = resize(bi, 2000,2000);
+					bag[a].setIcon(icon);
+				}
+				else{
+					bag[a].setIcon(new ImageIcon(getClass().getResource("emptyBag.png")));
+				}
+			}
 		}
-		 else{
-		 bag[a].setIcon(null);
-		 	}
+		else{
+			for(int a = 0; a < bag.length; a++){
+				bag[a].setIcon(new ImageIcon(getClass().getResource("emptyBag.png")));
+			}
 		}
 	}
-}
 
 	public ImageIcon getItem(Game.Item i) {
 		return null; // remove for compiling
@@ -216,12 +242,12 @@ public class GameCanvas extends JPanel implements Serializable {
 	 * @param height
 	 * @return ImageIcon
 	 */
-	public static ImageIcon resize(ImageIcon image, int width, int height) {
-		BufferedImage bi = new BufferedImage(width, height, BufferedImage.TRANSLUCENT);
-		Graphics2D g2d = (Graphics2D) bi.createGraphics();
+	public static ImageIcon resize(BufferedImage image, int width, int height) {
+		//BufferedImage bi = new BufferedImage(width, height, BufferedImage.TRANSLUCENT);
+		Graphics2D g2d = (Graphics2D) image.createGraphics();
 		g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
-		g2d.drawImage(image.getImage(), 0, 0, width, height, null);
+		g2d.drawImage(image, 0, 0, width, height, null);
 		g2d.dispose();
-		return new ImageIcon(bi);
+		return new ImageIcon(image);
 	}
 }

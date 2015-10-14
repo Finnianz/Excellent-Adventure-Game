@@ -2,6 +2,12 @@ package Game;
 import render.*;
 import render.Drawable.Position;
 
+/**
+ * 
+ * @author Michelle O'Neill ID:301025406
+ *
+ */
+
 public class Location extends DrawableTile{
 	
 	private int x;
