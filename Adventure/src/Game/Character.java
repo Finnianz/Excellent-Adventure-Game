@@ -28,6 +28,10 @@ public class Character extends CustomisableCharacter{
 		items.add(item);
 	}
 	
+	public List<Item> getItems(){
+		return items;
+	}
+	
 	
 	/**
 	 * @return the currentRoom

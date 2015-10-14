@@ -272,4 +272,8 @@ public class Main {
 	public static void setRoom(Room room) {
 		frame.getC().getRenderCanvas().setRoom(room);
 	}
+	
+	public static List<Game.Item>getBag(){
+		return game.getCharacters().get(0).getItems();
+	}
 }
