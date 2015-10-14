@@ -48,7 +48,7 @@ public final class Master implements Runnable {
 				String hat = input.readUTF();
 				Main.characters.add(new Character(color + "Ghost", hat + "Hat", "Player1"));
 
-				System.out.println("??" + color + hat);
+				// System.out.println("??" + color + hat);
 				game = new Gameplay(Main.characters, true);
 				game.setFrame(frame);
 
@@ -57,11 +57,32 @@ public final class Master implements Runnable {
 				output.writeUTF(game.getFrame().getPlayerColour());
 				output.writeUTF(game.getFrame().getPlayerHat());
 
+				// now render game
 				RenderCanvas renderCanv = new RenderCanvas();
 				game.setCanvas(renderCanv);
 
 				game.getFrame().getC().getRenderCanvas().setRoom(game.getRooms().get(0));
 				game.getFrame().getC().repaint();
+
+				if (input.available() != 0) {
+
+					// read direction event from client.
+					int dir = input.readInt();
+					switch (dir) {
+					case 1:
+						Main.moveUp(1);
+						break;
+					case 2:
+						Main.moveDown(1);
+						break;
+					case 3:
+						Main.moveRight(1);
+						break;
+					case 4:
+						Main.moveLeft(1);
+						break;
+					}
+				}
 
 				output.flush();
 

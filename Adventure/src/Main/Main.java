@@ -113,9 +113,9 @@ public class Main {
 				// Wait for a socket
 				Socket s = ss.accept();
 				System.out.println("ACCEPTED CONNECTION FROM: " + s.getInetAddress());
-				
+
 				connection = new Master(s, game);
-				
+
 				connection.run();
 
 				return; // done
@@ -185,91 +185,91 @@ public class Main {
 		}
 	}
 
-	public static void moveLeft() {
-		game.getCharacters().get(0).setDirection(Direction.LEFT);
+	public static void moveLeft(int player) {
+		game.getCharacters().get(player).setDirection(Direction.LEFT);
 		RenderCanvas.Compass direction = game.getFrame().getC().getRenderCanvas().getDirection();
 		switch (direction) {
 		case NORTH:
-			game.moveWest(game.getCharacters().get(0));
+			game.moveWest(game.getCharacters().get(player));
 			break;
 		case SOUTH:
-			game.moveEast(game.getCharacters().get(0));
+			game.moveEast(game.getCharacters().get(player));
 			break;
 		case EAST:
-			game.moveNorth(game.getCharacters().get(0));
+			game.moveNorth(game.getCharacters().get(player));
 			break;
 		case WEST:
-			game.moveSouth(game.getCharacters().get(0));
+			game.moveSouth(game.getCharacters().get(player));
 			break;
 		}
 		game.getFrame().getC().repaint();
 
 	}
 
-	public static void moveRight() {
-		game.getCharacters().get(0).setDirection(Direction.RIGHT);
+	public static void moveRight(int player) {
+		game.getCharacters().get(player).setDirection(Direction.RIGHT);
 		RenderCanvas.Compass direction = game.getFrame().getC().getRenderCanvas().getDirection();
 		switch (direction) {
 		case NORTH:
-			game.moveEast(game.getCharacters().get(0));
+			game.moveEast(game.getCharacters().get(player));
 			break;
 		case SOUTH:
-			game.moveWest(game.getCharacters().get(0));
+			game.moveWest(game.getCharacters().get(player));
 			break;
 		case EAST:
-			game.moveSouth(game.getCharacters().get(0));
+			game.moveSouth(game.getCharacters().get(player));
 			break;
 		case WEST:
-			game.moveNorth(game.getCharacters().get(0));
+			game.moveNorth(game.getCharacters().get(player));
 			break;
 		}
 		game.getFrame().getC().repaint();
 
 	}
 
-	public static void moveUp() {
-		game.getCharacters().get(0).setDirection(Direction.UP);
+	public static void moveUp(int player) {
+		game.getCharacters().get(player).setDirection(Direction.UP);
 		RenderCanvas.Compass direction = game.getFrame().getC().getRenderCanvas().getDirection();
 		switch (direction) {
 		case NORTH:
-			game.moveNorth(game.getCharacters().get(0));
+			game.moveNorth(game.getCharacters().get(player));
 			break;
 		case SOUTH:
-			game.moveSouth(game.getCharacters().get(0));
+			game.moveSouth(game.getCharacters().get(player));
 			break;
 		case EAST:
-			game.moveEast(game.getCharacters().get(0));
+			game.moveEast(game.getCharacters().get(player));
 			break;
 		case WEST:
-			game.moveWest(game.getCharacters().get(0));
+			game.moveWest(game.getCharacters().get(player));
 			break;
 		}
 		game.getFrame().getC().repaint();
 
 	}
 
-	public static void moveDown() {
-		game.getCharacters().get(0).setDirection(Direction.DOWN);
+	public static void moveDown(int player) {
+		game.getCharacters().get(player).setDirection(Direction.DOWN);
 		RenderCanvas.Compass direction = game.getFrame().getC().getRenderCanvas().getDirection();
 		switch (direction) {
 		case NORTH:
-			game.moveSouth(game.getCharacters().get(0));
+			game.moveSouth(game.getCharacters().get(player));
 			break;
 		case SOUTH:
-			game.moveNorth(game.getCharacters().get(0));
+			game.moveNorth(game.getCharacters().get(player));
 			break;
 		case EAST:
-			game.moveWest(game.getCharacters().get(0));
+			game.moveWest(game.getCharacters().get(player));
 			break;
 		case WEST:
-			game.moveEast(game.getCharacters().get(0));
+			game.moveEast(game.getCharacters().get(player));
 			break;
 		}
 		game.getFrame().getC().repaint();
 
 	}
-	
-	public static void setRoom(Room room){
+
+	public static void setRoom(Room room) {
 		frame.getC().getRenderCanvas().setRoom(room);
 	}
 }
