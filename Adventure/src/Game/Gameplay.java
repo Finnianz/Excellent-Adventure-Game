@@ -19,11 +19,12 @@ public class Gameplay implements Serializable {
 
 	private List<Room> rooms = new ArrayList<Room>();
 	private List<Character> characters = new ArrayList<Character>();
+	private boolean multi;
 
-	public Gameplay(List<Character> characters) {
+	public Gameplay(List<Character> characters, boolean multi) {
 
 		this.characters = characters;
-
+		this.multi = multi;
 		// Set up first 2 rooms
 
 		Room tower = new Room(1, 10, 10);
@@ -67,6 +68,15 @@ public class Gameplay implements Serializable {
 		player1.setCurrentLocation(playerLoc);
 
 		playerLoc.setOccupier(player1);
+
+		if (multi) {
+			Location playerLoc2 = tower.getFloor()[4][7];
+			Character player2 = characters.get(1);
+			player2.setCurrentRoom(tower);
+			player2.setCurrentLocation(playerLoc2);
+
+			playerLoc2.setOccupier(player2);
+		}
 
 	}
 

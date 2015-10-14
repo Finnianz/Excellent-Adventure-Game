@@ -83,7 +83,6 @@ public class Main {
 
 	private static void runClient(String url, int port) throws Exception {
 		Socket s = new Socket(url, port);
-		System.out.println("From Client with Love : ");
 
 		new Slave(s).run();
 
@@ -107,14 +106,14 @@ public class Main {
 			Master connection;
 			// Now, we await connections.
 			ServerSocket ss = new ServerSocket(port);
-			System.out.println("From Server with Love : ");
 
 			while (1 == 1) {
 				// Wait for a socket
 				Socket s = ss.accept();
 				System.out.println("ACCEPTED CONNECTION FROM: " + s.getInetAddress());
-
+				
 				connection = new Master(s, game);
+				
 				connection.run();
 
 				return; // done
@@ -139,7 +138,7 @@ public class Main {
 		frame.inputPlayers();
 
 		characters.add(new Character(frame.getPlayerColour() + "Ghost", frame.getPlayerHat() + "Hat", frame.getName()));
-		game = new Gameplay(characters);
+		game = new Gameplay(characters, false);
 
 		RenderCanvas renderCanv = new RenderCanvas();
 		game.setCanvas(renderCanv);

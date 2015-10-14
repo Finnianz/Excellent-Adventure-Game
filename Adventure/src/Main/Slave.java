@@ -27,7 +27,10 @@ public final class Slave implements Runnable, KeyListener {
 	}
 
 	public void run() {
+		System.out.println("From Client with Love : ");
+
 		try {
+
 			Socket s = socket;
 			Character player1;
 
@@ -36,29 +39,29 @@ public final class Slave implements Runnable, KeyListener {
 
 			output = new DataOutputStream(socket.getOutputStream());
 			input = new DataInputStream(socket.getInputStream());
+			System.out.println("elllo?");
 
 			// first write char selection to server
-			output.writeUTF(frame.getName());
 			output.writeUTF(frame.getPlayerColour());
 			output.writeUTF(frame.getPlayerHat());
 
-			if (!input.readUTF().equals(null)) {
+			// read character selection from server.
+			String color = input.readUTF();
+			String hat = input.readUTF();
+			player1 = new Character(color + "Ghost", hat + "Hat", "Player1");
+			System.out.println("eelllo?");
 
-				// read character selection from server.
-				String name = input.readUTF();
-				String color = input.readUTF();
-				String hat = input.readUTF();
-				player1 = new Character(color + "Ghost", hat + "Hat", name);
-
-				Main.characters.add(player1);
-				Main.characters.add(new Character(frame.getPlayerColour() + "Ghost", frame.getPlayerHat() + "Hat",
-						frame.getName()));
-				Gameplay game = new Gameplay(Main.characters);
-			
-			}
+			Main.characters.add(player1);
+			Main.characters
+					.add(new Character(frame.getPlayerColour() + "Ghost", frame.getPlayerHat() + "Hat", "Player2"));
+			Gameplay game = new Gameplay(Main.characters, true);
 
 			socket.close(); // release socket ... v.important!
-		} catch (IOException e) {
+		} catch (
+
+		IOException e)
+
+		{
 			System.err.println("I/O Error: " + e.getMessage());
 			e.printStackTrace(System.err);
 		}

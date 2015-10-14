@@ -29,6 +29,8 @@ public final class Master implements Runnable {
 
 	@Override
 	public void run() {
+		System.out.println("From Server with Love : ");
+
 		try {
 			GameFrame frame = new GameFrame();
 			frame.inputPlayers();
@@ -41,22 +43,17 @@ public final class Master implements Runnable {
 			boolean exit = false;
 			while (!exit) {
 
-				if (!input.readUTF().equals(null)) {
+				// read character selection from client.
+				String color = input.readUTF();
+				String hat = input.readUTF();
+				Main.characters.add(new Character(color + "Ghost", hat + "Hat", "Player1"));
 
-					// read character selection from client.
-					String name = input.readUTF();
-					String color = input.readUTF();
-					String hat = input.readUTF();
-					Main.characters.add(new Character(color + "Ghost", hat + "Hat", name));
-
-				}
-
-				game = new Gameplay(Main.characters);
-			
+				System.out.println("??" + color + hat);
+				game = new Gameplay(Main.characters, true);
+				game.setFrame(frame);
 
 				// Now, broadcast the server character to client
 
-				output.writeUTF(game.getFrame().getName());
 				output.writeUTF(game.getFrame().getPlayerColour());
 				output.writeUTF(game.getFrame().getPlayerHat());
 
