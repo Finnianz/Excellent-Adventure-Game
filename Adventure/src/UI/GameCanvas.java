@@ -114,7 +114,6 @@ public class GameCanvas extends JPanel implements Serializable {
 			bag[t].addMouseListener(new MouseListener() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					System.out.print("test");
 					if(currentLabel!=null){
 					currentLabel.setBorder(null);
 					}
@@ -167,6 +166,7 @@ public class GameCanvas extends JPanel implements Serializable {
 					}
 					
 				}
+				drawBag();
 				// TODO check actions
 			}
 		});

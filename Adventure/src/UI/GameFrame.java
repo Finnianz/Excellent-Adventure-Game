@@ -168,9 +168,7 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 		// asks for colour and saves as field
 		int token = JOptionPane.showOptionDialog(this, panel, "Choose your Player Colour:",
 				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-		System.out.print(token);
 		if (token == 0) {
-			System.out.print(playerColour);
 		}
 		// set up radio buttons for selecting hat
 		JRadioButton beanie = new JRadioButton("Beanie");
@@ -228,9 +226,7 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 		// asks for hat and saves as field playerHat
 		int token2 = JOptionPane.showOptionDialog(this, panel2, "Choose your Hat:", JOptionPane.YES_NO_CANCEL_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, null, null);
-		System.out.print(token);
 		if (token2 == 0) {
-			System.out.print(playerHat);
 		}
 	}
 
