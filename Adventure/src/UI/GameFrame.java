@@ -167,8 +167,17 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 
 		// asks for colour and saves as field
 		int token = JOptionPane.showOptionDialog(this, panel, "Choose your Player Colour:",
-				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-		if (token == 0) {
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+		if (token == 1) {
+			int r = JOptionPane.showConfirmDialog(canvasOfGame, new JLabel("Exit?"), "Confirm Exit",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			if (r == JOptionPane.YES_OPTION) {
+				System.exit(0);
+			}
+			if (r == JOptionPane.NO_OPTION) {
+				int token3 = JOptionPane.showOptionDialog(this, panel, "Choose your Player Colour:",
+						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+			}
 		}
 		// set up radio buttons for selecting hat
 		JRadioButton beanie = new JRadioButton("Beanie");
@@ -224,9 +233,18 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 		panel2.add(tophat);
 
 		// asks for hat and saves as field playerHat
-		int token2 = JOptionPane.showOptionDialog(this, panel2, "Choose your Hat:", JOptionPane.YES_NO_CANCEL_OPTION,
+		int token2 = JOptionPane.showOptionDialog(this, panel2, "Choose your Hat:", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE, null, null, null);
-		if (token2 == 0) {
+		if (token2 == 1) {
+			int r = JOptionPane.showConfirmDialog(canvasOfGame, new JLabel("Exit?"), "Confirm Exit",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			if (r == JOptionPane.YES_OPTION) {
+				System.exit(0);
+			}
+			if (r == JOptionPane.NO_OPTION) {
+				int token4 = JOptionPane.showOptionDialog(this, panel2, "Choose your Hat:", JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, null, null);
+			}
 		}
 	}
 
