@@ -406,7 +406,7 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 		System.exit(0);
 	}
 	/**
-	 * called when wins the game
+	 * called when lose the game
 	 */
 	public void lose(){
 		JOptionPane.showMessageDialog(this, ("AW SORRY YOU CAN'T GET OUT!!\n you can't get your revenge, try again later"
