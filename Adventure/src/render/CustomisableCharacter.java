@@ -52,28 +52,13 @@ public class CustomisableCharacter extends Drawable {
 		int intValue;
 		switch (dir) {
 		case UP:
-			return direction;
+			return Compass.NORTH;
 		case LEFT:
-			intValue = direction.ordinal() -1;
-			if(intValue <0){
-				intValue = 3;
-			}
-			return Compass.values()[intValue];
+			return Compass.WEST;
 		case RIGHT:
-			intValue = direction.ordinal() +1;
-			if(intValue >3){
-				intValue = 0;
-			}
-			return Compass.values()[intValue];
+			return Compass.EAST;
 		case DOWN:
-			intValue = direction.ordinal() +2;
-			if(intValue ==4){
-				intValue = 0;
-			}
-			if(intValue ==5){
-				intValue = 1;
-			}
-			return Compass.values()[intValue];
+			return Compass.SOUTH;
 		default:
 			return direction;
 		}
