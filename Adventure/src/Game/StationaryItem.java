@@ -13,7 +13,7 @@ import render.Drawable.Position;
 public class StationaryItem extends Item {
 
 	Boolean interactable;
-	CollectableItem hiddenItem;
+	Item hiddenItem;
 	Boolean itemFound = false;
 	Boolean unlockable;
 	int keyID;
@@ -61,7 +61,7 @@ public class StationaryItem extends Item {
 	/**
 	 * @return the hiddenItem
 	 */
-	public CollectableItem getHiddenItem() {
+	public Item getHiddenItem() {
 		return hiddenItem;
 	}
 
@@ -69,7 +69,7 @@ public class StationaryItem extends Item {
 	/**
 	 * @param hiddenItem the hiddenItem to set
 	 */
-	public void setHiddenItem(CollectableItem hiddenItem) {
+	public void setHiddenItem(Item hiddenItem) {
 		this.hiddenItem = hiddenItem;
 	}
 
