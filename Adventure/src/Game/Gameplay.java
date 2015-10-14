@@ -46,7 +46,7 @@ public class Gameplay implements Serializable {
 		Ladder l1 = new Ladder(ladderLoc.getWallNE(), ladderLoc.getWallNW(), ladderLoc.getWallSE(),
 				ladderLoc.getWallSW(), ladderLoc.getFloor(), new Item("Ladder", Position.CENTER, tower.getFloor()[4][4], dungeon), 4, 4, dungeon, tower);
 		dungeon.getFloor()[4][4] = l1;
-		e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(), empty.getFloor(),
+		e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(), new Item("FloorBlock", Position.FLOOR, dungeon.getFloor()[5][4], dungeon),
 				empty.getOccupier(), 5, 4);
 		dungeon.getFloor()[5][4] = e1;
 		// Set up items in Tower
@@ -106,7 +106,7 @@ public class Gameplay implements Serializable {
 					
 				}
 			}
-			if (newLoc instanceof Ladder) {
+			else if (newLoc instanceof Ladder) {
 				character.setCurrentRoom(((Ladder) newLoc).getExit());
 				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
 				character.setCurrentLocation(newRoomLoc);
@@ -114,7 +114,7 @@ public class Gameplay implements Serializable {
 				current.setOccupier(null);
 				Main.setRoom(character.getCurrentRoom());
 			}
-			if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
+			else if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
 				character.moveSpace(newLoc);
 				if (itemOnNewLoc != null) {
 					character.pickUpItem((CollectableItem) newLoc.getOccupier());
@@ -157,7 +157,7 @@ public class Gameplay implements Serializable {
 					Main.setRoom(character.getCurrentRoom());
 				}
 			}
-			if (newLoc instanceof Ladder) {
+			else if (newLoc instanceof Ladder) {
 				character.setCurrentRoom(((Ladder) newLoc).getExit());
 				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
 				character.setCurrentLocation(newRoomLoc);
@@ -165,7 +165,7 @@ public class Gameplay implements Serializable {
 				current.setOccupier(null);
 				Main.setRoom(character.getCurrentRoom());
 			}
-			if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
+			else if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
 				character.moveSpace(newLoc);
 				if (itemOnNewLoc != null) {
 					character.pickUpItem((CollectableItem) newLoc.getOccupier());
@@ -208,7 +208,7 @@ public class Gameplay implements Serializable {
 					Main.setRoom(character.getCurrentRoom());
 				}
 			}
-			if (newLoc instanceof Ladder) {
+			else if (newLoc instanceof Ladder) {
 				character.setCurrentRoom(((Ladder) newLoc).getExit());
 				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
 				character.setCurrentLocation(newRoomLoc);
@@ -216,7 +216,7 @@ public class Gameplay implements Serializable {
 				current.setOccupier(null);
 				Main.setRoom(character.getCurrentRoom());
 			}
-			if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
+			else if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
 				character.moveSpace(newLoc);
 				if (itemOnNewLoc != null) {
 					character.pickUpItem((CollectableItem) newLoc.getOccupier());
@@ -259,7 +259,7 @@ public class Gameplay implements Serializable {
 					Main.setRoom(character.getCurrentRoom());
 				}
 			}
-			if (newLoc instanceof Ladder) {
+			else if (newLoc instanceof Ladder) {
 				character.setCurrentRoom(((Ladder) newLoc).getExit());
 				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
 				character.setCurrentLocation(newRoomLoc);
@@ -267,7 +267,7 @@ public class Gameplay implements Serializable {
 				current.setOccupier(null);
 				Main.setRoom(character.getCurrentRoom());
 			}
-			if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
+			else if (itemOnNewLoc == null || itemOnNewLoc instanceof CollectableItem) {
 				character.moveSpace(newLoc);
 				if (itemOnNewLoc != null) {
 					character.pickUpItem((CollectableItem) newLoc.getOccupier());
