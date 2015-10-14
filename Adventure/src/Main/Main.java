@@ -1,11 +1,14 @@
 package Main;
 
 import Game.Character;
+import Game.CollectableItem;
 import Game.Gameplay;
 import Game.Location;
 import Game.Room;
+import Game.Trapdoor;
 import UI.GameFrame;
 import render.CustomisableCharacter.Direction;
+import render.DrawableTile;
 import render.RenderCanvas;
 
 import java.net.InetAddress;
@@ -275,5 +278,11 @@ public class Main {
 	
 	public static List<Game.Item>getBag(){
 		return game.getCharacters().get(0).getItems();
+	}
+	
+	public static void useItem(CollectableItem key, DrawableTile door){
+		if(door instanceof Trapdoor){
+		key.use((Trapdoor) door);
+		}
 	}
 }

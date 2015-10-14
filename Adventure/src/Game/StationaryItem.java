@@ -66,4 +66,22 @@ public class StationaryItem extends Item {
 	public void setHiddenItem(CollectableItem hiddenItem) {
 		this.hiddenItem = hiddenItem;
 	}
+
+
+	/**
+	 * @return the itemFound
+	 */
+	public Boolean getItemFound() {
+		return itemFound;
+	}
+
+
+	/**
+	 * @param itemFound the itemFound to set
+	 */
+	public void setItemFound(Boolean itemFound) {
+		this.itemFound = itemFound;
+	}
+	
+	
 }
