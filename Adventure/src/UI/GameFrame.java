@@ -59,7 +59,7 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 		canvasOfGame.setMinimumSize(new Dimension(600, 600));
 		getContentPane().add(canvasOfGame, BorderLayout.CENTER);
 		setUpMenu();
-		setSize(1500, 1500);
+		setSize(1000, 1000);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(this);
 		setResizable(true);
@@ -68,7 +68,6 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 
 		KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 		manager.addKeyEventDispatcher(new MyDispatcher());
-		//win();
 	}
 
 	/**
@@ -398,10 +397,23 @@ public class GameFrame extends JFrame implements WindowListener, Serializable {
 				+ " something you can make your way back up the ladder\n   --But beware the door will lock again behind you\n\n"
 				+ ">Some items you can push around the room and others if \nyou bump into them they may drop out a useful object ", "Instructions", JOptionPane.PLAIN_MESSAGE, image);
 	}
+	/**
+	 * called when wins the game
+	 */
 	public void win(){
-		JOptionPane.showMessageDialog(this, ("you win"), "Winner", JOptionPane.PLAIN_MESSAGE, new ImageIcon(getClass().getResource("escape.gif")));
+		JOptionPane.showMessageDialog(this, ("CONGRATULATIONS!!\n you escaped the tower now you can seek revenge"
+				 ), "You Escaped", JOptionPane.PLAIN_MESSAGE, new ImageIcon(getClass().getResource("escape.gif")));
+		System.exit(0);
 	}
-
+	/**
+	 * called when wins the game
+	 */
+	public void lose(){
+		JOptionPane.showMessageDialog(this, ("AW SORRY YOU CAN'T GET OUT!!\n you can't get your revenge, try again later"
+				), "You Didn't Escape", JOptionPane.PLAIN_MESSAGE);
+		System.exit(0);
+	}
+	
 	/**
 	 * sets the GamePlay of the frame
 	 * 

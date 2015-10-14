@@ -17,6 +17,7 @@ import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -79,7 +80,7 @@ public class GameCanvas extends JPanel implements Serializable {
 			}
 		});
 		ImageIcon clockWise = new ImageIcon(getClass().getResource("clockw.png"));
-		JButton RR = new JButton("ClockWise        ", clockWise);
+		JButton RR = new JButton("ClockWise       ", clockWise);
 		RR.setPreferredSize(new Dimension(50, 50));
 		RR.addActionListener(new ActionListener() {
 			@Override
@@ -94,12 +95,13 @@ public class GameCanvas extends JPanel implements Serializable {
 		button.add(RR);
 		button.add(Box.createRigidArea(new Dimension(0, 10)));
 		JPanel text = new JPanel();
-		JTextArea textArea = new JTextArea(20, 15);
+		JTextArea textArea = new JTextArea(5, 15);
 		JScrollPane scrollPane = new JScrollPane(textArea);
 		textArea.setBackground(Color.LIGHT_GRAY);
 		textArea.setEditable(false);
 		text.add(textArea);
 		button.add(text);
+		button.add(Box.createRigidArea(new Dimension(0, 10)));
 		add(button, BorderLayout.EAST);
 
 		// Creates the panel and adding bag
