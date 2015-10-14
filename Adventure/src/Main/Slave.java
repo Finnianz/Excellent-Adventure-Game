@@ -39,7 +39,7 @@ public final class Slave implements Runnable, KeyListener {
 
 			output = new DataOutputStream(socket.getOutputStream());
 			input = new DataInputStream(socket.getInputStream());
-			System.out.println("elllo?");
+			// System.out.println("elllo?");
 
 			// first write char selection to server
 			output.writeUTF(frame.getPlayerColour());
@@ -53,15 +53,24 @@ public final class Slave implements Runnable, KeyListener {
 			Main.characters.add(player1);
 			Main.characters
 					.add(new Character(frame.getPlayerColour() + "Ghost", frame.getPlayerHat() + "Hat", "Player2"));
-			Gameplay game = new Gameplay(Main.characters, true);
-			game.setFrame(frame);
-			//and render game
+			Main.game = new Gameplay(Main.characters, true);
+			Main.game.setFrame(frame);
+			// and render game
 			RenderCanvas renderCanv = new RenderCanvas();
-			game.setCanvas(renderCanv);
+			Main.game.setCanvas(renderCanv);
+			Main.game.getFrame().getC().getRenderCanvas().setRoom(Main.game.getCharacters().get(0).getCurrentRoom());
+			Main.game.getFrame().getC().repaint();
 
-			game.getFrame().getC().getRenderCanvas().setRoom(game.getRooms().get(0));
-			game.getFrame().getC().repaint();
-			
+			boolean exit = false;
+			while (!exit) {
+				// read event of keypress
+				int x = input.readInt();
+				int y = input.readInt();
+				
+				Main.game.getCharacters().get(1).setCurrentLocation(Main.game.getRooms().get(0).getFloor()[x][y]);
+				Main.game.getFrame().getC().repaint();
+			}
+
 			socket.close(); // release socket ... v.important!
 		} catch (
 
