@@ -1,4 +1,9 @@
 package Game;
+/**
+ * 
+ * @author Michelle O'Neill ID:301025406
+ *
+ */
 
 public class CollectableItem extends Item {
 

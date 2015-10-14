@@ -3,6 +3,12 @@ package Game;
 import render.Drawable;
 import render.Drawable.Position;
 
+/**
+ * 
+ * @author Michelle O'Neill ID:301025406
+ *
+ */
+
 public class MovableItem extends Item {
 
 	public MovableItem(String imgLoc, Position pos, Location loc, Room room){

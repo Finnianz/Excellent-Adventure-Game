@@ -1,5 +1,6 @@
 package Game;
 
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -12,6 +13,12 @@ import java.util.List;
 
 import Main.Main;
 import UI.GameFrame;
+
+/**
+ * 
+ * @author Michelle O'Neill ID:301025406
+ *
+ */
 
 public class Gameplay implements Serializable {
 

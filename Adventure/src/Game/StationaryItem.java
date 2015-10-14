@@ -4,6 +4,12 @@ import javax.swing.ImageIcon;
 
 import render.Drawable.Position;
 
+/**
+ * 
+ * @author Michelle O'Neill ID:301025406
+ *
+ */
+
 public class StationaryItem extends Item {
 
 	Boolean interactable;

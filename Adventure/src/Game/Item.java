@@ -1,8 +1,15 @@
 package Game;
 
+
 import javax.swing.ImageIcon;
 
 import render.*;
+
+/**
+ * 
+ * @author Michelle O'Neill ID:301025406
+ *
+ */
 
 public class Item extends Drawable{
 	

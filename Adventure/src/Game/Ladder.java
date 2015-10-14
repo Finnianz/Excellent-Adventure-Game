@@ -2,6 +2,12 @@ package Game;
 
 import render.Drawable;
 
+/**
+ * 
+ * @author Michelle O'Neill ID:301025406
+ *
+ */
+
 public class Ladder extends Location {
 
 	private final Room currentRoom;
