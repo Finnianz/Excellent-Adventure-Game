@@ -44,10 +44,10 @@ public class Gameplay implements Serializable {
 		Location ladderLoc = dungeon.getFloor()[4][4];
 		empty = dungeon.getFloor()[5][4];
 		Ladder l1 = new Ladder(ladderLoc.getWallNE(), ladderLoc.getWallNW(), ladderLoc.getWallSE(),
-				ladderLoc.getWallSW(), ladderLoc.getFloor(), new Item("Ladder", Position.CENTER, tower.getFloor()[5][4], dungeon), 4, 4, dungeon, tower);
+				ladderLoc.getWallSW(), ladderLoc.getFloor(), new Item("Ladder", Position.CENTER, tower.getFloor()[4][4], dungeon), 4, 4, dungeon, tower);
 		dungeon.getFloor()[4][4] = l1;
 		e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(), empty.getFloor(),
-				empty.getOccupier(), 5, 5);
+				empty.getOccupier(), 5, 4);
 		dungeon.getFloor()[5][4] = e1;
 		// Set up items in Tower
 		Location boxLoc = tower.getFloor()[7][7];
@@ -97,7 +97,7 @@ public class Gameplay implements Serializable {
 					return;
 				} else {
 					character.setCurrentRoom(((Trapdoor) newLoc).getExit());
-					Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()][newLoc.getY() + 1];
+					Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
 					character.setCurrentLocation(newRoomLoc);
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
@@ -108,7 +108,7 @@ public class Gameplay implements Serializable {
 			}
 			if (newLoc instanceof Ladder) {
 				character.setCurrentRoom(((Ladder) newLoc).getExit());
-				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()][newLoc.getY() + 1];
+				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
 				character.setCurrentLocation(newRoomLoc);
 				newRoomLoc.setOccupier(character);
 				current.setOccupier(null);
@@ -149,7 +149,7 @@ public class Gameplay implements Serializable {
 					// TODO stand on locked door
 				} else {
 					character.setCurrentRoom(((Trapdoor) newLoc).getExit());
-					Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()][newLoc.getY() - 1];
+					Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
 					character.setCurrentLocation(newRoomLoc);
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
@@ -159,7 +159,7 @@ public class Gameplay implements Serializable {
 			}
 			if (newLoc instanceof Ladder) {
 				character.setCurrentRoom(((Ladder) newLoc).getExit());
-				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()][newLoc.getY() - 1];
+				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
 				character.setCurrentLocation(newRoomLoc);
 				newRoomLoc.setOccupier(character);
 				current.setOccupier(null);
@@ -210,7 +210,7 @@ public class Gameplay implements Serializable {
 			}
 			if (newLoc instanceof Ladder) {
 				character.setCurrentRoom(((Ladder) newLoc).getExit());
-				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX() + 1][newLoc.getY()];
+				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
 				character.setCurrentLocation(newRoomLoc);
 				newRoomLoc.setOccupier(character);
 				current.setOccupier(null);
@@ -250,7 +250,7 @@ public class Gameplay implements Serializable {
 					// TODO stand on locked door
 				} else {
 					character.setCurrentRoom(((Trapdoor) newLoc).getExit());
-					Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX() - 1][newLoc.getY()];
+					Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
 					character.setCurrentLocation(newRoomLoc);
 					newRoomLoc.setOccupier(character);
 					current.setOccupier(null);
@@ -261,7 +261,7 @@ public class Gameplay implements Serializable {
 			}
 			if (newLoc instanceof Ladder) {
 				character.setCurrentRoom(((Ladder) newLoc).getExit());
-				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX() - 1][newLoc.getY()];
+				Location newRoomLoc = character.getCurrentRoom().getFloor()[newLoc.getX()+1][newLoc.getY()];
 				character.setCurrentLocation(newRoomLoc);
 				newRoomLoc.setOccupier(character);
 				current.setOccupier(null);
