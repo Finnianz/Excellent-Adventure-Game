@@ -42,6 +42,7 @@ public class Gameplay implements Serializable {
 		Room room5 = new Room(5, 10, 10);
 		Room room6 = new Room(6, 10, 10);
 		Room room7 = new Room(7, 10, 10);
+		Room room8 = new Room(8, 10, 10);
 		// set up trapdoor/ladder with empty tile next to each one
 		Location doorLoc = room1.getFloor()[4][4];
 		Location empty = room1.getFloor()[5][4];
@@ -252,7 +253,92 @@ public class Gameplay implements Serializable {
 				empty.getOccupier(), empty.getX(), empty.getY());
 		room7.getFloor()[empty.getX()][empty.getY()] = e1;
 		//set up items in room6
-		
+		itemLoc = room6.getFloor()[0][4];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room6, false, false, 0, null);
+		room6.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room6.getFloor()[1][4];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room6, false, false, 0, null);
+		room6.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room6.getFloor()[2][4];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room6, false, false, 0, null);
+		room6.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room6.getFloor()[3][4];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room6, false, false, 0, null);
+		room6.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room6.getFloor()[4][4];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room6, false, false, 0, null);
+		room6.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room6.getFloor()[4][3];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room6, false, false, 0, null);
+		room6.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room6.getFloor()[4][2];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room6, false, false, 0, null);
+		room6.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room6.getFloor()[4][1];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room6, false, false, 0, null);
+		room6.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room6.getFloor()[4][0];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room6, false, false, 0, null);
+		room6.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room6.getFloor()[0][4];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room6, false, false, 0, null);
+		room6.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room6.getFloor()[0][2];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room6, true, false, 6, null);
+		key = new CollectableItem("batkey", Position.CENTER, room6, null, 8, bookshelf);
+		bookshelf.setHiddenItem(key);
+		room6.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		//set up room 7
+		doorLoc = room7.getFloor()[2][1];
+		empty = room7.getFloor()[3][1];
+		t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(),
+				new Item("Skulldoor", Position.FLOOR, room7.getFloor()[doorLoc.getX()][doorLoc.getY()], room7), doorLoc.getOccupier(), doorLoc.getX(), doorLoc.getY(),
+				room7, room8, 10);
+		room7.getFloor()[doorLoc.getX()][doorLoc.getY()] = t1;
+		room7.addDoor(t1);
+		e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(),
+				new Item("FloorBlock", Position.FLOOR, room7.getFloor()[empty.getX()][empty.getY()], room7), empty.getOccupier(), empty.getX(), empty.getY()); 
+		room7.getFloor()[empty.getX()][empty.getY()] = e1;
+		ladderLoc = room8.getFloor()[doorLoc.getX()][doorLoc.getY()];
+		empty = room8.getFloor()[empty.getX()][empty.getY()];
+		l1 = new Ladder(ladderLoc.getWallNE(), ladderLoc.getWallNW(), ladderLoc.getWallSE(),
+				ladderLoc.getWallSW(), ladderLoc.getFloor(), new Item("Ladder", Position.CENTER, room8.getFloor()[ladderLoc.getX()][ladderLoc.getY()], room8), doorLoc.getX(), doorLoc.getY(), room8, room7);
+		room8.getFloor()[doorLoc.getX()][doorLoc.getY()] = l1;
+		e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(), new Item("FloorBlock", Position.FLOOR, room8.getFloor()[empty.getX()][empty.getY()], room8),
+				empty.getOccupier(), empty.getX(), empty.getY());
+		room8.getFloor()[empty.getX()][empty.getY()] = e1;
+		//set up items in room7
+		itemLoc = room7.getFloor()[4][9];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room7, false, false, 0, null);
+		room7.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room7.getFloor()[4][8];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room7, false, false, 0, null);
+		room7.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room7.getFloor()[4][7];
+		box = new MovableItem("Bookcase", Position.CENTER, itemLoc, room7);
+		room7.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(box);
+		itemLoc = room7.getFloor()[4][6];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room7, false, false, 0, null);
+		room7.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room7.getFloor()[4][5];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room7, false, false, 0, null);
+		room7.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room7.getFloor()[4][4];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room7, false, false, 0, null);
+		room7.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room7.getFloor()[5][4];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room7, false, false, 0, null);
+		room7.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room7.getFloor()[6][4];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room7, false, false, 0, null);
+		room7.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room7.getFloor()[7][4];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room7, false, false, 0, null);
+		room7.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room7.getFloor()[8][4];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room7, false, false, 0, null);
+		room7.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room7.getFloor()[9][4];
 		
 		
 		
@@ -262,6 +348,9 @@ public class Gameplay implements Serializable {
 		rooms.add(room3);
 		rooms.add(room4);
 		rooms.add(room5);
+		rooms.add(room6);
+		rooms.add(room7);
+		rooms.add(room8);
 		
 		// add player
 		Location playerLoc = room1.getFloor()[3][7];
