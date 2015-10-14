@@ -55,13 +55,13 @@ public final class Slave implements Runnable, KeyListener {
 					.add(new Character(frame.getPlayerColour() + "Ghost", frame.getPlayerHat() + "Hat", "Player2"));
 			Gameplay game = new Gameplay(Main.characters, true);
 			game.setFrame(frame);
-
+			//and render game
 			RenderCanvas renderCanv = new RenderCanvas();
 			game.setCanvas(renderCanv);
 
 			game.getFrame().getC().getRenderCanvas().setRoom(game.getRooms().get(0));
 			game.getFrame().getC().repaint();
-
+			
 			socket.close(); // release socket ... v.important!
 		} catch (
 

@@ -6,7 +6,7 @@ public class Trapdoor extends Location {
 
 	private final Room currentRoom;
 	private final Room exitRoom;
-	Boolean unlocked = true;
+	Boolean unlocked = false;
 	private int keyID;
 	
 	public Trapdoor(Drawable wallNE, Drawable wallNW, Drawable wallSE,
@@ -22,8 +22,8 @@ public class Trapdoor extends Location {
 	}
 
 
-	public void setLockRoom(Boolean locked){
-		unlocked = locked;
+	public void setUnLockRoom(Boolean unlocked){
+		this.unlocked = unlocked;
 	}
 
 	public Boolean isLocked(){
