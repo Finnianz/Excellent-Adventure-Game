@@ -33,7 +33,7 @@ public class Main {
 
 	private static Gameplay game;
 	private static GameFrame frame;
-	static List<Game.Character> characters;
+	public static List<Game.Character> characters = new ArrayList<Character>();
 
 	public static void main(String[] args) throws IOException {
 

@@ -9,6 +9,7 @@ import java.net.*;
 import Game.*;
 import Game.Character;
 import UI.*;
+import render.RenderCanvas;
 
 /**
  * A slave connection
@@ -19,7 +20,6 @@ public final class Slave implements Runnable, KeyListener {
 	private Socket socket;
 	private DataOutputStream output;
 	private DataInputStream input;
-	List<Game.Character> characters;
 	// Name??
 
 	public Slave(Socket socket) {
@@ -50,12 +50,13 @@ public final class Slave implements Runnable, KeyListener {
 				String hat = input.readUTF();
 				player1 = new Character(color + "Ghost", hat + "Hat", name);
 
-				characters = new ArrayList<Game.Character>();
-				characters.add(player1);
-				characters.add(new Character(frame.getPlayerColour() + "Ghost", frame.getPlayerHat() + "Hat",
+				Main.characters.add(player1);
+				Main.characters.add(new Character(frame.getPlayerColour() + "Ghost", frame.getPlayerHat() + "Hat",
 						frame.getName()));
+				Gameplay game = new Gameplay(Main.characters);
+			
 			}
-			new Gameplay(characters);
+
 			socket.close(); // release socket ... v.important!
 		} catch (IOException e) {
 			System.err.println("I/O Error: " + e.getMessage());

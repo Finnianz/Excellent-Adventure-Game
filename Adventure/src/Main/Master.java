@@ -32,7 +32,7 @@ public final class Master implements Runnable {
 		try {
 			GameFrame frame = new GameFrame();
 			frame.inputPlayers();
-			game.addCharacter(
+			Main.characters.add(
 					new Character(frame.getPlayerColour() + "Ghost", frame.getPlayerHat() + "Hat", frame.getName()));
 			DataInputStream input = new DataInputStream(socket.getInputStream());
 			DataOutputStream output = new DataOutputStream(socket.getOutputStream());
@@ -47,9 +47,12 @@ public final class Master implements Runnable {
 					String name = input.readUTF();
 					String color = input.readUTF();
 					String hat = input.readUTF();
-					game.addCharacter(new Character(color + "Ghost", hat + "Hat", name));
+					Main.characters.add(new Character(color + "Ghost", hat + "Hat", name));
 
 				}
+
+				game = new Gameplay(Main.characters);
+			
 
 				// Now, broadcast the server character to client
 
