@@ -24,7 +24,6 @@ public class Gameplay implements Serializable {
 
 	private RenderCanvas canvas;
 	private GameFrame frame;
-
 	private List<Room> rooms = new ArrayList<Room>();
 	private List<Character> characters = new ArrayList<Character>();
 	private boolean multi;
@@ -326,6 +325,25 @@ public class Gameplay implements Serializable {
 				empty.getOccupier(), empty.getX(), empty.getY());
 		room8.getFloor()[empty.getX()][empty.getY()] = e1;
 		//set up items in room7
+		doorLoc = room7.getFloor()[2][1];
+		empty = room7.getFloor()[3][1];
+		t1 = new Trapdoor(doorLoc.getWallNE(), doorLoc.getWallNW(), doorLoc.getWallSE(), doorLoc.getWallSW(),
+				new Item("Skulldoor", Position.FLOOR, room7.getFloor()[doorLoc.getX()][doorLoc.getY()], room7), doorLoc.getOccupier(), doorLoc.getX(), doorLoc.getY(),
+				room7, room8, 10);
+		room7.getFloor()[doorLoc.getX()][doorLoc.getY()] = t1;
+		room7.addDoor(t1);
+		e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(),
+				new Item("FloorBlock", Position.FLOOR, room7.getFloor()[empty.getX()][empty.getY()], room7), empty.getOccupier(), empty.getX(), empty.getY()); 
+		room7.getFloor()[empty.getX()][empty.getY()] = e1;
+		ladderLoc = room8.getFloor()[doorLoc.getX()][doorLoc.getY()];
+		empty = room8.getFloor()[empty.getX()][empty.getY()];
+		l1 = new Ladder(ladderLoc.getWallNE(), ladderLoc.getWallNW(), ladderLoc.getWallSE(),
+				ladderLoc.getWallSW(), ladderLoc.getFloor(), new Item("Ladder", Position.CENTER, room8.getFloor()[ladderLoc.getX()][ladderLoc.getY()], room8), doorLoc.getX(), doorLoc.getY(), room8, room7);
+		room8.getFloor()[doorLoc.getX()][doorLoc.getY()] = l1;
+		e1 = new EmptyTile(empty.getWallNE(), empty.getWallNW(), empty.getWallSE(), empty.getWallSW(), new Item("FloorBlock", Position.FLOOR, room8.getFloor()[empty.getX()][empty.getY()], room8),
+				empty.getOccupier(), empty.getX(), empty.getY());
+		room8.getFloor()[empty.getX()][empty.getY()] = e1;
+		//set up items in room7
 		itemLoc = room7.getFloor()[4][9];
 		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room7, false, false, 0, null);
 		room7.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
@@ -357,10 +375,13 @@ public class Gameplay implements Serializable {
 		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room7, false, false, 0, null);
 		room7.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
 		itemLoc = room7.getFloor()[9][4];
-
-
-
-
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room7, false, false, 0, null);
+		room7.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
+		itemLoc = room7.getFloor()[5][9];
+		bookshelf = new StationaryItem("Bookcase", Position.CENTER, itemLoc, room7, true, false, 6, null);
+		key = new CollectableItem("Skelkey", Position.CENTER, room7, null, 10, bookshelf);
+		bookshelf.setHiddenItem(key);
+		room7.getFloor()[itemLoc.getX()][itemLoc.getY()].setOccupier(bookshelf);
 		rooms.add(room1);
 		rooms.add(room2);
 		rooms.add(room3);

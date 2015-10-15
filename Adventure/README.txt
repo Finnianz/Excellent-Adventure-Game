@@ -27,4 +27,5 @@ level seven
 you win
 
 you can start a single player game by adding the arguement -single
-														   -multiplayer
+														   -server
+														   -connect <hosturl> <port>													
